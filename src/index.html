@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>Webpack Starter Kit</title>
+    <title>Overlook</title>
   </head>
   <body>
-    <h1>Webpack Starter Kit</h1>
-
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
-
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
+		<main>
+			<section class="login-wrapper">
+				<form>
+					<fieldset>
+						<legend>Customer Login:</legend>
+							<input id="customer-username" class="input-field" type="text" name="username" placeholder="Username">
+							<input id="customer-password" class="input-field" type="password" name="password" placeholder="Password">
+							<input type="submit" value="Login" class="login-button" id="login-form-submit">
+					</fieldset>
+				</form>
+				<form>
+					<fieldset>
+						<legend>Manager Login:</legend>
+							<input id="manager-username" class="input-field" type="text" name="username" placeholder="Username">
+							<input id="manager-password" class="input-field" type="password" name="password" placeholder="Password">
+							<input type="submit" value="Login" class="login-button" id="login-form-submit">
+					</fieldset>
+				</form>
+			</section>
+		</main>
   </body>
 </html>
