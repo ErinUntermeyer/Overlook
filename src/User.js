@@ -31,6 +31,16 @@ class User {
 			return availableRooms;
 		}, [])
 	}
+
+	listBookingsById(bookings, id) {
+		const bookingsById = [];
+		bookings.forEach(booking => {
+			if (booking.userID === id) {
+				bookingsById.push(booking);
+			}
+		})
+		return bookingsById;
+	}
 }
 
 export default User;
