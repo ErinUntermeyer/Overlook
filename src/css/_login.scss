@@ -1,0 +1,46 @@
+.login-wrapper {
+	display: flex;
+	justify-content: center;
+	margin-top: 200px;
+	height: 100%;
+}
+
+.login-section, .login-header, .login-form, .input-field {
+	margin: 10px;
+	background-color: $ocean-blue;
+	color: $black;
+}
+
+.login-section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 10px;
+	width: 50%;
+}
+
+.login-error-message {
+	background-color: $error;
+ 	color: $black;
+ 	font-weight: bold;
+}
+
+.login-form {
+	color: $black;
+	display: flex;
+	flex-direction: column;
+}
+
+.input-field {
+	border: none;
+	border-bottom: 1px solid black;
+	outline: none;
+}
+
+.login-button {
+	height: 25px;
+	background-color: $sand;
+	color: $black;
+	border: none;
+	border-radius: 3px;
+}
