@@ -22,6 +22,12 @@ class Manager extends User {
 			return totalRevenue;
 		}, 0)	
 	}
+
+	getPercentRoomsOccupied(bookings, rooms, date) {
+		const numberOfBookedRooms = super.getRoomsBooked(bookings, date).length;
+		const numberOfRooms = rooms.length;
+		return Math.floor(100 / (numberOfRooms / numberOfBookedRooms));
+	}
 }
 
 export default Manager;

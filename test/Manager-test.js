@@ -13,7 +13,7 @@ describe('Manager', function () {
 		usersData = [customer1, customer2]
 		manager = new Manager(usersData);
 		booking1 = { id: 1, userID: 1, date: 'today', roomNumber: 1, roomServiceCharges: [] };
-		booking2 = { id: 2, userID: 2, date: 'today', roomNumber: 2, roomServiceCharges: [] };
+		booking2 = { id: 2, userID: 2, date: 'tomorrow', roomNumber: 2, roomServiceCharges: [] };
 		bookings = [booking1, booking2];
 		room1 = { number: 1, roomType: 'suite', bidet: true, bedSize: 'king', numBeds: 2, costPerNight: 400 };
 		room2 = { number: 2, roomType: 'single room', bidet: false, bedSize: 'full', numBeds: 2, costPerNight: 100 };
@@ -38,7 +38,11 @@ describe('Manager', function () {
 	})
 
 	it('should get total revenue for today', function () {
-		expect(manager.getRevenueToday(bookings, rooms, 'today')).to.equal(500);
+		expect(manager.getRevenueToday(bookings, rooms, 'today')).to.equal(400);
+	})
+
+	it('should get percent of occupied rooms for today', function () {
+		expect(manager.getPercentRoomsOccupied(bookings, rooms, 'today')).to.equal(50);
 	})
 
 })
