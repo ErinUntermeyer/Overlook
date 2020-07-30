@@ -41,6 +41,18 @@ class User {
 		})
 		return bookingsById;
 	}
+
+	retrieveTotalSpent(bookings, rooms, id) {
+		const allBookings = this.listBookingsById(bookings, id);
+		return allBookings.reduce((totalSpent, booking) => {
+			rooms.forEach(room => {
+				if (room.number === booking.roomNumber) {
+					totalSpent += room.costPerNight;
+				}
+			})
+			return totalSpent;
+		}, 0)
+	}
 }
 
 export default User;
