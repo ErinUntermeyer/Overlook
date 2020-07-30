@@ -16,6 +16,21 @@ class User {
 				break;
 		}
 	}
+
+	listRoomsAvailable(bookings, rooms, date) {
+		const bookedRooms = [];
+		return bookings.reduce((availableRooms, booking) => {
+			if (booking.date === date) {
+				bookedRooms.push(booking.roomNumber);
+				rooms.forEach(room => {
+					if (room.number !== booking.roomNumber) {
+						availableRooms.push(room);
+					}
+				})
+			}
+			return availableRooms;
+		}, [])
+	}
 }
 
 export default User;
