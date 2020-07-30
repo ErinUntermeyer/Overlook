@@ -17,22 +17,29 @@ class User {
 		}
 	}
 
-	listRoomsAvailable(bookings, rooms, date) {
+	getRoomsBooked(bookings, date) {
 		const bookedRooms = [];
-		return bookings.reduce((availableRooms, booking) => {
+		bookings.forEach(booking => {
 			if (booking.date === date) {
 				bookedRooms.push(booking.roomNumber);
-				rooms.forEach(room => {
-					if (room.number !== booking.roomNumber) {
-						availableRooms.push(room);
-					}
+			}
+		})
+		return bookedRooms;
+	}
+
+	listRoomsAvailable(bookings, rooms, date) {
+		const bookedRooms = this.getRoomsBooked(bookings, date);
+		return bookedRooms.reduce((availableRooms, booking) => {
+			rooms.forEach(room => {
+				if (room.number !== booking) {
+					availableRooms.push(room);
+				}
 				})
-			}
-			if (availableRooms.length === 0) {
-				this.apologizeForNoRooms(date);
-			} else {
-				return availableRooms;
-			}
+				if (availableRooms.length === 0) {
+					this.apologizeForNoRooms(date);
+				} else {
+					return availableRooms;
+				}
 		}, [])
 	}
 
