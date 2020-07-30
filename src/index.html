@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
+		<meta charset="UTF-8">
     <title>Overlook</title>
   </head>
   <body>
-		<main>
-			<section class="login-wrapper">
-				<section class="login-section">
-					<h1 class="login-header">Customer Login:</h1>
-					<p class="login-error-message hidden">Invalid username and/or password</p>
-					<form class="login-form">
-						<input id="customer-username" class="input-field" type="text" name="username" placeholder="Username">
-						<input id="customer-password" class="input-field" type="password" name="password" placeholder="Password">
-						<input type="submit" value="Login" class="login-button">
-					</form>
-					<h1 class="login-header">Manager Login:</h1>
-					<p class="login-error-message hidden">Invalid username and/or password</p>
-					<form class="login-form">
-						<input id="manager-username" class="input-field" type="text" name="username" placeholder="Username">
-						<input id="manager-password" class="input-field" type="password" name="password" placeholder="Password">
-						<input type="submit" value="Login" class="login-button">
-					</form>
-				</section>
+		<header>
+			<h1>Overlook</h1>
+			<h2>Username</h2>
+		</header>
+		<section class="login-wrapper">
+			<section class="login-section">
+				<p class="login-header">Customer Login:</p>
+				<p class="login-error-message hidden">Invalid username and/or password</p>
+				<form class="login-form">
+					<input id="customer-username" class="input-field" type="text" name="username" placeholder="Username">
+					<input id="customer-password" class="input-field" type="password" name="password" placeholder="Password">
+					<input type="submit" value="Login" class="login-button">
+				</form>
+				<p class="login-header">Manager Login:</p>
+				<p class="login-error-message hidden">Invalid username and/or password</p>
+				<form class="login-form">
+					<input id="manager-username" class="input-field" type="text" name="username" placeholder="Username">
+					<input id="manager-password" class="input-field" type="password" name="password" placeholder="Password">
+					<input type="submit" value="Login" class="login-button">
+				</form>
 			</section>
-		</main>
+		</section>
   </body>
 </html>
