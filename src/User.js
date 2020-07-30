@@ -28,8 +28,16 @@ class User {
 					}
 				})
 			}
-			return availableRooms;
+			if (availableRooms.length === 0) {
+				this.apologizeForNoRooms(date);
+			} else {
+				return availableRooms;
+			}
 		}, [])
+	}
+
+	apologizeForNoRooms(date) {
+		return `Overlook regrets to inform you that there are no rooms available for ${date}`;
 	}
 
 	listBookingsById(bookings, id) {
