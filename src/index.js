@@ -1,10 +1,36 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/black-tables-on-beach.jpg'
+import Manager from './Manager';
 
-console.log('This is the JavaScript entry file - your code begins here.');
+// fetch data
+function getUsersData() {
+	return fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
+		.then(response => response.json())
+}
+
+function getRoomsData() {
+	return fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms')
+		.then(response => response.json())
+}
+
+function getBookingsData() {
+	return fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings')
+		.then(response => response.json())
+}
+
+function getData() {
+	return Promise.all([getUsersData(), getRoomsData(), getBookingsData()])
+	.then(dataSets => {
+		const usersData = dataSets[0].users;
+		const roomsData = dataSets[1].rooms;
+		const bookingsData = dataSets[2].bookings;
+		return [usersData, roomsData, bookingsData];
+	})
+}
+
+getData()
+.then(parsedData => {
+	const manager = new Manager(parsedData[0]);
+	const allRooms = parsedData[1];
+	const allBookings = parsedData[2];
+})
