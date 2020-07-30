@@ -1,7 +1,19 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-;
+@import 'variables';
+@import 'login';
+@import 'banner';
 
-body {
-  background: $primary-background;
+* {
+	box-sizing: border-box;
+	margin: 0;
+	font-family: $main-font;
+}
+
+html {
+	background: url('../images/black-tables-on-beach.jpg');
+	background-size: cover;
+	height: 100%;
+}
+
+.hidden {
+	display: none;
 }
