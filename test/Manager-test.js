@@ -27,4 +27,8 @@ describe('Manager', function () {
 		expect(manager.allCustomers[1]).to.be.an.instanceof(Customer);
 	})
 
+	it('should be able to search for a customer by name', function () {
+		expect(manager.searchForCustomer('John Smith')).to.deep.equal(customer1);
+	})
+
 })

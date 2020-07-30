@@ -6,6 +6,10 @@ class Manager extends User {
 		super();
 		this.allCustomers = usersData.map(user => new Customer(user.id, user.name))
 	}
+
+	searchForCustomer(name) {
+		return this.allCustomers.find(customer => name);
+	}
 }
 
 export default Manager;
