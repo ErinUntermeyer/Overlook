@@ -53,6 +53,16 @@ class User {
 			return totalSpent;
 		}, 0)
 	}
+
+	filterByRoomType(roomType, rooms) {
+		const filteredRooms = [];
+		rooms.forEach(room => {
+			if (room.roomType === roomType) {
+				filteredRooms.push(room);
+			}
+		})
+		return filteredRooms;
+	}
 }
 
 export default User;
