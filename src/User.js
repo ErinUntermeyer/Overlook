@@ -7,13 +7,10 @@ class User {
 		switch (dataType) {
 			case 'number':
 				return 0;
-				break;
 			case 'string':
 				return 'Invalid';
-				break;
 			case 'object':
 				return [];
-				break;
 		}
 	}
 
@@ -29,18 +26,8 @@ class User {
 
 	listRoomsAvailable(bookings, rooms, date) {
 		const bookedRooms = this.getRoomsBooked(bookings, date);
-		return bookedRooms.reduce((availableRooms, booking) => {
-			rooms.forEach(room => {
-				if (room.number !== booking) {
-					availableRooms.push(room);
-				}
-				})
-				if (availableRooms.length === 0) {
-					this.apologizeForNoRooms(date);
-				} else {
-					return availableRooms;
-				}
-		}, [])
+		const	availableRooms = rooms.filter(room => (!bookedRooms.includes(room.number)))
+		return availableRooms;
 	}
 
 	apologizeForNoRooms(date) {
@@ -60,7 +47,7 @@ class User {
 	retrieveTotalSpent(bookings, rooms, id) {
 		const allBookings = this.listBookingsById(bookings, id);
 		return allBookings.reduce((totalSpent, booking) => {
-			rooms.forEach(room => {
+			rooms.find(room => {
 				if (room.number === booking.roomNumber) {
 					totalSpent += room.costPerNight;
 				}
