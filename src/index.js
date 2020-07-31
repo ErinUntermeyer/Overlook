@@ -37,32 +37,29 @@ function getBookingsData() {
 function getData() {
 	return Promise.all([getUsersData(), getRoomsData(), getBookingsData()])
 	.then(dataSets => {
-		const usersData = dataSets[0].users;
-		const roomsData = dataSets[1].rooms;
-		const bookingsData = dataSets[2].bookings;
-		return [usersData, roomsData, bookingsData];
+		return dataSets;
 	})
 }
 
 function callGetData() {
 	return getData()
 		.then(parsedData => {
-			const allBookings = parsedData[2];
-			const manager = new Manager(parsedData[0], allBookings);
-			const allRooms = parsedData[1];
+			const usersData = parsedData[0]
+			const roomsData = parsedData[1]
+			const bookingsData = parsedData[2];
 			if (currentCustomerId) {
-				displayCustomerInfo();
+				displayCustomerInfo(usersData, roomsData, bookingsData);
 			} else {
-				displayManagerInfo();
+				displayManagerInfo(usersData, roomsData, bookingsData);
 			}
 		})
 }
 
-function displayCustomerInfo() {
+function displayCustomerInfo(usersData, roomsData, bookingsData) {
 	domUpdates.displayCustomerLandingPage();
 }
 
-function displayManagerInfo() {
+function displayManagerInfo(usersData, roomsData, bookingsData) {
 	domUpdates.displayManagerLandingPage();
 }
 
