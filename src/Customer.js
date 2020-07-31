@@ -2,10 +2,10 @@ import User from '../src/User';
 import Booking from './Booking';
 
 class Customer extends User {
-	constructor(usersData, bookingsData) {
+	constructor(userData, bookingsData) {
 		super();
-		this.id = super.checkDataType(usersData.id, 'number');
-		this.name = super.checkDataType(usersData.name, 'string');
+		this.id = super.checkDataType(userData.id, 'number');
+		this.name = super.checkDataType(userData.name, 'string');
 		this.bookings = this.updateCustomerBookings(bookingsData, this.id);
 	}
 
