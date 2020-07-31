@@ -1,6 +1,7 @@
 import './css/base.scss';
 import './images/black-tables-on-beach.jpg'
 import Manager from './Manager';
+import Booking from './Booking';
 
 // fetch data
 function getUsersData() {
@@ -29,8 +30,8 @@ function getData() {
 }
 
 getData()
-.then(parsedData => {
-	const manager = new Manager(parsedData[0]);
-	const allRooms = parsedData[1];
-	const allBookings = parsedData[2];
-})
+	.then(parsedData => {
+		const manager = new Manager(parsedData[0]);
+		const allRooms = parsedData[1];
+		const allBookings = parsedData[2].map(item => new Booking(item));
+	})
