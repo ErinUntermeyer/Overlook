@@ -7,24 +7,35 @@
   <body>
 		<header>
 			<h1>Overlook</h1>
-			<h2>Username</h2>
+			<h2 class="hidden">Username</h2>
 		</header>
 		<section class="login-wrapper">
 			<section class="login-section">
-				<p class="login-header">Customer Login:</p>
+				<p class="login-header">Customer Login</p>
 				<p class="login-error-message hidden">Invalid username and/or password</p>
 				<form class="login-form">
-					<input id="customer-username" class="input-field" type="text" name="username" placeholder="Username">
-					<input id="customer-password" class="input-field" type="password" name="password" placeholder="Password">
+					<label class="login-label" for="customer-username">username</label>
+					<input id="customer-username" class="input-field" type="text">
+					<label class="login-label" for="customer-password">password</label>
+					<input id="customer-password" class="input-field" type="password">
 					<input type="submit" value="Login" class="login-button">
 				</form>
-				<p class="login-header">Manager Login:</p>
+				<p class="login-header">Manager Login</p>
 				<p class="login-error-message hidden">Invalid username and/or password</p>
 				<form class="login-form">
-					<input id="manager-username" class="input-field" type="text" name="username" placeholder="Username">
-					<input id="manager-password" class="input-field" type="password" name="password" placeholder="Password">
+					<label class="login-label" for="manager-username">username</label>
+					<input id="manager-username" class="input-field" type="text" name="username">
+					<label class="login-label" for="manager-password">password</label>
+					<input id="manager-password" class="input-field" type="password" name="password">
 					<input type="submit" value="Login" class="login-button">
 				</form>
+			</section>
+		</section>
+		<section class="customer-wrapper hidden">
+			<section class="customer-book-new">
+				<label class="book-new-label" for="calendar">Book a Room</label>
+				<input class="calendar" id="calendar" type="date">
+				<button>Check availability</button>
 			</section>
 		</section>
   </body>

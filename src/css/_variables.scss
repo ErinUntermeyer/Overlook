@@ -3,4 +3,28 @@ $sand: #D6D3D2;
 $black: #1A1A1A;
 
 // fonts
-$main-font: Arial, Helvetica, sans-serif;
+$main-font: Verdana, sans-serif;
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+// mixins
+
+@mixin header-font($font-size) {
+  font-family: 'Dancing Script', cursive;
+  font-size: $font-size;
+}
+
+@mixin info-card($border-radius) {
+	background-color: $sand;
+	opacity: 80%;
+	border-radius: $border-radius
+}
+
+@mixin button() {
+	height: 25px;
+	background-color: $black;
+	color: $sand;
+	border: none;
+	border-radius: 3px;
+}
+
