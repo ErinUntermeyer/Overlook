@@ -37,6 +37,10 @@ describe('Manager', function () {
 		expect(manager.searchForCustomer('John Smith')).to.deep.equal(customer1);
 	})
 
+	it('should only take in a string for a name', function () {
+		expect(manager.searchForCustomer(32)).to.equal('Invalid search');
+	})
+
 	it('should get total revenue for today', function () {
 		expect(manager.getRevenueToday(bookings, rooms, 'today')).to.equal(400);
 	})

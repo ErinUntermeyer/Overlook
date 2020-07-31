@@ -8,19 +8,23 @@ class Manager extends User {
 	}
 
 	searchForCustomer(name) {
-		return this.allCustomers.find(customer => name);
+		if (typeof name !== 'string') {
+			return 'Invalid search'
+		} else {
+			return this.allCustomers.find(customer => name === customer.name)
+		}
 	}
 
 	getRevenueToday(bookings, rooms, date) {
 		const bookedRooms = super.getRoomsBooked(bookings, date);
 		return bookedRooms.reduce((totalRevenue, bookedRoom) => {
-			rooms.forEach(room => {
+			rooms.find(room => {
 				if (room.number === bookedRoom) {
 					totalRevenue += room.costPerNight;
 				}
 			})
 			return totalRevenue;
-		}, 0)	
+		}, 0)
 	}
 
 	getPercentRoomsOccupied(bookings, rooms, date) {
