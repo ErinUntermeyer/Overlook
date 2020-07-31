@@ -49,8 +49,8 @@ getData()
 		const allRooms = parsedData[1];
 	})
 
-function verifyCustomerId() {
-	customerId = usernameInput.match(/\d+/g).map(Number);
+function verifyCustomerId(input) {
+	const customerId = input.match(/\d+/g).map(Number);
 	if (customerId < 51) {
 		domUpdates.displayCustomerLandingPage();
 	} else {
