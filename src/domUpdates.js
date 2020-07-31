@@ -1,9 +1,26 @@
 const domUpdates = {
-	// toggleView(element, hide, display) {
-	// 	pageElement = document.querySelector(element);
-	// 	pageElement.classList.remove(hide);
-	// 	pageElement.classList.add(display);
-	// },
+	hideDisplay(element) {
+		const pageElement = document.querySelector(element);
+		const hide = pageElement.classList.add('hidden');
+		switch(element) {
+			case '.login-wrapper':
+				hide;
+				break;
+		}
+	},
+
+	showDisplay(element) {
+		const pageElement = document.querySelector(element);
+		const show = pageElement.classList.remove('hidden');
+		switch (element) {
+			case '.customer-wrapper':
+				show;
+				break;
+			case '.manager-wrapper':
+				show;
+				break;
+		}
+	},
 
 	verifyCustomerId(input) {
 		const customerId = input.match(/\d+/g).map(Number);
@@ -24,17 +41,13 @@ const domUpdates = {
 	},
 
 	displayCustomerLandingPage() {
-		const loginPage = document.querySelector('.login-wrapper');
-		const customerLandingPage = document.querySelector('.customer-wrapper');
-		loginPage.classList.add('hidden');
-		customerLandingPage.classList.remove('hidden');
+		this.hideDisplay('.login-wrapper');
+		this.showDisplay('.customer-wrapper');
 	},
 
 	displayManagerLandingPage() {
-		const loginPage = document.querySelector('.login-wrapper');
-		const managerLandingPage = document.querySelector('.manager-wrapper');
-		loginPage.classList.add('hidden');
-		managerLandingPage.classList.remove('hidden');
+		this.hideDisplay('.login-wrapper');
+		this.showDisplay('.manager-wrapper');
 	},
 
 	displayErrorMessage() {
