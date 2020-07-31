@@ -3,4 +3,11 @@ $sand: #D6D3D2;
 $black: #1A1A1A;
 
 // fonts
-$main-font: Arial, Helvetica, sans-serif;
+$main-font: Verdana, sans-serif;
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+@mixin header-font($font-size) {
+  font-family: 'Dancing Script', cursive;
+  font-size: $font-size;
+}
