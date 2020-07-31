@@ -2,6 +2,19 @@ import './css/base.scss';
 import './images/black-tables-on-beach.jpg'
 import Manager from './Manager';
 import Booking from './Booking';
+import domUpdates from './domUpdates'
+
+const body = document.querySelector('body');
+
+// event listeners
+body.addEventListener('click', handleClick);
+
+// event handlers
+function handleClick(event) {
+	if (event.target.classList.contains('login-button')) {
+		domUpdates.verifyLoginCredentials(event);
+	}
+ }
 
 // fetch data
 function getUsersData() {
@@ -35,3 +48,4 @@ getData()
 		const allRooms = parsedData[1];
 		const allBookings = parsedData[2].map(item => new Booking(item));
 	})
+
