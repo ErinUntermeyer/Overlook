@@ -4,6 +4,7 @@ import Manager from './Manager';
 import Booking from './Booking';
 import domUpdates from './domUpdates'
 
+let currentCustomerId;
 const body = document.querySelector('body');
 
 // event listeners
@@ -12,9 +13,10 @@ body.addEventListener('click', handleClick);
 // event handlers
 function handleClick(event) {
 	if (event.target.classList.contains('login-button')) {
-		verifyLoginCredentials(event);
+		event.preventDefault();
+		verifyLoginCredentials();
 	}
- }
+}
 
 // fetch data
 function getUsersData() {
@@ -42,31 +44,47 @@ function getData() {
 	})
 }
 
-getData()
-	.then(parsedData => {
-		const allBookings = parsedData[2];
-		const manager = new Manager(parsedData[0], allBookings);
-		const allRooms = parsedData[1];
-	})
-
-function verifyCustomerId(input) {
-	const customerId = input.match(/\d+/g).map(Number);
-	if (customerId < 51) {
-		domUpdates.displayCustomerLandingPage();
-	} else {
-		domUpdates.displayErrorMessage();
-	}
+function callGetData() {
+	return getData()
+		.then(parsedData => {
+			const allBookings = parsedData[2];
+			const manager = new Manager(parsedData[0], allBookings);
+			const allRooms = parsedData[1];
+			if (currentCustomerId) {
+				displayCustomerInfo();
+			} else {
+				displayManagerInfo();
+			}
+		})
 }
 
-function verifyLoginCredentials(event) {
-	event.preventDefault();
+function displayCustomerInfo() {
+	domUpdates.displayCustomerLandingPage();
+}
+
+function displayManagerInfo() {
+	domUpdates.displayManagerLandingPage();
+}
+
+function verifyLoginCredentials() {
 	const usernameInput = document.querySelector('#username').value;
 	const passwordInput = document.querySelector('#password').value;
 	if (usernameInput.includes('customer') && passwordInput === 'overlook2020') {
 		verifyCustomerId(usernameInput);
 	} else if (usernameInput === 'manager' && passwordInput === 'overlook2020') {
-		domUpdates.displayManagerLandingPage();
+		callGetData();
 	} else {
 		domUpdates.displayErrorMessage();
 	}
 }
+
+function verifyCustomerId(input) {
+	const customerId = input.match(/\d+/g).map(Number);
+	if (customerId < 51) {
+		currentCustomerId = customerId;
+		callGetData();
+	} else {
+		domUpdates.displayErrorMessage();
+	}
+}
+

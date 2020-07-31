@@ -36,11 +36,6 @@ const domUpdates = {
 		const loginErrorMessage = document.querySelector('.login-error-message');
 		loginErrorMessage.innerHTML = `<p>Invalid username and/or password</p>`;
 	},
-
-	displayRoomCards() {
-
-	}
-
 }
 
 export default domUpdates;
