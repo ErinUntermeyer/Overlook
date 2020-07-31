@@ -12,7 +12,7 @@ body.addEventListener('click', handleClick);
 // event handlers
 function handleClick(event) {
 	if (event.target.classList.contains('login-button')) {
-		domUpdates.verifyLoginCredentials(event);
+		verifyLoginCredentials(event);
 	}
  }
 
@@ -47,15 +47,26 @@ getData()
 		const allBookings = parsedData[2];
 		const manager = new Manager(parsedData[0], allBookings);
 		const allRooms = parsedData[1];
-		displayCustomerInfo();
-		displayManagerInfo();
 	})
 
-	function displayCustomerInfo() {
-		console.log('hi')
+function verifyCustomerId() {
+	customerId = usernameInput.match(/\d+/g).map(Number);
+	if (customerId < 51) {
+		domUpdates.displayCustomerLandingPage();
+	} else {
+		domUpdates.displayErrorMessage();
 	}
+}
 
-	function displayManagerInfo() {
-		console.log('hi')
+function verifyLoginCredentials(event) {
+	event.preventDefault();
+	const usernameInput = document.querySelector('#username').value;
+	const passwordInput = document.querySelector('#password').value;
+	if (usernameInput.includes('customer') && passwordInput === 'overlook2020') {
+		verifyCustomerId(usernameInput);
+	} else if (usernameInput === 'manager' && passwordInput === 'overlook2020') {
+		domUpdates.displayManagerLandingPage();
+	} else {
+		domUpdates.displayErrorMessage();
 	}
-
+}

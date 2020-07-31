@@ -22,24 +22,6 @@ const domUpdates = {
 		}
 	},
 
-	verifyCustomerId(input) {
-		const customerId = input.match(/\d+/g).map(Number);
-		customerId < 51 ? this.displayCustomerLandingPage() : this.displayErrorMessage();
-	},
-
-	verifyLoginCredentials(event) {
-		event.preventDefault();
-		const usernameInput = document.querySelector('#username').value;
-		const passwordInput = document.querySelector('#password').value;
-		if (usernameInput.includes('customer') && passwordInput === 'overlook2020') {
-			this.verifyCustomerId(usernameInput);
-		} else if (usernameInput === 'manager' && passwordInput === 'overlook2020') {
-			this.displayManagerLandingPage();
-		} else {
-			this.displayErrorMessage();
-		}
-	},
-
 	displayCustomerLandingPage() {
 		this.hideDisplay('.login-wrapper');
 		this.showDisplay('.customer-wrapper');
