@@ -1,6 +1,6 @@
 const chai = require('chai');
-const expect = chai.expect;
 const spies = require('chai-spies');
+const expect = chai.expect;
 chai.use(spies);
 
 import domUpdates from '../src/domUpdates';
@@ -18,9 +18,7 @@ describe('domUpdates', function () {
 		chai.spy.restore();
 	})
 
-	// it('should hide login card upon valid login', function () {
-	// 	domUpdates.verifyLoginCredentials(event);
-	// 	expect(document.querySelector).to.have.been.called(1);
-	// 	expect(document.querySelector).to.have.been.called.with('.login-button');
-	// })
+	it('should', function () {
+
+	})
 })

@@ -1,5 +1,5 @@
 .login-wrapper {
-	@include info-card(10px);
+	@include info-card-box(10px);
 	display: flex;
 	justify-content: center;
 	position: absolute;
