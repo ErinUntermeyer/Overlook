@@ -1,3 +1,6 @@
+import User from '../src/User';
+const user = new User();
+
 const domUpdates = {
 	hideDisplay(element) {
 		const pageElement = document.querySelector(element);
@@ -36,6 +39,27 @@ const domUpdates = {
 		const loginErrorMessage = document.querySelector('.login-error-message');
 		loginErrorMessage.innerHTML = `<p>Invalid username and/or password</p>`;
 	},
+
+	displayCustomerBookings(customer, rooms) {
+		const customerBookingSection = document.querySelector('.customer-wrapper');
+		customer.bookings.forEach(booking => {
+			const match = rooms.find(room => booking.roomNumber === room.number)
+			customerBookingSection.innerHTML += `
+			<section class="customer-bookings">
+			 <h3>booked for</h3>
+			  <p>${new Date(booking.date).toLocaleString().split(',')[0]}</p>
+			 <h3>room details</h3>
+				<p>room number: ${match.number}</p>
+				<p>room type: ${match.roomType}</p>
+				<p>bidet: ${match.bidet}</p>
+				<p>bed size: ${match.bedSize}</p>
+				<p>number of beds: ${match.numBeds}</p>
+				<p>cost per night: $${match.costPerNight}</p>
+			</section>
+			`
+		})
+
+	}
 }
 
 export default domUpdates;

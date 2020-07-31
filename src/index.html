@@ -7,6 +7,7 @@
   <body>
 		<header>
 			<h1>Overlook</h1>
+			<h2 class="total-spent"></h2>
 			<h2 class="hidden">Username</h2>
 		</header>
 		<section class="login-wrapper">
@@ -25,15 +26,22 @@
 		<section class="customer-wrapper hidden">
 			<section class="customer-book-new">
 				<label class="book-new-label" for="calendar">Book a Room</label>
-				<input class="calendar" id="calendar" type="date">
+				<input class="calendar" id="customer-calendar" type="date">
 				<button>Check availability</button>
 			</section>
+			<h2>your booked rooms:</h2>
 		</section>
 		<section class="manager-wrapper hidden">
 			<section class="manager-book-new">
 				<label class="book-new-label" for="calendar">Book a Room</label>
-				<input class="calendar" id="calendar" type="date">
+				<input class="calendar" id="manager-calendar" type="date">
 				<button>Check availability</button>
+			</section>
+			<section class="data-for-today">
+				<!-- total revenue and percent of occupied rooms go here -->
+			</section>
+			<section class="all-available-rooms">
+				<!-- all available rooms go here -->
 			</section>
 		</section>
   </body>

@@ -1,10 +1,11 @@
 import './css/base.scss';
 import './images/black-tables-on-beach.jpg'
 import Manager from './Manager';
-import Booking from './Booking';
 import domUpdates from './domUpdates'
+import Customer from './Customer';
 
 let currentCustomerId;
+let currentCustomerInfo;
 const body = document.querySelector('body');
 
 // event listeners
@@ -44,22 +45,26 @@ function getData() {
 function callGetData() {
 	return getData()
 		.then(parsedData => {
-			const usersData = parsedData[0]
-			const roomsData = parsedData[1]
-			const bookingsData = parsedData[2];
+			const usersData = parsedData[0].users;
+			const roomsData = parsedData[1].rooms;
+			const bookingsData = parsedData[2].bookings;
 			if (currentCustomerId) {
-				displayCustomerInfo(usersData, roomsData, bookingsData);
+				const currentCustomer = usersData.find(user => user.id === currentCustomerId);
+				currentCustomerInfo = new Customer(currentCustomer, bookingsData);
+				displayCustomerInfo(currentCustomerInfo, usersData, roomsData, bookingsData);
 			} else {
 				displayManagerInfo(usersData, roomsData, bookingsData);
 			}
 		})
 }
 
-function displayCustomerInfo(usersData, roomsData, bookingsData) {
+function displayCustomerInfo(currentCustomerInfo, usersData, roomsData, bookingsData) {
 	domUpdates.displayCustomerLandingPage();
+	domUpdates.displayCustomerBookings(currentCustomerInfo, roomsData);
 }
 
 function displayManagerInfo(usersData, roomsData, bookingsData) {
+	const manager = new Manager(usersData.users, bookingsData.bookings)
 	domUpdates.displayManagerLandingPage();
 }
 
@@ -78,7 +83,7 @@ function verifyLoginCredentials() {
 function verifyCustomerId(input) {
 	const customerId = input.match(/\d+/g).map(Number);
 	if (customerId < 51) {
-		currentCustomerId = customerId;
+		currentCustomerId = customerId[0];
 		callGetData();
 	} else {
 		domUpdates.displayErrorMessage();

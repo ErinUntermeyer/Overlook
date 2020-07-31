@@ -33,7 +33,7 @@ $main-font: Verdana, sans-serif;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 40px;
+	padding: 30px;
 
 	.book-new-label {
 		@include header-font(40px);
