@@ -14,21 +14,28 @@
 				<p class="login-header">Customer Login</p>
 				<p class="login-error-message hidden">Invalid username and/or password</p>
 				<form class="login-form">
-					<label for="customer-username">username</label>
+					<label class="login-label" for="customer-username">username</label>
 					<input id="customer-username" class="input-field" type="text">
-					<label for="customer-password">password</label>
+					<label class="login-label" for="customer-password">password</label>
 					<input id="customer-password" class="input-field" type="password">
 					<input type="submit" value="Login" class="login-button">
 				</form>
 				<p class="login-header">Manager Login</p>
 				<p class="login-error-message hidden">Invalid username and/or password</p>
 				<form class="login-form">
-					<label for="manager-username">username</label>
+					<label class="login-label" for="manager-username">username</label>
 					<input id="manager-username" class="input-field" type="text" name="username">
-					<label for="manager-password">password</label>
+					<label class="login-label" for="manager-password">password</label>
 					<input id="manager-password" class="input-field" type="password" name="password">
 					<input type="submit" value="Login" class="login-button">
 				</form>
+			</section>
+		</section>
+		<section class="customer-wrapper hidden">
+			<section class="customer-book-new">
+				<label class="book-new-label" for="calendar">Book a Room</label>
+				<input class="calendar" id="calendar" type="date">
+				<button>Check availability</button>
 			</section>
 		</section>
   </body>
