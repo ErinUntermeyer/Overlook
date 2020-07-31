@@ -44,8 +44,18 @@ function getData() {
 
 getData()
 	.then(parsedData => {
-		const manager = new Manager(parsedData[0]);
+		const allBookings = parsedData[2];
+		const manager = new Manager(parsedData[0], allBookings);
 		const allRooms = parsedData[1];
-		const allBookings = parsedData[2].map(item => new Booking(item));
+		displayCustomerInfo();
+		displayManagerInfo();
 	})
+
+	function displayCustomerInfo() {
+		console.log('hi')
+	}
+
+	function displayManagerInfo() {
+		console.log('hi')
+	}
 
