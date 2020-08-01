@@ -10,8 +10,8 @@ class Customer extends User {
 	}
 
 	updateCustomerBookings(bookingsData, id) {
-		const customerBookings = super.listBookingsById(bookingsData, id)
-		return customerBookings.map(booking => new Booking(booking))
+		const customerBookings = super.listBookingsById(bookingsData, id);
+		return customerBookings.map(booking => new Booking(booking));
 	}
 }
 

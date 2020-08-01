@@ -20,7 +20,3 @@ div {
 	align-items: flex-end;
 	padding: 15px;
 }
-
-h3 {
-	@include header-font(20px);
-}

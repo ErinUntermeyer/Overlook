@@ -19,3 +19,11 @@ html {
 .hidden {
 	display: none;
 }
+
+.input-field {
+	@include input-field;
+}
+
+.card-header {
+	@include header-font(28px);
+}

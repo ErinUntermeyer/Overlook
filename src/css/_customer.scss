@@ -1,11 +1,14 @@
+.name-display {
+	@include header-font(40px);
+	color: $sand;
+}
+
+h3 {
+	@include header-font(20px);
+}
+
 .customer-wrapper {
-	padding: 30px;
-	display: grid;
-	grid-gap: 10px;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-template-rows: 1fr .5fr 1fr;
-	justify-items: center;
-	width: 100%;
+	@include section-wrapper;
 }
 
 .customer-book-new {
@@ -13,17 +16,12 @@
 	grid-area: 1 / 1 / 2 / 4;
 }
 
-.customer-bookings {
-	@include book-room-box;
-}
-
-h2 {
+.section-header {
 	@include header-font(40px);
-	color: $sand;
 	grid-area: 2 / 1 / 3 / 4;
 	justify-self: center;
 }
 
-.card-header {
-	@include header-font(28px);
+.customer-bookings {
+	@include book-room-box;
 }

@@ -1,9 +1,72 @@
 .manager-wrapper {
-	display: flex;
-	justify-content: center;
-	margin: 40px;
+	padding: 30px;
+	display: grid;
+	grid-gap: 10px;
+	grid-template-rows: 1fr 1fr;
+	justify-items: center;
 }
 
-.manager-book-new {
+.daily-stats {
+	@include book-room-box;
+	grid-row-start: 1;
+	grid-row-end: 2;
+	width: 30%;
+}
+
+.daily-stats-heading {
+	color: $black;
+	margin-bottom: 30px;
+}
+
+.search-form {
+	@include form;
+	@include info-card-box(10px);
+	grid-row-start: 2;
+	grid-row-end: 3;
+	width: 30%;
+	align-items: center;
+	align-self: center;
+	padding: 20px;
+}
+
+.search-label {
+	font-size: 12px;
+}
+
+.search-button {
+	@include button;
+	width: 50%;
+}
+
+.search-error-message {
+	@include error;
+}
+
+.section-header {
+	@include header-font(40px);
+	grid-area: 2 / 1 / 3 / 4;
+	justify-self: center;
+}
+
+.search-results {
+	padding: 30px;
+	display: grid;
+	grid-gap: 10px;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: .5fr .5fr 1fr;
+	justify-items: center;
+	width: 100%;
+}
+
+.customer-match-details {
+	@include book-room-box;
+	grid-area: 1 / 1 / 1 / 4;
+}
+
+.customer-match-name {
+	@include header-font(40px)
+}
+
+.customer-bookings {
 	@include book-room-box;
 }

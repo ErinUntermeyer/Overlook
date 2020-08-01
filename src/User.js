@@ -14,6 +14,10 @@ class User {
 		}
 	}
 
+	sortBookingsByDate(bookings) {
+		return bookings.sort((a, b) => new Date(b.date) - new Date(a.date));
+	}
+
 	getRoomsBooked(bookings, date) {
 		const bookedRooms = [];
 		bookings.forEach(booking => {
@@ -39,13 +43,7 @@ class User {
 	}
 
 	listBookingsById(bookings, id) {
-		const bookingsById = [];
-		bookings.forEach(booking => {
-			if (booking.userID === id) {
-				bookingsById.push(booking);
-			}
-		})
-		return bookingsById;
+		return bookings.filter(booking => booking.userID === id);
 	}
 
 	retrieveTotalSpent(bookings, rooms, id) {
@@ -61,13 +59,7 @@ class User {
 	}
 
 	filterByRoomType(roomType, rooms) {
-		const filteredRooms = [];
-		rooms.forEach(room => {
-			if (room.roomType === roomType) {
-				filteredRooms.push(room);
-			}
-		})
-		return filteredRooms;
+		return rooms.filter(room => room.roomType === roomType);
 	}
 }
 

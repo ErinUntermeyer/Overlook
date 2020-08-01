@@ -12,10 +12,11 @@ class Manager extends User {
 	}
 
 	searchForCustomer(name) {
-		if (typeof name !== 'string') {
+		const searchResults = this.allCustomers.find(customer => name === customer.name)
+		if (searchResults === undefined || typeof name !== 'string') {
 			return 'Invalid search'
 		} else {
-			return this.allCustomers.find(customer => name === customer.name)
+			return searchResults;
 		}
 	}
 
@@ -33,8 +34,7 @@ class Manager extends User {
 
 	getPercentRoomsOccupied(bookings, rooms, date) {
 		const numberOfBookedRooms = super.getRoomsBooked(bookings, date).length;
-		const numberOfRooms = rooms.length;
-		return Math.floor(100 / (numberOfRooms / numberOfBookedRooms));
+		return Math.floor(100 / (rooms.length / numberOfBookedRooms));
 	}
 }
 
