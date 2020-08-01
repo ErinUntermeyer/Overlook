@@ -49,7 +49,7 @@ describe('Manager', function () {
 	})
 
 	it('should get percent of occupied rooms for today', function () {
-		expect(manager.getPercentRoomsOccupied(bookingsData, roomsData, 'today')).to.equal(50);
+		expect(manager.getPercentRoomsOccupied(bookedRooms, roomsData, 'today')).to.equal(50);
 	})
 
 })

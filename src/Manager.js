@@ -31,8 +31,8 @@ class Manager extends User {
 		}, 0)
 	}
 
-	getPercentRoomsOccupied(bookings, rooms, date) {
-		const numberOfBookedRooms = super.getBookedRooms(bookings, date).length;
+	getPercentRoomsOccupied(bookedRooms, rooms) {
+		const numberOfBookedRooms = bookedRooms.length;
 		return Math.floor(100 / (rooms.length / numberOfBookedRooms));
 	}
 }

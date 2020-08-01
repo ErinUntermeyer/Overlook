@@ -102,10 +102,10 @@ function verifyCustomerId(input) {
 }
 
 function getManagerDailyStats(bookings, rooms, date) {
-	// totalRoomsAvailable and totalRevenue now needs to take in bookedRooms from getBookedRooms(date)
+	// all of these now need to take in roomsBooked array from getBookedRooms(date)
 	// const totalRoomsAvailable = user.listRoomsAvailable(bookings, rooms, date).length;
-	// const totalRevenue = manager.getRevenueToday(bookings, rooms, date);
-	const percentOfOccupied = manager.getPercentRoomsOccupied(bookings, rooms, date);
+	// const totalRevenue = manager.getRevenueToday(bookings, rooms);
+	// const percentOfOccupied = manager.getPercentRoomsOccupied(bookings, rooms);
 	return [totalRoomsAvailable, totalRevenue, percentOfOccupied];
 }
 
