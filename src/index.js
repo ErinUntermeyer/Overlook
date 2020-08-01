@@ -115,8 +115,9 @@ function getSearchResultsForManager() {
 	} else {
 		customerId = customerMatch.id;
 		customerBookings = bookingRepo.listBookingsById(customerId);
+		const customerSpent = (user.retrieveTotalSpent(customerBookings, roomsData)).toFixed(2);
 		domUpdates.hideManagerLandingDisplay();
-		domUpdates.displayMatchedCustomerName(customerMatch);
+		domUpdates.displayMatchedCustomerName(customerMatch, customerSpent);
 		domUpdates.displayMatchedCustomerBookings(customerBookings, roomsData);
 	}
 }

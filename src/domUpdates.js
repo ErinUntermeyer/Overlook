@@ -113,13 +113,13 @@ const domUpdates = {
 		this.hideDisplay('.search-form');
 	},
 
-	displayMatchedCustomerName(customerMatch) {
+	displayMatchedCustomerName(customerMatch, customerSpent) {
 		const searchResultsSection = document.querySelector('.search-results');
 		searchResultsSection.innerHTML += `
 			<section class="customer-match-details">
 				<h2 class="customer-match-name">${customerMatch.name}</h2>
 				<h3 class="card-header">total spent on rooms</h3>
-				<p>$43298</p>
+				<p>$${customerSpent}</p>
 			</section>
 			`
 	},
