@@ -75,7 +75,6 @@ function displayManagerInfo(usersData, roomsData, bookingsData) {
 	domUpdates.displayManagerLandingPage();
 	domUpdates.displayManagerWelcome();
 	domUpdates.displayDailyStatsForManager(dailyStats);
-	getSearchResultsForManager();
 }
 
 function verifyLoginCredentials() {
@@ -113,6 +112,7 @@ function getSearchResultsForManager() {
 	if (customerMatch === 'Invalid search') {
 		domUpdates.displaySearchErrorMessage();
 	} else {
+		domUpdates.hideManagerLandingDisplay();
 		domUpdates.displayMatchedCustomerName(customerMatch);
 		domUpdates.displayMatchedCustomerBookings(customerMatch);
 	}

@@ -9,6 +9,12 @@ const domUpdates = {
 			case '.login-wrapper':
 				hide;
 				break;
+			case '.daily-stats':
+				hide;
+				break;
+			case '.search-form':
+				hide;
+				break;
 		}
 	},
 
@@ -94,6 +100,11 @@ const domUpdates = {
 		searchErrorMessage.innerHTML = `<p>Invalid customer name</p>`;
 	},
 
+	hideManagerLandingDisplay() {
+		this.hideDisplay('.daily-stats');
+		this.hideDisplay('.search-form');
+	},
+
 	displayMatchedCustomerName(customerMatch) {
 		const searchResultsSection = document.querySelector('.search-results');
 		searchResultsSection.innerHTML += `
@@ -107,6 +118,7 @@ const domUpdates = {
 
 	displayMatchedCustomerBookings(customerMatch) {
 		const searchResultsSection = document.querySelector('.search-results');
+		searchResultsSection.classList.remove('hidden');
 		customerMatch.bookings.forEach(booking => {
 			searchResultsSection.innerHTML += `
 				<section class="customer-bookings">
