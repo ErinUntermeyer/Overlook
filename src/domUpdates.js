@@ -40,15 +40,26 @@ const domUpdates = {
 		loginErrorMessage.innerHTML = `<p>Invalid username and/or password</p>`;
 	},
 
+	displayCustomerName(customer) {
+		const nameDisplay = document.querySelector('.name-display');
+		nameDisplay.innerHTML = `${customer.name}`
+	},
+
+	displayCustomerSpent(customer, rooms) {
+		const totalSpentDisplay = document.querySelector('.total-spent');
+		const totalSpent = (user.retrieveTotalSpent(customer.bookings, rooms, customer.id)).toFixed(2);
+		totalSpentDisplay.innerHTML = `total spent: $${totalSpent}`
+	},
+
 	displayCustomerBookings(customer, rooms) {
 		const customerBookingSection = document.querySelector('.customer-wrapper');
 		customer.bookings.forEach(booking => {
 			const match = rooms.find(room => booking.roomNumber === room.number)
 			customerBookingSection.innerHTML += `
 			<section class="customer-bookings">
-			 <h3>booked for</h3>
+			 <h3 class="card-header">booked for</h3>
 			  <p>${new Date(booking.date).toLocaleString().split(',')[0]}</p>
-			 <h3>room details</h3>
+			 <h3 class="card-header">room details</h3>
 				<p>room number: ${match.number}</p>
 				<p>room type: ${match.roomType}</p>
 				<p>bidet: ${match.bidet}</p>

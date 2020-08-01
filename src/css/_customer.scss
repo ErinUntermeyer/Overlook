@@ -24,6 +24,6 @@ h2 {
 	justify-self: center;
 }
 
-h3 {
+.card-header {
 	@include header-font(28px);
 }
