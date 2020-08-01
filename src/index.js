@@ -6,7 +6,8 @@ import User from './User';
 import BookingRepo from './BookingRepo';
 const Moment = require('moment');
 
-let currentCustomerId, currentCustomerName, currentCustomerBookings, manager;
+let customerId, customerName, customerBookings, manager, usersData, roomsData, bookingRepo;
+
 const user = new User();
 const today = new Moment().format('YYYY/MM/DD');
 const body = document.querySelector('body');
@@ -47,38 +48,6 @@ function getData() {
 	})
 }
 
-function callGetData() {
-	return getData()
-		.then(parsedData => {
-			const usersData = parsedData[0].users;
-			const roomsData = parsedData[1].rooms;
-			const bookingsData = parsedData[2].bookings;
-			const bookingRepo = new BookingRepo(bookingsData);
-			// if (currentCustomerId) {
-			// 	currentCustomerName = usersData.find(user => user.id === currentCustomerId);
-			// 	currentCustomerBookings = bookingsData.listBookingsById(currentCustomerId);
-			// 	displayCustomerInfo(roomsData, currentCustomerName, currentCustomerBookings);
-			// } else {
-			// 	displayManagerInfo(usersData, roomsData, bookingsData);
-			// }
-		})
-}
-
-function displayCustomerInfo(roomsData, currentCustomerName, currentCustomerBookings) {
-	domUpdates.displayCustomerLandingPage();
-	domUpdates.displayCustomerName(currentCustomerName);
-	// domUpdates.displayCustomerSpent(currentCustomerInfo, roomsData);
-	domUpdates.displayCustomerBookings(currentCustomerBookings, roomsData);
-}
-
-function displayManagerInfo(usersData, roomsData, bookingsData) {
-	manager = new Manager(usersData, bookingsData);
-	const dailyStats = getManagerDailyStats(bookingsData, roomsData, today);
-	domUpdates.displayManagerLandingPage();
-	domUpdates.displayManagerWelcome();
-	domUpdates.displayDailyStatsForManager(dailyStats);
-}
-
 function verifyLoginCredentials() {
 	const usernameInput = document.querySelector('#username').value;
 	const passwordInput = document.querySelector('#password').value;
@@ -92,20 +61,49 @@ function verifyLoginCredentials() {
 }
 
 function verifyCustomerId(input) {
-	const customerId = input.match(/\d+/g).map(Number);
-	if (customerId < 51) {
-		currentCustomerId = customerId[0];
+	const customerIdInput = input.match(/\d+/g).map(Number);
+	if (customerIdInput < 51) {
+		customerId = customerIdInput[0];
 		callGetData();
 	} else {
 		domUpdates.displayLoginErrorMessage();
 	}
 }
 
-function getManagerDailyStats(bookings, rooms, date) {
-	// all of these now need to take in roomsBooked array from getBookedRooms(date)
-	// const totalRoomsAvailable = user.listRoomsAvailable(bookings, rooms, date).length;
-	// const totalRevenue = manager.getRevenueToday(bookings, rooms);
-	// const percentOfOccupied = manager.getPercentRoomsOccupied(bookings, rooms);
+function callGetData() {
+	return getData()
+		.then(parsedData => {
+			usersData = parsedData[0].users;
+			roomsData = parsedData[1].rooms;
+			bookingRepo = new BookingRepo(parsedData[2].bookings);
+			if (customerId) {
+				customerName = usersData.find(user => user.id === customerId).name;
+				customerBookings = bookingRepo.listBookingsById(customerId);
+				displayCustomerInfo(customerName, customerBookings);
+			} else {
+				displayManagerInfo();
+			}
+		})
+}
+
+function displayCustomerInfo(customerName, customerBookings) {
+	domUpdates.displayCustomerLandingPage();
+	domUpdates.displayCustomerDetails(customerName, customerBookings, roomsData);
+}
+
+function displayManagerInfo() {
+	manager = new Manager(usersData);
+	const dailyStats = getManagerDailyStats(bookingRepo, roomsData, today);
+	domUpdates.displayManagerLandingPage();
+	domUpdates.displayManagerWelcome();
+	domUpdates.displayDailyStatsForManager(dailyStats);
+}
+
+function getManagerDailyStats(date) {
+	const bookedRooms = bookingRepo.getBookedRooms(date);
+	const totalRoomsAvailable = user.listRoomsAvailable(bookedRooms, roomsData, date).length;
+	const totalRevenue = manager.getRevenueToday(bookedRooms, roomsData);
+	const percentOfOccupied = manager.getPercentRoomsOccupied(bookedRooms, roomsData);
 	return [totalRoomsAvailable, totalRevenue, percentOfOccupied];
 }
 
@@ -115,9 +113,11 @@ function getSearchResultsForManager() {
 	if (customerMatch === 'Invalid search') {
 		domUpdates.displaySearchErrorMessage();
 	} else {
+		customerId = customerMatch.id;
+		customerBookings = bookingRepo.listBookingsById(customerId);
+		const customerSpent = (user.retrieveTotalSpent(customerBookings, roomsData)).toFixed(2);
 		domUpdates.hideManagerLandingDisplay();
-		domUpdates.displayMatchedCustomerName(customerMatch);
-		domUpdates.displayMatchedCustomerBookings(customerMatch);
+		domUpdates.displayMatchedCustomerName(customerMatch, customerSpent);
+		domUpdates.displayMatchedCustomerBookings(customerBookings, roomsData);
 	}
 }
-
