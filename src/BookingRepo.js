@@ -17,10 +17,17 @@ class BookingRepo {
 		return bookedRooms;
 	}
 
+	getPastBookings(date) {
+		
+	}
+
+	getFutureBookings(date) {
+
+	}
+
 	listBookingsById(id) {
 		return this.bookings.filter(booking => booking.userID === id);
 	}
-
 }
 
 export default BookingRepo;

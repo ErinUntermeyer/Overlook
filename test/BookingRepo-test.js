@@ -27,5 +27,17 @@ describe('BookingRepo', function () {
 		expect(bookingRepo.getBookedRooms('today')).to.deep.equal([1, 3]);
 	})
 
+	it('should list all bookings by ID', function () {
+		expect(bookingRepo.listBookingsById(2)).to.deep.equal([bookingsData[1], bookingsData[3]]);
+	})
+
+	it('should list all past bookings', function () {
+		expect(bookingRepo.getBookedRooms('today')).to.deep.equal([1, 3]);
+	})
+
+	it('should list all future bookings', function () {
+		expect(bookingRepo.getBookedRooms('today')).to.deep.equal([1, 3]);
+	})
+
 
 })
