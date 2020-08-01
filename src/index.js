@@ -6,7 +6,7 @@ import User from './User';
 import BookingRepo from './BookingRepo';
 const Moment = require('moment');
 
-let currentCustomerId, currentCustomerName, currentCustomerBookings, manager;
+let customerId, customerName, customerBookings, manager;
 const user = new User();
 const today = new Moment().format('YYYY/MM/DD');
 const body = document.querySelector('body');
@@ -54,25 +54,27 @@ function callGetData() {
 			const roomsData = parsedData[1].rooms;
 			const bookingsData = parsedData[2].bookings;
 			const bookingRepo = new BookingRepo(bookingsData);
-			// if (currentCustomerId) {
-			// 	currentCustomerName = usersData.find(user => user.id === currentCustomerId);
-			// 	currentCustomerBookings = bookingsData.listBookingsById(currentCustomerId);
-			// 	displayCustomerInfo(roomsData, currentCustomerName, currentCustomerBookings);
-			// } else {
-			// 	displayManagerInfo(usersData, roomsData, bookingsData);
-			// }
+			if (customerId) {
+				customerName = usersData.find(user => user.id === customerId).name;
+				customerBookings = bookingRepo.listBookingsById(customerId);
+				displayCustomerInfo(customerName, customerBookings, roomsData);
+			} else {
+				managerHandler(usersData, roomsData, bookingsData);
+			}
 		})
 }
 
-function displayCustomerInfo(roomsData, currentCustomerName, currentCustomerBookings) {
+function managerHandler(usersData, roomsData, bookingsData) {
+
+}
+
+function displayCustomerInfo(customerName, customerBookings, roomsData) {
 	domUpdates.displayCustomerLandingPage();
-	domUpdates.displayCustomerName(currentCustomerName);
-	// domUpdates.displayCustomerSpent(currentCustomerInfo, roomsData);
-	domUpdates.displayCustomerBookings(currentCustomerBookings, roomsData);
+	domUpdates.displayCustomerDetails(customerName, customerBookings, roomsData);
 }
 
 function displayManagerInfo(usersData, roomsData, bookingsData) {
-	manager = new Manager(usersData, bookingsData);
+	manager = new Manager(usersData);
 	const dailyStats = getManagerDailyStats(bookingsData, roomsData, today);
 	domUpdates.displayManagerLandingPage();
 	domUpdates.displayManagerWelcome();
@@ -92,9 +94,9 @@ function verifyLoginCredentials() {
 }
 
 function verifyCustomerId(input) {
-	const customerId = input.match(/\d+/g).map(Number);
-	if (customerId < 51) {
-		currentCustomerId = customerId[0];
+	const customerIdInput = input.match(/\d+/g).map(Number);
+	if (customerIdInput < 51) {
+		customerId = customerIdInput[0];
 		callGetData();
 	} else {
 		domUpdates.displayLoginErrorMessage();

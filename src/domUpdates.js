@@ -31,19 +31,22 @@ const domUpdates = {
 		}
 	},
 
+	displayLoginErrorMessage() {
+		const loginErrorMessage = document.querySelector('.login-error-message');
+		loginErrorMessage.innerHTML = `<p>Invalid username and/or password</p>`;
+	},
+
+	// customer section
+
 	displayCustomerLandingPage() {
 		this.hideDisplay('.login-wrapper');
 		this.showDisplay('.customer-wrapper');
 	},
 
-	displayManagerLandingPage() {
-		this.hideDisplay('.login-wrapper');
-		this.showDisplay('.manager-wrapper');
-	},
-
-	displayLoginErrorMessage() {
-		const loginErrorMessage = document.querySelector('.login-error-message');
-		loginErrorMessage.innerHTML = `<p>Invalid username and/or password</p>`;
+	displayCustomerDetails(customerName, customerBookings, roomsData) {
+		this.displayCustomerName(customerName);
+		this.displayCustomerSpent(customerBookings, roomsData);
+		this.displayCustomerBookings(customerBookings, roomsData);
 	},
 
 	displayCustomerName(customerName) {
@@ -51,16 +54,16 @@ const domUpdates = {
 		nameDisplay.innerHTML = `${customerName}`
 	},
 
-	// displayCustomerSpent(customer, rooms) {
-	// 	const totalSpentDisplay = document.querySelector('.total-spent');
-	// 	const totalSpent = (user.retrieveTotalSpent(customer.bookings, rooms, customer.id)).toFixed(2);
-	// 	totalSpentDisplay.innerHTML = `total spent: $${totalSpent}`
-	// },
+	displayCustomerSpent(customerBookings, roomsData) {
+		const totalSpentDisplay = document.querySelector('.total-spent');
+		const totalSpent = (user.retrieveTotalSpent(customerBookings, roomsData)).toFixed(2);
+		totalSpentDisplay.innerHTML = `total spent: $${totalSpent}`
+	},
 
-	displayCustomerBookings(customerBookings, rooms) {
+	displayCustomerBookings(customerBookings, roomsData) {
 		const customerBookingSection = document.querySelector('.customer-wrapper');
 		customerBookings.forEach(booking => {
-			const match = rooms.find(room => booking.roomNumber === room.number)
+			const match = roomsData.find(room => booking.roomNumber === room.number)
 			customerBookingSection.innerHTML += `
 			<section class="customer-bookings">
 			 <h3 class="card-header">booked for</h3>
@@ -77,6 +80,17 @@ const domUpdates = {
 		})
 	},
 
+	// manager section 
+	displayManagerLandingPage() {
+		this.hideDisplay('.login-wrapper');
+		this.showDisplay('.manager-wrapper');
+	},
+
+	displayManagerWelcome() {
+		const nameDisplay = document.querySelector('.name-display');
+		nameDisplay.innerHTML = `Welcome back , Manager`;
+	},
+
 	displayDailyStatsForManager(dailyStats) {
 		const dailyStatsSection = document.querySelector('.daily-stats');
 		dailyStatsSection.innerHTML += `
@@ -88,11 +102,6 @@ const domUpdates = {
 			<h3 class="card-header">percent of rooms occupied</h3>
 				<p>${dailyStats[2]}%</p>
 		`
-	},
-
-	displayManagerWelcome() {
-		const nameDisplay = document.querySelector('.name-display');
-		nameDisplay.innerHTML = `Welcome back , Manager`;
 	},
 
 	displaySearchErrorMessage() {

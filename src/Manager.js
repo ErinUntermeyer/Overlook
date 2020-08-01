@@ -2,9 +2,9 @@ import User from '../src/User';
 import Customer from '../src/Customer';
 
 class Manager extends User {
-	constructor(usersData, bookingsData) {
+	constructor(usersData) {
 		super();
-		this.allCustomers = this.updateAllCustomers(usersData, bookingsData);
+		this.allCustomers = this.updateAllCustomers(usersData);
 	}
 
 	updateAllCustomers(usersData) {
