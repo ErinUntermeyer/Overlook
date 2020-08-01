@@ -7,8 +7,8 @@ class Manager extends User {
 		this.allCustomers = this.updateAllCustomers(usersData, bookingsData);
 	}
 
-	updateAllCustomers(usersData, bookingsData) {
-		return usersData.map(user => new Customer(user, bookingsData))
+	updateAllCustomers(usersData) {
+		return usersData.map(user => new Customer(user));
 	}
 
 	searchForCustomer(name) {
@@ -20,8 +20,7 @@ class Manager extends User {
 		}
 	}
 
-	getRevenueToday(bookings, rooms, date) {
-		const bookedRooms = super.getRoomsBooked(bookings, date);
+	getRevenueToday(bookedRooms, rooms) {
 		return bookedRooms.reduce((totalRevenue, bookedRoom) => {
 			rooms.find(room => {
 				if (room.number === bookedRoom) {
@@ -32,8 +31,8 @@ class Manager extends User {
 		}, 0)
 	}
 
-	getPercentRoomsOccupied(bookings, rooms, date) {
-		const numberOfBookedRooms = super.getRoomsBooked(bookings, date).length;
+	getPercentRoomsOccupied(bookedRooms, rooms) {
+		const numberOfBookedRooms = bookedRooms.length;
 		return Math.floor(100 / (rooms.length / numberOfBookedRooms));
 	}
 }

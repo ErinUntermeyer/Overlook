@@ -5,7 +5,7 @@ import Manager from '../src/Manager';
 import Customer from '../src/Customer';
 
 describe('Manager', function () {
-	let userData1, userData2, usersData, bookingsData, roomsData,  customer1, manager;
+	let userData1, userData2, usersData, bookingsData, roomsData,  customer1, manager, bookedRooms;
  
 	beforeEach(function () {
 		userData1 = { id: 1, name: 'John Smith' };
@@ -19,7 +19,8 @@ describe('Manager', function () {
 			{ number: 1, roomType: 'suite', bidet: true, bedSize: 'king', numBeds: 2, costPerNight: 400 },
 			{ number: 2, roomType: 'single room', bidet: false, bedSize: 'full', numBeds: 2, costPerNight: 100 }];
 		customer1 = new Customer(userData1, bookingsData);
-		manager = new Manager(usersData, bookingsData)
+		manager = new Manager(usersData, bookingsData);
+		bookedRooms = [1];
 	})
 
 	it('should be a function', function () {
@@ -44,11 +45,11 @@ describe('Manager', function () {
 	})
 
 	it('should get total revenue for today', function () {
-		expect(manager.getRevenueToday(bookingsData, roomsData, 'today')).to.equal(400);
+		expect(manager.getRevenueToday(bookedRooms, roomsData, 'today')).to.equal(400);
 	})
 
 	it('should get percent of occupied rooms for today', function () {
-		expect(manager.getPercentRoomsOccupied(bookingsData, roomsData, 'today')).to.equal(50);
+		expect(manager.getPercentRoomsOccupied(bookedRooms, roomsData, 'today')).to.equal(50);
 	})
 
 })

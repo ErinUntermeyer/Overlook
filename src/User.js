@@ -14,22 +14,7 @@ class User {
 		}
 	}
 
-	sortBookingsByDate(bookings) {
-		return bookings.sort((a, b) => new Date(b.date) - new Date(a.date));
-	}
-
-	getRoomsBooked(bookings, date) {
-		const bookedRooms = [];
-		bookings.forEach(booking => {
-			if (booking.date === date) {
-				bookedRooms.push(booking.roomNumber);
-			}
-		})
-		return bookedRooms;
-	}
-
-	listRoomsAvailable(bookings, rooms, date) {
-		const bookedRooms = this.getRoomsBooked(bookings, date);
+	listRoomsAvailable(bookedRooms, rooms, date) {
 		const	availableRooms = rooms.filter(room => (!bookedRooms.includes(room.number)));
 		if (availableRooms.length === 0) {
 			this.apologizeForNoRooms(date);
@@ -42,13 +27,8 @@ class User {
 		return `Overlook regrets to inform you that there are no rooms available for ${date}`;
 	}
 
-	listBookingsById(bookings, id) {
-		return bookings.filter(booking => booking.userID === id);
-	}
-
-	retrieveTotalSpent(bookings, rooms, id) {
-		const allBookings = this.listBookingsById(bookings, id);
-		return allBookings.reduce((totalSpent, booking) => {
+	retrieveTotalSpent(customerBookings, rooms) {
+		return customerBookings.reduce((totalSpent, booking) => {
 			rooms.find(room => {
 				if (room.number === booking.roomNumber) {
 					totalSpent += room.costPerNight;
