@@ -37,18 +37,7 @@
 }
 
 .login-form {
-	margin: 10px;
-	color: $black;
-	display: flex;
-	flex-direction: column;
-}
-
-.input-field {
-	height: 25px;
-	margin-bottom: 10px;
-	border: none;
-	background: transparent;
-	border-bottom: $black solid 1px;
+	@include form;
 }
 
 .login-button {

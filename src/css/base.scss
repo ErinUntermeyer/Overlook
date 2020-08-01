@@ -19,3 +19,7 @@ html {
 .hidden {
 	display: none;
 }
+
+.input-field {
+	@include input-field;
+}

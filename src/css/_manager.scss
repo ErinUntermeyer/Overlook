@@ -1,16 +1,10 @@
 .manager-wrapper {
-	padding: 30px;
-	display: grid;
-	grid-gap: 10px;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-template-rows: 1fr .5fr 1fr;
-	justify-items: center;
-	width: 100%;
+	@include section-wrapper;
 }
 
 .daily-stats {
 	@include book-room-box;
-	grid-area: 1 / 1 / 2 / 4;
+	grid-area: 1 / 2 / 2 / 3;
 }
 
 .card-header {
@@ -20,4 +14,19 @@
 .daily-stats-heading {
 	color: $black;
 	margin-bottom: 30px;
+}
+
+.search-form {
+	@include form;
+	@include info-card-box(10px);
+	grid-area: 2 / 2 / 3 / 3;
+	width: 100%;
+	align-items: center;
+	align-self: center;
+	padding: 20px;
+}
+
+.search-button {
+	@include button;
+	width: 50%;
 }

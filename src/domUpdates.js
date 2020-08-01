@@ -75,6 +75,7 @@ const domUpdates = {
 		const managerBookingSection = document.querySelector('.manager-wrapper');
 		managerBookingSection.innerHTML += `
 		<section class="daily-stats">
+			<h2 class="daily-stats-heading">today's details:</h2>
 			<h3 class="card-header">total rooms available</h3>
 				<p>${dailyStats[0]}</p>
 			<h3 class="card-header">total revenue</h3>
