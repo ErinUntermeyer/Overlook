@@ -45,7 +45,7 @@ describe('User', function () {
 		expect(user.listBookingsById(bookingsData, userData1.id)).to.deep.equal([bookingsData[0]]);
 	})
 
-	it.only('should return total amount spent on rooms for a customer', function () {
+	it('should return total amount spent on rooms for a customer', function () {
 		expect(user.retrieveTotalSpent(customer1Bookings, roomsData)).to.equal(400);
 	})
 

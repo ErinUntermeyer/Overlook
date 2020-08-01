@@ -2,11 +2,10 @@ import './css/base.scss';
 import './images/black-tables-on-beach.jpg'
 import Manager from './Manager';
 import domUpdates from './domUpdates'
-import Customer from './Customer';
 import User from './User';
 import BookingRepo from './BookingRepo';
 
-let currentCustomerId, currentCustomerInfo, manager, today;
+let currentCustomerId, currentCustomerName, currentCustomerBookings, manager, today;
 const user = new User();
 const bookingRepo = new BookingRepo();
 const body = document.querySelector('body');
@@ -54,20 +53,20 @@ function callGetData() {
 			const roomsData = parsedData[1].rooms;
 			const bookingsData = parsedData[2].bookings;
 			if (currentCustomerId) {
-				const currentCustomer = usersData.find(user => user.id === currentCustomerId);
-				currentCustomerInfo = new Customer(currentCustomer, bookingsData);
-				displayCustomerInfo(currentCustomerInfo, usersData, roomsData, bookingsData);
+				currentCustomerName = usersData.find(user => user.id === currentCustomerId);
+				currentCustomerBookings = bookingsData.listBookingsById(currentCustomerId);
+				displayCustomerInfo(roomsData, currentCustomerName, currentCustomerBookings);
 			} else {
 				displayManagerInfo(usersData, roomsData, bookingsData);
 			}
 		})
 }
 
-function displayCustomerInfo(currentCustomerInfo, usersData, roomsData, bookingsData) {
+function displayCustomerInfo(roomsData, currentCustomerName, currentCustomerBookings) {
 	domUpdates.displayCustomerLandingPage();
-	domUpdates.displayCustomerName(currentCustomerInfo);
+	domUpdates.displayCustomerName(currentCustomerName);
 	// domUpdates.displayCustomerSpent(currentCustomerInfo, roomsData);
-	domUpdates.displayCustomerBookings(currentCustomerInfo, roomsData);
+	domUpdates.displayCustomerBookings(currentCustomerBookings, roomsData);
 }
 
 function displayManagerInfo(usersData, roomsData, bookingsData) {

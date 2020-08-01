@@ -7,8 +7,8 @@ class Manager extends User {
 		this.allCustomers = this.updateAllCustomers(usersData, bookingsData);
 	}
 
-	updateAllCustomers(usersData, bookingsData) {
-		return usersData.map(user => new Customer(user, bookingsData))
+	updateAllCustomers(usersData) {
+		return usersData.map(user => new Customer(user));
 	}
 
 	searchForCustomer(name) {
