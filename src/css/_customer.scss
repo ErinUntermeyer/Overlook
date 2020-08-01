@@ -1,28 +1,29 @@
 .customer-wrapper {
-	display: flex;
-	justify-content: center;
-	margin: 40px;
+	padding: 30px;
+	display: grid;
+	grid-gap: 10px;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr .5fr 1fr;
+	justify-items: center;
+	width: 100%;
 }
 
 .customer-book-new {
-	@include info-card(10px);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 40px;
+	@include book-room-box;
+	grid-area: 1 / 1 / 2 / 4;
 }
 
-.book-new-label {
+.customer-bookings {
+	@include book-room-box;
+}
+
+h2 {
 	@include header-font(40px);
+	color: $sand;
+	grid-area: 2 / 1 / 3 / 4;
+	justify-self: center;
 }
 
-.calendar {
-	background-color: $sand;
-	font-family: $main-font;
-	border: none;
-	padding: 20px;
-}
-
-button {
-	@include button;
+.card-header {
+	@include header-font(28px);
 }

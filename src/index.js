@@ -1,7 +1,23 @@
 import './css/base.scss';
 import './images/black-tables-on-beach.jpg'
 import Manager from './Manager';
-import Booking from './Booking';
+import domUpdates from './domUpdates'
+import Customer from './Customer';
+
+let currentCustomerId;
+let currentCustomerInfo;
+const body = document.querySelector('body');
+
+// event listeners
+body.addEventListener('click', handleClick);
+
+// event handlers
+function handleClick(event) {
+	if (event.target.classList.contains('login-button')) {
+		event.preventDefault();
+		verifyLoginCredentials();
+	}
+}
 
 // fetch data
 function getUsersData() {
@@ -22,16 +38,57 @@ function getBookingsData() {
 function getData() {
 	return Promise.all([getUsersData(), getRoomsData(), getBookingsData()])
 	.then(dataSets => {
-		const usersData = dataSets[0].users;
-		const roomsData = dataSets[1].rooms;
-		const bookingsData = dataSets[2].bookings;
-		return [usersData, roomsData, bookingsData];
+		return dataSets;
 	})
 }
 
-getData()
-	.then(parsedData => {
-		const manager = new Manager(parsedData[0]);
-		const allRooms = parsedData[1];
-		const allBookings = parsedData[2].map(item => new Booking(item));
-	})
+function callGetData() {
+	return getData()
+		.then(parsedData => {
+			const usersData = parsedData[0].users;
+			const roomsData = parsedData[1].rooms;
+			const bookingsData = parsedData[2].bookings;
+			if (currentCustomerId) {
+				const currentCustomer = usersData.find(user => user.id === currentCustomerId);
+				currentCustomerInfo = new Customer(currentCustomer, bookingsData);
+				displayCustomerInfo(currentCustomerInfo, usersData, roomsData, bookingsData);
+			} else {
+				displayManagerInfo(usersData, roomsData, bookingsData);
+			}
+		})
+}
+
+function displayCustomerInfo(currentCustomerInfo, usersData, roomsData, bookingsData) {
+	domUpdates.displayCustomerLandingPage();
+	domUpdates.displayCustomerName(currentCustomerInfo);
+	domUpdates.displayCustomerSpent(currentCustomerInfo, roomsData);
+	domUpdates.displayCustomerBookings(currentCustomerInfo, roomsData);
+}
+
+function displayManagerInfo(usersData, roomsData, bookingsData) {
+	const manager = new Manager(usersData.users, bookingsData.bookings)
+	domUpdates.displayManagerLandingPage();
+}
+
+function verifyLoginCredentials() {
+	const usernameInput = document.querySelector('#username').value;
+	const passwordInput = document.querySelector('#password').value;
+	if (usernameInput.includes('customer') && passwordInput === 'overlook2020') {
+		verifyCustomerId(usernameInput);
+	} else if (usernameInput === 'manager' && passwordInput === 'overlook2020') {
+		callGetData();
+	} else {
+		domUpdates.displayErrorMessage();
+	}
+}
+
+function verifyCustomerId(input) {
+	const customerId = input.match(/\d+/g).map(Number);
+	if (customerId < 51) {
+		currentCustomerId = customerId[0];
+		callGetData();
+	} else {
+		domUpdates.displayErrorMessage();
+	}
+}
+

@@ -1,12 +1,12 @@
 .login-wrapper {
-	@include info-card(10px);
+	@include info-card-box(10px);
 	display: flex;
 	justify-content: center;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	margin-left: -20%;
-	margin-top: -20%;
+	margin-top: -10%;
 	width: 40%;
 }
 

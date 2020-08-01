@@ -1,0 +1,9 @@
+.manager-wrapper {
+	display: flex;
+	justify-content: center;
+	margin: 40px;
+}
+
+.manager-book-new {
+	@include book-room-box;
+}

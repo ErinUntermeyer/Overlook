@@ -2,9 +2,13 @@ import User from '../src/User';
 import Customer from '../src/Customer';
 
 class Manager extends User {
-	constructor(usersData) {
+	constructor(usersData, bookingsData) {
 		super();
-		this.allCustomers = usersData.map(user => new Customer(user.id, user.name))
+		this.allCustomers = this.updateAllCustomers(usersData, bookingsData);
+	}
+
+	updateAllCustomers(usersData, bookingsData) {
+		return usersData.map(user => new Customer(user, bookingsData))
 	}
 
 	searchForCustomer(name) {

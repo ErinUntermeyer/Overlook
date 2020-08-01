@@ -7,26 +7,20 @@
   <body>
 		<header>
 			<h1>Overlook</h1>
-			<h2 class="hidden">Username</h2>
+			<div>
+				<h2 class="name-display"></h2>
+				<h3 class="total-spent"></h3>
+			</div>
 		</header>
 		<section class="login-wrapper">
 			<section class="login-section">
-				<p class="login-header">Customer Login</p>
-				<p class="login-error-message hidden">Invalid username and/or password</p>
+				<p class="login-header">Login</p>
+				<p class="login-error-message"></p>
 				<form class="login-form">
-					<label class="login-label" for="customer-username">username</label>
-					<input id="customer-username" class="input-field" type="text">
-					<label class="login-label" for="customer-password">password</label>
-					<input id="customer-password" class="input-field" type="password">
-					<input type="submit" value="Login" class="login-button">
-				</form>
-				<p class="login-header">Manager Login</p>
-				<p class="login-error-message hidden">Invalid username and/or password</p>
-				<form class="login-form">
-					<label class="login-label" for="manager-username">username</label>
-					<input id="manager-username" class="input-field" type="text" name="username">
-					<label class="login-label" for="manager-password">password</label>
-					<input id="manager-password" class="input-field" type="password" name="password">
+					<label class="login-label" for="username">username</label>
+					<input id="username" class="input-field" type="text">
+					<label class="login-label" for="password">password</label>
+					<input id="password" class="input-field" type="password">
 					<input type="submit" value="Login" class="login-button">
 				</form>
 			</section>
@@ -34,8 +28,22 @@
 		<section class="customer-wrapper hidden">
 			<section class="customer-book-new">
 				<label class="book-new-label" for="calendar">Book a Room</label>
-				<input class="calendar" id="calendar" type="date">
+				<input class="calendar" id="customer-calendar" type="date">
 				<button>Check availability</button>
+			</section>
+			<h2>your booked rooms:</h2>
+		</section>
+		<section class="manager-wrapper hidden">
+			<section class="manager-book-new">
+				<label class="book-new-label" for="calendar">Book a Room</label>
+				<input class="calendar" id="manager-calendar" type="date">
+				<button>Check availability</button>
+			</section>
+			<section class="data-for-today">
+				<!-- total revenue and percent of occupied rooms go here -->
+			</section>
+			<section class="all-available-rooms">
+				<!-- all available rooms go here -->
 			</section>
 		</section>
   </body>

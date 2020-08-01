@@ -26,8 +26,12 @@ class User {
 
 	listRoomsAvailable(bookings, rooms, date) {
 		const bookedRooms = this.getRoomsBooked(bookings, date);
-		const	availableRooms = rooms.filter(room => (!bookedRooms.includes(room.number)))
-		return availableRooms;
+		const	availableRooms = rooms.filter(room => (!bookedRooms.includes(room.number)));
+		if (availableRooms.length === 0) {
+			this.apologizeForNoRooms(date);
+		} else {
+			return availableRooms;
+		}
 	}
 
 	apologizeForNoRooms(date) {
