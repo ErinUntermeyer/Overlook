@@ -124,21 +124,22 @@ const domUpdates = {
 			`
 	},
 
-	displayMatchedCustomerBookings(customerMatch) {
+	displayMatchedCustomerBookings(customerBookings, roomsData) {
 		const searchResultsSection = document.querySelector('.search-results');
 		searchResultsSection.classList.remove('hidden');
-		customerMatch.bookings.forEach(booking => {
+		customerBookings.forEach(booking => {
+			const match = roomsData.find(room => booking.roomNumber === room.number)
 			searchResultsSection.innerHTML += `
 				<section class="customer-bookings">
 					<h3 class="card-header">booked for</h3>
 						<p>${new Date(booking.date).toLocaleString().split(',')[0]}</p>
 					<h3 class="card-header">room details</h3>
-						<p>room number: ${customerMatch.number}</p>
-						<p>room type: ${customerMatch.roomType}</p>
-						<p>bidet: ${customerMatch.bidet}</p>
-						<p>bed size: ${customerMatch.bedSize}</p>
-						<p>number of beds: ${customerMatch.numBeds}</p>
-						<p>cost per night: $${customerMatch.costPerNight}</p>
+						<p>room number: ${match.number}</p>
+						<p>room type: ${match.roomType}</p>
+						<p>bidet: ${match.bidet}</p>
+						<p>bed size: ${match.bedSize}</p>
+						<p>number of beds: ${match.numBeds}</p>
+						<p>cost per night: $${match.costPerNight}</p>
 				</section>
 			`
 		})

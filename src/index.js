@@ -6,7 +6,8 @@ import User from './User';
 import BookingRepo from './BookingRepo';
 const Moment = require('moment');
 
-let customerId, customerName, customerBookings, manager;
+let customerId, customerName, customerBookings, manager, usersData, roomsData, bookingRepo;
+
 const user = new User();
 const today = new Moment().format('YYYY/MM/DD');
 const body = document.querySelector('body');
@@ -47,36 +48,6 @@ function getData() {
 	})
 }
 
-function callGetData() {
-	return getData()
-		.then(parsedData => {
-			const usersData = parsedData[0].users;
-			const roomsData = parsedData[1].rooms;
-			const bookingsData = parsedData[2].bookings;
-			const bookingRepo = new BookingRepo(bookingsData);
-			if (customerId) {
-				customerName = usersData.find(user => user.id === customerId).name;
-				customerBookings = bookingRepo.listBookingsById(customerId);
-				displayCustomerInfo(customerName, customerBookings, roomsData);
-			} else {
-				displayManagerInfo(usersData, roomsData, bookingRepo);
-			}
-		})
-}
-
-function displayCustomerInfo(customerName, customerBookings, roomsData) {
-	domUpdates.displayCustomerLandingPage();
-	domUpdates.displayCustomerDetails(customerName, customerBookings, roomsData);
-}
-
-function displayManagerInfo(usersData, roomsData, bookingRepo) {
-	manager = new Manager(usersData);
-	const dailyStats = getManagerDailyStats(bookingRepo, roomsData, today);
-	domUpdates.displayManagerLandingPage();
-	domUpdates.displayManagerWelcome();
-	domUpdates.displayDailyStatsForManager(dailyStats);
-}
-
 function verifyLoginCredentials() {
 	const usernameInput = document.querySelector('#username').value;
 	const passwordInput = document.querySelector('#password').value;
@@ -99,7 +70,36 @@ function verifyCustomerId(input) {
 	}
 }
 
-function getManagerDailyStats(bookingRepo, roomsData, date) {
+function callGetData() {
+	return getData()
+		.then(parsedData => {
+			usersData = parsedData[0].users;
+			roomsData = parsedData[1].rooms;
+			bookingRepo = new BookingRepo(parsedData[2].bookings);
+			if (customerId) {
+				customerName = usersData.find(user => user.id === customerId).name;
+				customerBookings = bookingRepo.listBookingsById(customerId);
+				displayCustomerInfo(customerName, customerBookings);
+			} else {
+				displayManagerInfo();
+			}
+		})
+}
+
+function displayCustomerInfo(customerName, customerBookings) {
+	domUpdates.displayCustomerLandingPage();
+	domUpdates.displayCustomerDetails(customerName, customerBookings, roomsData);
+}
+
+function displayManagerInfo() {
+	manager = new Manager(usersData);
+	const dailyStats = getManagerDailyStats(bookingRepo, roomsData, today);
+	domUpdates.displayManagerLandingPage();
+	domUpdates.displayManagerWelcome();
+	domUpdates.displayDailyStatsForManager(dailyStats);
+}
+
+function getManagerDailyStats(date) {
 	const bookedRooms = bookingRepo.getBookedRooms(date);
 	const totalRoomsAvailable = user.listRoomsAvailable(bookedRooms, roomsData, date).length;
 	const totalRevenue = manager.getRevenueToday(bookedRooms, roomsData);
@@ -113,9 +113,10 @@ function getSearchResultsForManager() {
 	if (customerMatch === 'Invalid search') {
 		domUpdates.displaySearchErrorMessage();
 	} else {
+		customerId = customerMatch.id;
+		customerBookings = bookingRepo.listBookingsById(customerId);
 		domUpdates.hideManagerLandingDisplay();
 		domUpdates.displayMatchedCustomerName(customerMatch);
-		domUpdates.displayMatchedCustomerBookings(customerMatch);
+		domUpdates.displayMatchedCustomerBookings(customerBookings, roomsData);
 	}
 }
-
