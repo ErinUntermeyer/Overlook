@@ -37,7 +37,6 @@ const domUpdates = {
 	},
 
 	// customer section
-
 	displayCustomerLandingPage() {
 		this.hideDisplay('.login-wrapper');
 		this.showDisplay('.customer-wrapper');

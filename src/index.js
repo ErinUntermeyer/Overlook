@@ -59,13 +59,9 @@ function callGetData() {
 				customerBookings = bookingRepo.listBookingsById(customerId);
 				displayCustomerInfo(customerName, customerBookings, roomsData);
 			} else {
-				managerHandler(usersData, roomsData, bookingsData);
+				displayManagerInfo(usersData, roomsData, bookingRepo);
 			}
 		})
-}
-
-function managerHandler(usersData, roomsData, bookingsData) {
-
 }
 
 function displayCustomerInfo(customerName, customerBookings, roomsData) {
@@ -73,9 +69,9 @@ function displayCustomerInfo(customerName, customerBookings, roomsData) {
 	domUpdates.displayCustomerDetails(customerName, customerBookings, roomsData);
 }
 
-function displayManagerInfo(usersData, roomsData, bookingsData) {
+function displayManagerInfo(usersData, roomsData, bookingRepo) {
 	manager = new Manager(usersData);
-	const dailyStats = getManagerDailyStats(bookingsData, roomsData, today);
+	const dailyStats = getManagerDailyStats(bookingRepo, roomsData, today);
 	domUpdates.displayManagerLandingPage();
 	domUpdates.displayManagerWelcome();
 	domUpdates.displayDailyStatsForManager(dailyStats);
@@ -103,11 +99,11 @@ function verifyCustomerId(input) {
 	}
 }
 
-function getManagerDailyStats(bookings, rooms, date) {
-	// all of these now need to take in roomsBooked array from getBookedRooms(date)
-	// const totalRoomsAvailable = user.listRoomsAvailable(bookings, rooms, date).length;
-	// const totalRevenue = manager.getRevenueToday(bookings, rooms);
-	// const percentOfOccupied = manager.getPercentRoomsOccupied(bookings, rooms);
+function getManagerDailyStats(bookingRepo, roomsData, date) {
+	const bookedRooms = bookingRepo.getBookedRooms(date);
+	const totalRoomsAvailable = user.listRoomsAvailable(bookedRooms, roomsData, date).length;
+	const totalRevenue = manager.getRevenueToday(bookedRooms, roomsData);
+	const percentOfOccupied = manager.getPercentRoomsOccupied(bookedRooms, roomsData);
 	return [totalRoomsAvailable, totalRevenue, percentOfOccupied];
 }
 
