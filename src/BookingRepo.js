@@ -1,10 +1,12 @@
+const Moment = require('moment')
+
 class BookingRepo {
 	constructor(bookingsData) {
 		this.bookings = bookingsData;
 	}
 
 	sortBookingsByDate() {
-		return this.bookings.sort((a, b) => new Date(b.date) - new Date(a.date));
+		return this.bookings.sort((a, b) => new Moment(b.date).format('YYYYMMDD') - new Moment(a.date).format('YYYYMMDD'));
 	}
 
 	getBookedRooms(date) {
@@ -17,12 +19,12 @@ class BookingRepo {
 		return bookedRooms;
 	}
 
-	getPastBookings(date) {
-		
+	getPastBookings(today) {
+		return this.bookings.filter(booking => booking.date < today);
 	}
 
-	getFutureBookings(date) {
-
+	getFutureBookings(today) {
+		return this.bookings.filter(booking => booking.date > today);
 	}
 
 	listBookingsById(id) {

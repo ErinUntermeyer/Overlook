@@ -4,10 +4,11 @@ import Manager from './Manager';
 import domUpdates from './domUpdates'
 import User from './User';
 import BookingRepo from './BookingRepo';
+const Moment = require('moment');
 
-let currentCustomerId, currentCustomerName, currentCustomerBookings, manager, today;
+let currentCustomerId, currentCustomerName, currentCustomerBookings, manager;
 const user = new User();
-const bookingRepo = new BookingRepo();
+const today = new Moment().format('YYYY/MM/DD');
 const body = document.querySelector('body');
 
 // event listeners
@@ -52,13 +53,14 @@ function callGetData() {
 			const usersData = parsedData[0].users;
 			const roomsData = parsedData[1].rooms;
 			const bookingsData = parsedData[2].bookings;
-			if (currentCustomerId) {
-				currentCustomerName = usersData.find(user => user.id === currentCustomerId);
-				currentCustomerBookings = bookingsData.listBookingsById(currentCustomerId);
-				displayCustomerInfo(roomsData, currentCustomerName, currentCustomerBookings);
-			} else {
-				displayManagerInfo(usersData, roomsData, bookingsData);
-			}
+			const bookingRepo = new BookingRepo(bookingsData);
+			// if (currentCustomerId) {
+			// 	currentCustomerName = usersData.find(user => user.id === currentCustomerId);
+			// 	currentCustomerBookings = bookingsData.listBookingsById(currentCustomerId);
+			// 	displayCustomerInfo(roomsData, currentCustomerName, currentCustomerBookings);
+			// } else {
+			// 	displayManagerInfo(usersData, roomsData, bookingsData);
+			// }
 		})
 }
 
@@ -71,7 +73,6 @@ function displayCustomerInfo(roomsData, currentCustomerName, currentCustomerBook
 
 function displayManagerInfo(usersData, roomsData, bookingsData) {
 	manager = new Manager(usersData, bookingsData);
-	today = bookingRepo.sortBookingsByDate(bookingsData)[0].date;
 	const dailyStats = getManagerDailyStats(bookingsData, roomsData, today);
 	domUpdates.displayManagerLandingPage();
 	domUpdates.displayManagerWelcome();
