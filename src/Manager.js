@@ -20,8 +20,7 @@ class Manager extends User {
 		}
 	}
 
-	getRevenueToday(bookings, rooms, date) {
-		const bookedRooms = super.getBookedRooms(bookings, date);
+	getRevenueToday(bookedRooms, rooms) {
 		return bookedRooms.reduce((totalRevenue, bookedRoom) => {
 			rooms.find(room => {
 				if (room.number === bookedRoom) {
