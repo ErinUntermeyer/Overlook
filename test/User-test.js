@@ -5,7 +5,7 @@ import User from '../src/User';
 import Customer from '../src/Customer';
 
 describe('User', function () {
-	let user, userData1, bookingsData, roomsData, badUserData, badCustomer;
+	let user, userData1, bookingsData, roomsData, badUserData, badCustomer, bookedRooms;
 
 	beforeEach(function () {
 		user = new User();
@@ -19,6 +19,7 @@ describe('User', function () {
 			{ number: 2, roomType: 'single room', bidet: false, bedSize: 'full', numBeds: 2, costPerNight: 100 }];
 		badUserData = { id: 'one', name: 123 };
 		badCustomer = new Customer(badUserData, bookingsData);
+		bookedRooms = [1];
 	})
 
 	it('should be a function', function () {
@@ -32,7 +33,7 @@ describe('User', function () {
 	})
 
 	it('should list all rooms available for a day', function () {
-		expect(user.listRoomsAvailable(bookingsData, roomsData, 'today')).to.deep.equal([roomsData[1]]);
+		expect(user.listRoomsAvailable(bookedRooms, roomsData, 'today')).to.deep.equal([roomsData[1]]);
 	})
 
 	it('should fiercely apologize if no rooms are available', function () {

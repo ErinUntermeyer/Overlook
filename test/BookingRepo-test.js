@@ -23,7 +23,7 @@ describe('BookingRepo', function () {
 		expect(bookingRepo).to.be.an.instanceof(BookingRepo);
 	})
 
-	it.only('should list all booked room', function () {
+	it('should list all booked room', function () {
 		expect(bookingRepo.getBookedRooms('today')).to.deep.equal([1, 3]);
 	})
 
