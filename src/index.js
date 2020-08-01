@@ -3,9 +3,11 @@ import './images/black-tables-on-beach.jpg'
 import Manager from './Manager';
 import domUpdates from './domUpdates'
 import Customer from './Customer';
+import User from './User';
 
 let currentCustomerId;
 let currentCustomerInfo;
+const user = new User();
 const body = document.querySelector('body');
 
 // event listeners
@@ -66,8 +68,10 @@ function displayCustomerInfo(currentCustomerInfo, usersData, roomsData, bookings
 }
 
 function displayManagerInfo(usersData, roomsData, bookingsData) {
-	const manager = new Manager(usersData.users, bookingsData.bookings)
+	const manager = new Manager(usersData, bookingsData)
+	const today = user.sortBookingsByDate(bookingsData)[0].date;
 	domUpdates.displayManagerLandingPage();
+	domUpdates.displayManagerAllBookings(roomsData, bookingsData, today);
 }
 
 function verifyLoginCredentials() {

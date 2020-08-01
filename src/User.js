@@ -14,6 +14,10 @@ class User {
 		}
 	}
 
+	sortBookingsByDate(bookings) {
+		return bookings.sort((a, b) => new Date(b.date) - new Date(a.date));
+	}
+
 	getRoomsBooked(bookings, date) {
 		const bookedRooms = [];
 		bookings.forEach(booking => {
@@ -61,13 +65,7 @@ class User {
 	}
 
 	filterByRoomType(roomType, rooms) {
-		const filteredRooms = [];
-		rooms.forEach(room => {
-			if (room.roomType === roomType) {
-				filteredRooms.push(room);
-			}
-		})
-		return filteredRooms;
+		return rooms.filter(room => room.roomType === roomType);
 	}
 }
 

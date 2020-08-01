@@ -69,8 +69,33 @@ const domUpdates = {
 			</section>
 			`
 		})
+	},
 
+	displayManagerAllBookings(rooms, bookings, date) {
+		const managerBookingSection = document.querySelector('.manager-wrapper');
+		const availableRooms = user.listRoomsAvailable(bookings, rooms, date);
+		availableRooms.forEach(room => {
+			managerBookingSection.innerHTML += `
+			<section class="all-available-rooms">
+				<h3 class="card-header">room details</h3>
+					<p>room number: ${room.number}</p>
+					<p>room type: ${room.roomType}</p>
+					<p>bidet: ${room.bidet}</p>
+					<p>bed size: ${room.bedSize}</p>
+					<p>number of beds: ${room.numBeds}</p>
+					<p>cost per night: $${room.costPerNight}</p>
+			</section>
+			`
+		})
 	}
 }
 
 export default domUpdates;
+
+
+/*
+
+			<section class="data-for-today">
+				<!-- total revenue and percent of occupied rooms go here -->
+			</section>
+			*/
