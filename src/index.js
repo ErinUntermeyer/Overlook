@@ -66,7 +66,7 @@ function callGetData() {
 function displayCustomerInfo(currentCustomerInfo, usersData, roomsData, bookingsData) {
 	domUpdates.displayCustomerLandingPage();
 	domUpdates.displayCustomerName(currentCustomerInfo);
-	domUpdates.displayCustomerSpent(currentCustomerInfo, roomsData);
+	// domUpdates.displayCustomerSpent(currentCustomerInfo, roomsData);
 	domUpdates.displayCustomerBookings(currentCustomerInfo, roomsData);
 }
 

@@ -17,6 +17,10 @@ class BookingRepo {
 		return bookedRooms;
 	}
 
+	listBookingsById(id) {
+		return this.bookings.filter(booking => booking.userID === id);
+	}
+
 }
 
 export default BookingRepo;

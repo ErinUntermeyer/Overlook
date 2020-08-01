@@ -27,13 +27,8 @@ class User {
 		return `Overlook regrets to inform you that there are no rooms available for ${date}`;
 	}
 
-	listBookingsById(bookings, id) {
-		return bookings.filter(booking => booking.userID === id);
-	}
-
-	retrieveTotalSpent(bookings, rooms, id) {
-		const allBookings = this.listBookingsById(bookings, id);
-		return allBookings.reduce((totalSpent, booking) => {
+	retrieveTotalSpent(customerBookings, rooms) {
+		return customerBookings.reduce((totalSpent, booking) => {
 			rooms.find(room => {
 				if (room.number === booking.roomNumber) {
 					totalSpent += room.costPerNight;

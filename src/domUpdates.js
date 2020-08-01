@@ -51,11 +51,11 @@ const domUpdates = {
 		nameDisplay.innerHTML = `${customer.name}`
 	},
 
-	displayCustomerSpent(customer, rooms) {
-		const totalSpentDisplay = document.querySelector('.total-spent');
-		const totalSpent = (user.retrieveTotalSpent(customer.bookings, rooms, customer.id)).toFixed(2);
-		totalSpentDisplay.innerHTML = `total spent: $${totalSpent}`
-	},
+	// displayCustomerSpent(customer, rooms) {
+	// 	const totalSpentDisplay = document.querySelector('.total-spent');
+	// 	const totalSpent = (user.retrieveTotalSpent(customer.bookings, rooms, customer.id)).toFixed(2);
+	// 	totalSpentDisplay.innerHTML = `total spent: $${totalSpent}`
+	// },
 
 	displayCustomerBookings(customer, rooms) {
 		const customerBookingSection = document.querySelector('.customer-wrapper');

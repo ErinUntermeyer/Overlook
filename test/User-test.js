@@ -5,7 +5,7 @@ import User from '../src/User';
 import Customer from '../src/Customer';
 
 describe('User', function () {
-	let user, userData1, bookingsData, roomsData, badUserData, badCustomer, bookedRooms;
+	let user, userData1, bookingsData, roomsData, badUserData, badCustomer, bookedRooms, customer1Bookings;
 
 	beforeEach(function () {
 		user = new User();
@@ -20,6 +20,7 @@ describe('User', function () {
 		badUserData = { id: 'one', name: 123 };
 		badCustomer = new Customer(badUserData, bookingsData);
 		bookedRooms = [1];
+		customer1Bookings = [{ id: 1, userID: 1, date: 'today', roomNumber: 1, roomServiceCharges: [] }]
 	})
 
 	it('should be a function', function () {
@@ -44,8 +45,8 @@ describe('User', function () {
 		expect(user.listBookingsById(bookingsData, userData1.id)).to.deep.equal([bookingsData[0]]);
 	})
 
-	it('should return total amount spent on rooms for a customer', function () {
-		expect(user.retrieveTotalSpent(bookingsData, roomsData, 1)).to.equal(400);
+	it.only('should return total amount spent on rooms for a customer', function () {
+		expect(user.retrieveTotalSpent(customer1Bookings, roomsData)).to.equal(400);
 	})
 
 	it('should be able to filter rooms by room type', function () {
