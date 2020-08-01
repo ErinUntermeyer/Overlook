@@ -71,6 +71,7 @@ function displayManagerInfo(usersData, roomsData, bookingsData) {
 	today = user.sortBookingsByDate(bookingsData)[0].date;
 	const dailyStats = getManagerDailyStats(bookingsData, roomsData, today);
 	domUpdates.displayManagerLandingPage();
+	domUpdates.displayManagerWelcome();
 	domUpdates.displayDailyStatsForManager(dailyStats);
 }
 

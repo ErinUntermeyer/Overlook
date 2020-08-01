@@ -84,7 +84,12 @@ const domUpdates = {
 				<p>${dailyStats[2]}%</p>
 		</section>
 		`
-	}
+	},
+
+	displayManagerWelcome(date) {
+		const nameDisplay = document.querySelector('.name-display');
+		nameDisplay.innerHTML = `Welcome back , Manager`;
+	},
 
 }
 
