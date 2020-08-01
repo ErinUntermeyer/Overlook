@@ -21,7 +21,7 @@ class Manager extends User {
 	}
 
 	getRevenueToday(bookings, rooms, date) {
-		const bookedRooms = super.getRoomsBooked(bookings, date);
+		const bookedRooms = super.getBookedRooms(bookings, date);
 		return bookedRooms.reduce((totalRevenue, bookedRoom) => {
 			rooms.find(room => {
 				if (room.number === bookedRoom) {
@@ -33,7 +33,7 @@ class Manager extends User {
 	}
 
 	getPercentRoomsOccupied(bookings, rooms, date) {
-		const numberOfBookedRooms = super.getRoomsBooked(bookings, date).length;
+		const numberOfBookedRooms = super.getBookedRooms(bookings, date).length;
 		return Math.floor(100 / (rooms.length / numberOfBookedRooms));
 	}
 }

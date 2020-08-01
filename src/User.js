@@ -14,22 +14,8 @@ class User {
 		}
 	}
 
-	sortBookingsByDate(bookings) {
-		return bookings.sort((a, b) => new Date(b.date) - new Date(a.date));
-	}
-
-	getRoomsBooked(bookings, date) {
-		const bookedRooms = [];
-		bookings.forEach(booking => {
-			if (booking.date === date) {
-				bookedRooms.push(booking.roomNumber);
-			}
-		})
-		return bookedRooms;
-	}
-
 	listRoomsAvailable(bookings, rooms, date) {
-		const bookedRooms = this.getRoomsBooked(bookings, date);
+		const bookedRooms = this.getBookedRooms(bookings, date);
 		const	availableRooms = rooms.filter(room => (!bookedRooms.includes(room.number)));
 		if (availableRooms.length === 0) {
 			this.apologizeForNoRooms(date);

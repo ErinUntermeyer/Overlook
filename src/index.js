@@ -4,9 +4,11 @@ import Manager from './Manager';
 import domUpdates from './domUpdates'
 import Customer from './Customer';
 import User from './User';
+import BookingRepo from './BookingRepo';
 
 let currentCustomerId, currentCustomerInfo, manager, today;
 const user = new User();
+const bookingRepo = new BookingRepo();
 const body = document.querySelector('body');
 
 // event listeners
@@ -70,7 +72,7 @@ function displayCustomerInfo(currentCustomerInfo, usersData, roomsData, bookings
 
 function displayManagerInfo(usersData, roomsData, bookingsData) {
 	manager = new Manager(usersData, bookingsData);
-	today = user.sortBookingsByDate(bookingsData)[0].date;
+	today = bookingRepo.sortBookingsByDate(bookingsData)[0].date;
 	const dailyStats = getManagerDailyStats(bookingsData, roomsData, today);
 	domUpdates.displayManagerLandingPage();
 	domUpdates.displayManagerWelcome();
