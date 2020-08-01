@@ -5,8 +5,7 @@ import domUpdates from './domUpdates'
 import Customer from './Customer';
 import User from './User';
 
-let currentCustomerId;
-let currentCustomerInfo;
+let currentCustomerId, currentCustomerInfo, manager, today;
 const user = new User();
 const body = document.querySelector('body');
 
@@ -68,10 +67,11 @@ function displayCustomerInfo(currentCustomerInfo, usersData, roomsData, bookings
 }
 
 function displayManagerInfo(usersData, roomsData, bookingsData) {
-	const manager = new Manager(usersData, bookingsData)
-	const today = user.sortBookingsByDate(bookingsData)[0].date;
+	manager = new Manager(usersData, bookingsData);
+	today = user.sortBookingsByDate(bookingsData)[0].date;
+	const dailyStats = getManagerDailyStats(bookingsData, roomsData, today);
 	domUpdates.displayManagerLandingPage();
-	domUpdates.displayManagerAllBookings(roomsData, bookingsData, today);
+	domUpdates.displayDailyStatsForManager(dailyStats);
 }
 
 function verifyLoginCredentials() {
@@ -94,5 +94,12 @@ function verifyCustomerId(input) {
 	} else {
 		domUpdates.displayErrorMessage();
 	}
+}
+
+function getManagerDailyStats(bookings, rooms, date) {
+	const totalRoomsAvailable = user.listRoomsAvailable(bookings, rooms, date).length;
+	const totalRevenue = manager.getRevenueToday(bookings, rooms, date);
+	const percentOfOccupied = manager.getPercentRoomsOccupied(bookings, rooms, date);
+	return [totalRoomsAvailable, totalRevenue, percentOfOccupied];
 }
 

@@ -1,9 +1,23 @@
 .manager-wrapper {
-	display: flex;
-	justify-content: center;
-	margin: 40px;
+	padding: 30px;
+	display: grid;
+	grid-gap: 10px;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr .5fr 1fr;
+	justify-items: center;
+	width: 100%;
 }
 
-.manager-book-new {
+.daily-stats {
 	@include book-room-box;
+	grid-area: 1 / 1 / 2 / 4;
+}
+
+.card-header {
+	@include header-font(28px);
+}
+
+.daily-stats-heading {
+	color: $black;
+	margin-bottom: 30px;
 }

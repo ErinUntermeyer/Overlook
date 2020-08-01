@@ -71,31 +71,20 @@ const domUpdates = {
 		})
 	},
 
-	displayManagerAllBookings(rooms, bookings, date) {
+	displayDailyStatsForManager(dailyStats) {
 		const managerBookingSection = document.querySelector('.manager-wrapper');
-		const availableRooms = user.listRoomsAvailable(bookings, rooms, date);
-		availableRooms.forEach(room => {
-			managerBookingSection.innerHTML += `
-			<section class="all-available-rooms">
-				<h3 class="card-header">room details</h3>
-					<p>room number: ${room.number}</p>
-					<p>room type: ${room.roomType}</p>
-					<p>bidet: ${room.bidet}</p>
-					<p>bed size: ${room.bedSize}</p>
-					<p>number of beds: ${room.numBeds}</p>
-					<p>cost per night: $${room.costPerNight}</p>
-			</section>
-			`
-		})
+		managerBookingSection.innerHTML += `
+		<section class="daily-stats">
+			<h3 class="card-header">total rooms available</h3>
+				<p>${dailyStats[0]}</p>
+			<h3 class="card-header">total revenue</h3>
+				<p>$${dailyStats[1]}</p>
+			<h3 class="card-header">percent of rooms occupied</h3>
+				<p>${dailyStats[2]}%</p>
+		</section>
+		`
 	}
+
 }
 
 export default domUpdates;
-
-
-/*
-
-			<section class="data-for-today">
-				<!-- total revenue and percent of occupied rooms go here -->
-			</section>
-			*/
