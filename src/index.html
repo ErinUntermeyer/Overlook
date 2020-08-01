@@ -9,7 +9,7 @@
 			<h1>Overlook</h1>
 			<div>
 				<h2 class="name-display"></h2>
-				<h3 class="total-spent date"></h3>
+				<h3 class="total-spent"></h3>
 			</div>
 		</header>
 		<section class="login-wrapper">
@@ -31,23 +31,21 @@
 				<input class="calendar" id="customer-calendar" type="date">
 				<button>Check availability</button>
 			</section>
-			<h2>your booked rooms:</h2>
+			<h2 class="section-header">your booked rooms:</h2>
 		</section>
 		<section class="manager-wrapper hidden">
-			<!-- <section class="daily-stats">
-				<h2 class="daily-stats-heading">today's details:</h2>
-				<h3 class="card-header">total rooms available</h3>
-				<p>24</p>
-				<h3 class="card-header">total revenue</h3>
-				<p>$3243.46</p>
-				<h3 class="card-header">percent of rooms occupied</h3>
-				<p>34%</p>
-			</section> -->
+			<section class="daily-stats">
+				<!-- daily stats go here -->
+			</section>
 			<form class="search-form">
+				<p class="search-error-message"></p>
 				<label class="search-label" for="search">search for user</label>
 				<input id="search" class="input-field" type="text">
 				<input type="submit" value="Search" class="search-button">
 			</form>
+			<section class="search-results">
+				<h2 class="section-header">customer's booked rooms:</h2>
+			</section>
 		</section>
   </body>
 </html>

@@ -14,9 +14,11 @@ body.addEventListener('click', handleClick);
 
 // event handlers
 function handleClick(event) {
+	event.preventDefault();
 	if (event.target.classList.contains('login-button')) {
-		event.preventDefault();
 		verifyLoginCredentials();
+	} else if (event.target.classList.contains('search-button')) {
+		getSearchResultsForManager();
 	}
 }
 
@@ -73,6 +75,7 @@ function displayManagerInfo(usersData, roomsData, bookingsData) {
 	domUpdates.displayManagerLandingPage();
 	domUpdates.displayManagerWelcome();
 	domUpdates.displayDailyStatsForManager(dailyStats);
+	getSearchResultsForManager();
 }
 
 function verifyLoginCredentials() {
@@ -83,7 +86,7 @@ function verifyLoginCredentials() {
 	} else if (usernameInput === 'manager' && passwordInput === 'overlook2020') {
 		callGetData();
 	} else {
-		domUpdates.displayErrorMessage();
+		domUpdates.displayLoginErrorMessage();
 	}
 }
 
@@ -93,7 +96,7 @@ function verifyCustomerId(input) {
 		currentCustomerId = customerId[0];
 		callGetData();
 	} else {
-		domUpdates.displayErrorMessage();
+		domUpdates.displayLoginErrorMessage();
 	}
 }
 
@@ -102,5 +105,16 @@ function getManagerDailyStats(bookings, rooms, date) {
 	const totalRevenue = manager.getRevenueToday(bookings, rooms, date);
 	const percentOfOccupied = manager.getPercentRoomsOccupied(bookings, rooms, date);
 	return [totalRoomsAvailable, totalRevenue, percentOfOccupied];
+}
+
+function getSearchResultsForManager() {
+	const searchInput = document.querySelector('#search').value;
+	const customerMatch = manager.searchForCustomer(searchInput);
+	if (customerMatch === 'Invalid search') {
+		domUpdates.displaySearchErrorMessage();
+	} else {
+		domUpdates.displayMatchedCustomerName(customerMatch);
+		domUpdates.displayMatchedCustomerBookings(customerMatch);
+	}
 }
 

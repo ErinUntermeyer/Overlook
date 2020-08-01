@@ -75,3 +75,8 @@ $main-font: Verdana, sans-serif;
 	display: flex;
 	flex-direction: column;
 }
+
+@mixin error() {
+	color: $black;
+ 	font-weight: bold;
+}

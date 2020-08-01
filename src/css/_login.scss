@@ -31,8 +31,7 @@
 }
 
 .login-error-message {
- 	color: $black;
- 	font-weight: bold;
+ @include error;
 }
 
 .login-form {

@@ -43,7 +43,7 @@ class User {
 	}
 
 	listBookingsById(bookings, id) {
-		return bookings.filter(booking => booking.userID === id)
+		return bookings.filter(booking => booking.userID === id);
 	}
 
 	retrieveTotalSpent(bookings, rooms, id) {
