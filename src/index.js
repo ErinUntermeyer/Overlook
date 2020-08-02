@@ -17,11 +17,14 @@ body.addEventListener('click', handleClick);
 
 // event handlers
 function handleClick(event) {
-	event.preventDefault();
 	if (event.target.classList.contains('login-button')) {
+		event.preventDefault();
 		verifyLoginCredentials();
 	} else if (event.target.classList.contains('search-button')) {
+		event.preventDefault();
 		getSearchResultsForManager();
+	} else if (event.target.classList.contains('availability-button')) {
+		checkAvailability();
 	}
 }
 
@@ -120,4 +123,11 @@ function getSearchResultsForManager() {
 		domUpdates.displayMatchedCustomerName(customerMatch, customerSpent);
 		domUpdates.displayMatchedCustomerBookings(customerBookings, roomsData);
 	}
+}
+
+function checkAvailability() {
+	const calendarInput = document.querySelector('#customer-calendar').value;
+	const bookedRooms = bookingRepo.getBookedRooms(calendarInput);
+	const availableRooms = user.listRoomsAvailable(bookedRooms, roomsData, calendarInput);
+	domUpdates.displayAvailableRoomsToBook(availableRooms);
 }
