@@ -6,11 +6,12 @@ import User from './User';
 import BookingRepo from './BookingRepo';
 const Moment = require('moment');
 
-let customerId, customerName, customerBookings, manager, usersData, roomsData, bookingRepo;
+let customerId, customerName, customerBookings, manager, usersData, roomsData, bookingRepo, availableRooms;
 
 const user = new User();
 const today = new Moment().format('YYYY/MM/DD');
 const body = document.querySelector('body');
+const filterButtons = document.querySelector('.filter-buttons');
 
 // event listeners
 body.addEventListener('click', handleClick);
@@ -25,6 +26,9 @@ function handleClick(event) {
 		getSearchResultsForManager();
 	} else if (event.target.classList.contains('availability-button')) {
 		checkAvailability();
+	} else if (event.target.classList.contains('filter-button')) {
+		event.preventDefault();
+		filterRoomOnClick();
 	}
 }
 
@@ -127,7 +131,24 @@ function getSearchResultsForManager() {
 
 function checkAvailability() {
 	const calendarInput = document.querySelector('#customer-calendar').value;
-	const bookedRooms = bookingRepo.getBookedRooms(calendarInput);
-	const availableRooms = user.listRoomsAvailable(bookedRooms, roomsData, calendarInput);
+	const modifiedInput = calendarInput.split('-').join('/');
+	const bookedRooms = bookingRepo.getBookedRooms(modifiedInput);
+	availableRooms = user.listRoomsAvailable(bookedRooms, roomsData, modifiedInput);
 	domUpdates.displayAvailableRoomsToBook(availableRooms);
+}
+
+function filterRoomOnClick() {
+	if (event.target.classList.contains('res')) {
+		availableRooms = user.filterByRoomType('residential suite', availableRooms);
+		domUpdates.displayFilteredList(availableRooms);
+	} else if (event.target.classList.contains('suite')) {
+		availableRooms = user.filterByRoomType('suite', availableRooms);
+		domUpdates.displayFilteredList(availableRooms);
+	} else if (event.target.classList.contains('single')) {
+		availableRooms = user.filterByRoomType('single room', availableRooms);
+		domUpdates.displayFilteredList(availableRooms);
+	} else if (event.target.classList.contains('junior')) {
+		availableRooms = user.filterByRoomType('junior suite', availableRooms);
+		domUpdates.displayFilteredList(availableRooms);
+	}
 }
