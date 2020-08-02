@@ -163,9 +163,13 @@ function getAllAvailableRooms() {
 
 function getFilteredRooms() {
 	const roomTypeSelected = getRoomTypeClicked();
-	availableRooms = checkAvailability();
-	const filteredAvailable = user.filterByRoomType(roomTypeSelected, availableRooms);
-	domUpdates.displayFilteredList(filteredAvailable);
+	if (roomTypeSelected === 'all-rooms') {
+		domUpdates.resetAvailableRoomsDisplay();
+	} else {
+		availableRooms = checkAvailability();
+		const filteredAvailable = user.filterByRoomType(roomTypeSelected, availableRooms);
+		domUpdates.displayFilteredList(filteredAvailable);
+	}
 }
 
 function checkAvailability() {

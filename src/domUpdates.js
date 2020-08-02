@@ -52,6 +52,9 @@ const domUpdates = {
 			case '.success':
 				show;
 				break;
+			case '.available-rooms-list':
+				show;
+				break;
 		}
 	},
 
@@ -126,6 +129,10 @@ const domUpdates = {
 		availableRooms.forEach(room => {
 			this.createBookRoomCard(availableRoomsSection, 'available-rooms-to-book', room);
 		});
+	},
+
+	resetAvailableRoomsDisplay() {
+		this.showDisplay('.available-rooms-list');
 	},
 
 	displayApology(message) {
