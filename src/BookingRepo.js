@@ -5,8 +5,8 @@ class BookingRepo {
 		this.bookings = bookingsData;
 	}
 
-	sortBookingsByDate() {
-		return this.bookings.sort((a, b) => new Moment(b.date).format('YYYYMMDD') - new Moment(a.date).format('YYYYMMDD'));
+	sortBookingsByDate(bookings) {
+		return bookings.sort((a, b) => new Moment(b.date).format('YYYYMMDD') - new Moment(a.date).format('YYYYMMDD'));
 	}
 
 	getBookedRooms(date) {

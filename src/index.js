@@ -109,7 +109,7 @@ function callGetData() {
 			bookingRepo = new BookingRepo(parsedData[2].bookings);
 			if (customerId) {
 				customerName = usersData.find(user => user.id === customerId).name;
-				customerBookings = bookingRepo.listBookingsById(customerId);
+				customerBookings = bookingRepo.sortBookingsByDate(bookingRepo.listBookingsById(customerId));
 				displayCustomerInfo(customerName, customerBookings);
 			} else {
 				displayManagerInfo();
@@ -146,7 +146,7 @@ function getSearchResultsForManager() {
 		domUpdates.displaySearchErrorMessage();
 	} else {
 		customerId = customerMatch.id;
-		customerBookings = bookingRepo.listBookingsById(customerId);
+		customerBookings = bookingRepo.sortBookingsByDate(bookingRepo.listBookingsById(customerId));
 		const customerSpent = (user.retrieveTotalSpent(customerBookings, roomsData)).toFixed(2);
 		domUpdates.hideManagerLandingPage();
 		domUpdates.displayMatchedCustomerName(customerMatch, customerSpent);
