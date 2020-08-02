@@ -12,7 +12,8 @@ class Manager extends User {
 	}
 
 	searchForCustomer(name) {
-		const searchResults = this.allCustomers.find(customer => name === customer.name)
+		let input = name.toLowerCase();
+		const searchResults = this.allCustomers.find(customer => input == customer.name.toLowerCase())
 		if (searchResults === undefined || typeof name !== 'string') {
 			return 'Invalid search'
 		} else {
