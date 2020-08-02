@@ -51,6 +51,22 @@
 	width: 100%;
 }
 
+.try-again {
+	@include button();
+	width: 15%;
+	margin-top: 20px;
+}
+
+.apology, .success {
+	display: grid;
+	justify-items: center;
+}
+
+.message {
+	width: 50%;
+	text-align: center;
+}
+
 .reserve {
 	@include button();
 	margin-top: 20px;

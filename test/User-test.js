@@ -32,7 +32,7 @@ describe('User', function () {
 	})
 
 	it('should fiercely apologize if no rooms are available', function () {
-		expect(user.apologizeForNoRooms('some date in the future')).to.equal('Overlook regrets to inform you that there are no rooms available for some date in the future');
+		expect(user.apologizeForNoRooms('some date in the future')).to.equal('Overlook regrets to inform you that there are no rooms available for that date, please try again');
 	})
 
 	it('should return total amount spent on rooms for a customer', function () {

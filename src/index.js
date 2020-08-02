@@ -6,12 +6,11 @@ import User from './User';
 import BookingRepo from './BookingRepo';
 const Moment = require('moment');
 
-let customerId, customerName, customerBookings, manager, usersData, roomsData, bookingRepo, availableRooms;
+let customerId, customerName, customerBookings, manager, usersData, roomsData, bookingRepo, availableRooms, dateSelected;
 
 const user = new User();
 const today = new Moment().format('YYYY/MM/DD');
 const body = document.querySelector('body');
-const filterButtons = document.querySelector('.filter-buttons');
 
 // event listeners
 body.addEventListener('click', handleClick);
@@ -28,6 +27,10 @@ function handleClick(event) {
 		getAllAvailableRooms();
 	} else if (event.target.classList.contains('filter-button')) {
 		getFilteredRooms();
+	} else if (event.target.classList.contains('try-again')) {
+		resetCheckAvailability();
+	} else if (event.target.classList.contains('reserve')) {
+		addABooking();
 	}
 }
 
@@ -55,6 +58,27 @@ function getData() {
 	.catch(error => console.log(error));
 }
 
+// POST data
+function formatBookingData() {
+	const bookingData = {
+		userID: customerId,
+		date: dateSelected,
+		roomNumber: getRoomCardClicked()
+	}
+	return bookingData;
+}
+
+function postBooking() {
+	fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(formatBookingData())
+	})
+}
+
+// login page
 function verifyLoginCredentials() {
 	const usernameInput = document.querySelector('#username').value;
 	const passwordInput = document.querySelector('#password').value;
@@ -93,11 +117,10 @@ function callGetData() {
 		})
 }
 
+// display functions
 function displayCustomerInfo(customerName, customerBookings) {
 	domUpdates.displayCustomerLandingPage();
 	domUpdates.displayCustomerDetails(customerName, customerBookings, roomsData);
-	// availableRooms = checkAvailability();
-	// domUpdates.displayAvailableRoomsToBook(availableRooms);
 }
 
 function displayManagerInfo() {
@@ -133,7 +156,9 @@ function getSearchResultsForManager() {
 
 function getAllAvailableRooms() {
 	availableRooms = checkAvailability();
-	domUpdates.displayAvailableRoomsToBook(availableRooms);
+	if (availableRooms) {
+		domUpdates.displayAvailableRoomsToBook(availableRooms);
+	}
 }
 
 function getFilteredRooms() {
@@ -144,9 +169,22 @@ function getFilteredRooms() {
 }
 
 function checkAvailability() {
-	const dateSelected = getDateSelected();
+	dateSelected = getDateSelected();
 	const bookedRooms = bookingRepo.getBookedRooms(dateSelected);
-	return user.listRoomsAvailable(bookedRooms, roomsData, dateSelected);
+	if (bookedRooms.length < 25) {
+		return user.listRoomsAvailable(bookedRooms, roomsData, dateSelected);
+	} else {
+		apologizeForAvailability();
+	}
+}
+
+function apologizeForAvailability() {
+	const apologyMessage = user.apologizeForNoRooms();
+	domUpdates.displayApology(apologyMessage);
+}
+
+function resetCheckAvailability() {
+	displayCustomerInfo(customerName, customerBookings);
 }
 
 function getDateSelected() {
@@ -157,4 +195,15 @@ function getDateSelected() {
 function getRoomTypeClicked() {
 	const roomType = event.target.id;
 	return roomType;
+}
+
+function getRoomCardClicked() {
+	const button = event.target;
+	const roomNumberText = button.closest('.available-rooms-to-book').children[1].innerText;
+	return roomNumberText.match(/\d+/g).map(Number)[0];
+}
+
+function addABooking() {
+	postBooking();
+	domUpdates.displaySuccessMessage();
 }

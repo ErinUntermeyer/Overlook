@@ -21,6 +21,15 @@ const domUpdates = {
 			case '.available-rooms-list':
 				hide;
 				break;
+			case '.apology':
+				hide;
+				break;
+			case '.available-rooms-nav':
+				hide;
+				break;
+			case '.filtered-list':
+				hide;
+				break;
 		}
 	},
 
@@ -37,6 +46,12 @@ const domUpdates = {
 			case '.available-rooms-nav':
 				show;
 				break;
+			case '.apology':
+				show;
+				break;
+			case '.success':
+				show;
+				break;
 		}
 	},
 
@@ -51,7 +66,7 @@ const domUpdates = {
 			 <h3 class="card-header">booked for</h3>
 			  <p>${new Date(booking.date).toLocaleString().split(',')[0]}</p>
 			 <h3 class="card-header">${variableName.roomType}</h3>
-				<p>room number: ${variableName.number}</p>
+				<p class="room-num">room number: ${variableName.number}</p>
 				<p>bidet: ${variableName.bidet}</p>
 				<p>beds: ${variableName.numBeds} ${variableName.bedSize} size</p>
 				<p>$${variableName.costPerNight} per night</p>
@@ -63,7 +78,7 @@ const domUpdates = {
 		return section.innerHTML += `
 			<section class="${sectionClass}">
 			 <h3 class="card-header">${variableName.roomType}</h3>
-				<p>room number: ${variableName.number}</p>
+				<p class="room-num">room number: ${variableName.number}</p>
 				<p>bidet: ${variableName.bidet}</p>
 				<p>beds: ${variableName.numBeds} ${variableName.bedSize} size</p>
 				<p>$${variableName.costPerNight} per night</p>
@@ -79,6 +94,7 @@ const domUpdates = {
 	},
 
 	displayCustomerDetails(customerName, customerBookings, roomsData) {
+		this.hideDisplay('.apology');
 		this.displayCustomerName(customerName);
 		this.displayCustomerSpent(customerBookings, roomsData);
 		this.displayCustomerBookings(customerBookings, roomsData);
@@ -112,6 +128,16 @@ const domUpdates = {
 		});
 	},
 
+	displayApology(message) {
+		const apologySection = document.querySelector('.apology');
+		this.hideDisplay('.customer-wrapper');
+		this.showDisplay('.apology');
+		apologySection.innerHTML = `
+			<h3 class="card-header message">${message}</h3>
+			<button class="try-again">Try again!</button>
+		`
+	},
+
 	displayFilteredList(availableRooms) {
 		this.hideDisplay('.available-rooms-list');
 		const filteredRoomsSection = document.querySelector('.filtered-list');
@@ -119,6 +145,18 @@ const domUpdates = {
 		availableRooms.forEach(room => {
 			this.createBookRoomCard(filteredRoomsSection, 'available-rooms-to-book', room);
 		});
+	},
+
+	displaySuccessMessage() {
+		const successSection = document.querySelector('.success');
+		this.hideDisplay('.available-rooms-nav')
+		this.hideDisplay('.available-rooms-list')
+		this.hideDisplay('.filtered-list')
+		this.showDisplay('.success')
+		successSection.innerHTML = `
+			<h3 class="card-header message">Success! Enjoy your stay!</h3>
+			<button class="try-again">Home</button>
+		`
 	},
 
 	// manager section 
