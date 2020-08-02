@@ -84,6 +84,11 @@ const domUpdates = {
 		this.displayCustomerBookings(customerBookings, roomsData);
 	},
 
+	displayCustomerName(customerName) {
+		const nameDisplay = document.querySelector('.name-display');
+		nameDisplay.innerHTML = `${customerName}`
+	},
+
 	displayCustomerSpent(customerBookings, roomsData) {
 		const totalSpentDisplay = document.querySelector('.total-spent');
 		const totalSpent = (user.retrieveTotalSpent(customerBookings, roomsData)).toFixed(2);
@@ -110,6 +115,7 @@ const domUpdates = {
 	displayFilteredList(availableRooms) {
 		this.hideDisplay('.available-rooms-list');
 		const filteredRoomsSection = document.querySelector('.filtered-list');
+		filteredRoomsSection.innerHTML = ``;
 		availableRooms.forEach(room => {
 			this.createBookRoomCard(filteredRoomsSection, 'available-rooms-to-book', room);
 		});
