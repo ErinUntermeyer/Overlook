@@ -23,5 +23,10 @@ h3 {
 }
 
 .customer-bookings {
-	@include book-room-box;
+	@include info-card-box(10px);
+	width: 100%;
+}
+
+.availability-button {
+	@include button();
 }

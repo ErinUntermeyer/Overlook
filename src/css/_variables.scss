@@ -17,7 +17,11 @@ $main-font: Verdana, sans-serif;
 @mixin info-card-box($border-radius) {
 	background-color: $sand;
 	opacity: 80%;
-	border-radius: $border-radius
+	border-radius: $border-radius;
+	padding: 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 @mixin button() {
@@ -30,10 +34,6 @@ $main-font: Verdana, sans-serif;
 
 @mixin book-room-box() {
 	@include info-card-box(10px);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 30px;
 
 	.book-new-label {
 		@include header-font(40px);
@@ -52,7 +52,7 @@ $main-font: Verdana, sans-serif;
 	display: grid;
 	grid-gap: 10px;
 	grid-template-columns: 1fr 1fr 1fr;
-	grid-template-rows: 1fr .5fr 1fr;
+	grid-template-rows: 1fr .25fr 1fr;
 	justify-items: center;
 	width: 100%;
 }
