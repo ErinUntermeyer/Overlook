@@ -53,7 +53,7 @@ function getData() {
 	.then(dataSets => {
 		return dataSets;
 	})
-	.catch(error = console.log(error));
+	.catch(error => console.log(error));
 }
 
 function verifyLoginCredentials() {

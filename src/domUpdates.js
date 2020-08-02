@@ -84,6 +84,11 @@ const domUpdates = {
 		this.displayCustomerBookings(customerBookings, roomsData);
 	},
 
+	displayCustomerName(customerName) {
+		const nameDisplay = document.querySelector('.name-display');
+		nameDisplay.innerHTML = `${customerName}`
+	},
+
 	displayCustomerSpent(customerBookings, roomsData) {
 		const totalSpentDisplay = document.querySelector('.total-spent');
 		const totalSpent = (user.retrieveTotalSpent(customerBookings, roomsData)).toFixed(2);
