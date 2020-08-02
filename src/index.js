@@ -27,6 +27,8 @@ function handleClick(event) {
 		getAllAvailableRooms();
 	} else if (event.target.classList.contains('filter-button')) {
 		getFilteredRooms();
+	} else if (event.target.classList.contains('try-again')) {
+		resetCheckAvailability();
 	}
 }
 
@@ -155,6 +157,10 @@ function checkAvailability() {
 function apologizeForAvailability() {
 	const apologyMessage = user.apologizeForNoRooms();
 	domUpdates.displayApology(apologyMessage);
+}
+
+function resetCheckAvailability() {
+	displayCustomerInfo(customerName, customerBookings);
 }
 
 function getDateSelected() {

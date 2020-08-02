@@ -21,6 +21,9 @@ const domUpdates = {
 			case '.available-rooms-list':
 				hide;
 				break;
+			case '.apology':
+				hide;
+				break;
 		}
 	},
 
@@ -82,6 +85,7 @@ const domUpdates = {
 	},
 
 	displayCustomerDetails(customerName, customerBookings, roomsData) {
+		this.hideDisplay('.apology');
 		this.displayCustomerName(customerName);
 		this.displayCustomerSpent(customerBookings, roomsData);
 		this.displayCustomerBookings(customerBookings, roomsData);
