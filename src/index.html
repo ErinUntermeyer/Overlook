@@ -33,13 +33,22 @@
 			</section>
 			<h2 class="section-header">your booked rooms:</h2>
 		</section>
-		<section class="available-rooms-wrapper hidden">
-			<h2 class="section-header">available rooms to book:</h2>
+		<section class="available-rooms-header hidden">
+			<h2 class="filter-header">filter rooms by:</h2>
+			<div class="filter-buttons">
+				<button class="filter-button res">residential suite</button>
+				<button class="filter-button suite">suite</button>
+				<button class="filter-button single">single room</button>
+				<button class="filter-button junior">junior suite</button>
+			</div>
+			<h2 class="available-header">available rooms to book:</h2>
+		</section>
+		<section class="available-rooms-list">
+		</section>
+		<section class="filtered-list">
 		</section>
 		<section class="manager-wrapper hidden">
-			<section class="daily-stats">
-				<!-- daily stats go here -->
-			</section>
+			<section class="daily-stats"></section>
 			<form class="search-form">
 				<p class="search-error-message"></p>
 				<label class="search-label" for="search">search for user</label>

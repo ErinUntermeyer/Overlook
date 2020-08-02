@@ -18,6 +18,9 @@ const domUpdates = {
 			case '.customer-bookings':
 				hide;
 				break;
+			case '.available-rooms-list':
+				hide;
+				break;
 		}
 	},
 
@@ -31,7 +34,7 @@ const domUpdates = {
 			case '.manager-wrapper':
 				show;
 				break;
-			case '.available-rooms-wrapper':
+			case '.available-rooms-header':
 				show;
 				break;
 		}
@@ -86,11 +89,30 @@ const domUpdates = {
 	},
 
 	displayAvailableRoomsToBook(availableRooms) {
-		const availableRoomsSection = document.querySelector('.available-rooms-wrapper');
+		const availableRoomsSection = document.querySelector('.available-rooms-list');
 		this.hideDisplay('.customer-wrapper');
-		this.showDisplay('.available-rooms-wrapper');
+		this.showDisplay('.available-rooms-header');
 		availableRooms.forEach(room => {
 			availableRoomsSection.innerHTML += `
+			<section class="available-rooms-to-book">
+			 <h3 class="card-header">room details</h3>
+				<p>room number: ${room.number}</p>
+				<p>room type: ${room.roomType}</p>
+				<p>bidet: ${room.bidet}</p>
+				<p>bed size: ${room.bedSize}</p>
+				<p>number of beds: ${room.numBeds}</p>
+				<p>cost per night: $${room.costPerNight}</p>
+				<button class="reserve">reserve</button>
+			</section>
+			`
+		})
+	},
+
+	displayFilteredList(availableRooms) {
+		this.hideDisplay('.available-rooms-list');
+		const filteredRoomsSection = document.querySelector('.filtered-list');
+		availableRooms.forEach(room => {
+			filteredRoomsSection.innerHTML += `
 			<section class="available-rooms-to-book">
 			 <h3 class="card-header">room details</h3>
 				<p>room number: ${room.number}</p>
