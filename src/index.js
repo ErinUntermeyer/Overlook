@@ -143,16 +143,16 @@ function checkAvailability() {
 }
 
 function filterRoomOnClick() {
-	if (event.target.classList.contains('res')) {
+	if (event.target.id === 'res') {
 		availableRooms = user.filterByRoomType('residential suite', availableRooms);
 		domUpdates.displayFilteredList(availableRooms);
-	} else if (event.target.classList.contains('suite')) {
+	} else if (event.target.id === 'suite') {
 		availableRooms = user.filterByRoomType('suite', availableRooms);
 		domUpdates.displayFilteredList(availableRooms);
-	} else if (event.target.classList.contains('single')) {
+	} else if (event.target.id === 'single') {
 		availableRooms = user.filterByRoomType('single room', availableRooms);
 		domUpdates.displayFilteredList(availableRooms);
-	} else if (event.target.classList.contains('junior')) {
+	} else if (event.target.id === 'junior') {
 		availableRooms = user.filterByRoomType('junior suite', availableRooms);
 		domUpdates.displayFilteredList(availableRooms);
 	}
