@@ -24,6 +24,12 @@ const domUpdates = {
 			case '.apology':
 				hide;
 				break;
+			case '.available-rooms-nav':
+				hide;
+				break;
+			case '.filtered-list':
+				hide;
+				break;
 		}
 	},
 
@@ -41,6 +47,9 @@ const domUpdates = {
 				show;
 				break;
 			case '.apology':
+				show;
+				break;
+			case '.success':
 				show;
 				break;
 		}
@@ -136,6 +145,18 @@ const domUpdates = {
 		availableRooms.forEach(room => {
 			this.createBookRoomCard(filteredRoomsSection, 'available-rooms-to-book', room);
 		});
+	},
+
+	displaySuccessMessage() {
+		const successSection = document.querySelector('.success');
+		this.hideDisplay('.available-rooms-nav')
+		this.hideDisplay('.available-rooms-list')
+		this.hideDisplay('.filtered-list')
+		this.showDisplay('.success')
+		successSection.innerHTML = `
+			<h3 class="card-header message">Success! Enjoy your stay!</h3>
+			<button class="try-again">Home</button>
+		`
 	},
 
 	// manager section 

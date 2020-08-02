@@ -6,7 +6,7 @@ import User from './User';
 import BookingRepo from './BookingRepo';
 const Moment = require('moment');
 
-let customerId, customerName, customerBookings, manager, usersData, roomsData, bookingRepo, availableRooms;
+let customerId, customerName, customerBookings, manager, usersData, roomsData, bookingRepo, availableRooms, dateSelected;
 
 const user = new User();
 const today = new Moment().format('YYYY/MM/DD');
@@ -30,7 +30,7 @@ function handleClick(event) {
 	} else if (event.target.classList.contains('try-again')) {
 		resetCheckAvailability();
 	} else if (event.target.classList.contains('reserve')) {
-		formatBookingData();
+		addABooking();
 	}
 }
 
@@ -60,17 +60,25 @@ function getData() {
 
 // POST data
 function formatBookingData() {
-	const button = event.target;
-	const parent = button.closest('.available-rooms-to-book').children[1].innerText;
-	const roomNumber = parent.match(/\d+/g).map(Number)[0];
 	const bookingData = {
-		userId: customerId,
-		date: today,
-		roomNumber: roomNumber
+		userID: customerId,
+		date: dateSelected,
+		roomNumber: getRoomCardClicked()
 	}
 	return bookingData;
 }
 
+function postBooking() {
+	fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(formatBookingData())
+	})
+}
+
+// login page
 function verifyLoginCredentials() {
 	const usernameInput = document.querySelector('#username').value;
 	const passwordInput = document.querySelector('#password').value;
@@ -109,6 +117,7 @@ function callGetData() {
 		})
 }
 
+// display functions
 function displayCustomerInfo(customerName, customerBookings) {
 	domUpdates.displayCustomerLandingPage();
 	domUpdates.displayCustomerDetails(customerName, customerBookings, roomsData);
@@ -160,7 +169,7 @@ function getFilteredRooms() {
 }
 
 function checkAvailability() {
-	const dateSelected = getDateSelected();
+	dateSelected = getDateSelected();
 	const bookedRooms = bookingRepo.getBookedRooms(dateSelected);
 	if (bookedRooms.length < 25) {
 		return user.listRoomsAvailable(bookedRooms, roomsData, dateSelected);
@@ -188,23 +197,13 @@ function getRoomTypeClicked() {
 	return roomType;
 }
 
+function getRoomCardClicked() {
+	const button = event.target;
+	const roomNumberText = button.closest('.available-rooms-to-book').children[1].innerText;
+	return roomNumberText.match(/\d+/g).map(Number)[0];
+}
 
-
-/*
-
-
-
-when i click the reserve button
-
-needs to call a function to post data to the server
-first should call a function that formats the object to send
-then needs to call another function that actually posts to the server
-
-
-all views hide (customer wrapper)
-add a section just like apology
-to say success!
-add button to go back to main page
-call resetCheckAvailability
-
-*/
+function addABooking() {
+	postBooking();
+	domUpdates.displaySuccessMessage();
+}
