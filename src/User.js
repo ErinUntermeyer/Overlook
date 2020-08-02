@@ -23,8 +23,8 @@ class User {
 		}
 	}
 
-	apologizeForNoRooms(date) {
-		return `Overlook regrets to inform you that there are no rooms available for ${date}`;
+	apologizeForNoRooms() {
+		return `Overlook regrets to inform you that there are no rooms available for that date, please try again`;
 	}
 
 	retrieveTotalSpent(customerBookings, rooms) {

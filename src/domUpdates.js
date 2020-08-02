@@ -37,6 +37,9 @@ const domUpdates = {
 			case '.available-rooms-nav':
 				show;
 				break;
+			case '.apology':
+				show;
+				break;
 		}
 	},
 
@@ -110,6 +113,16 @@ const domUpdates = {
 		availableRooms.forEach(room => {
 			this.createBookRoomCard(availableRoomsSection, 'available-rooms-to-book', room);
 		});
+	},
+
+	displayApology(message) {
+		const apologySection = document.querySelector('.apology');
+		this.hideDisplay('.customer-wrapper');
+		this.showDisplay('.apology');
+		apologySection.innerHTML = `
+			<h3 class="card-header">${message}</h3>
+			<button class="try-again">Try again!</button>
+		`
 	},
 
 	displayFilteredList(availableRooms) {

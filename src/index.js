@@ -11,7 +11,6 @@ let customerId, customerName, customerBookings, manager, usersData, roomsData, b
 const user = new User();
 const today = new Moment().format('YYYY/MM/DD');
 const body = document.querySelector('body');
-const filterButtons = document.querySelector('.filter-buttons');
 
 // event listeners
 body.addEventListener('click', handleClick);
@@ -96,8 +95,6 @@ function callGetData() {
 function displayCustomerInfo(customerName, customerBookings) {
 	domUpdates.displayCustomerLandingPage();
 	domUpdates.displayCustomerDetails(customerName, customerBookings, roomsData);
-	// availableRooms = checkAvailability();
-	// domUpdates.displayAvailableRoomsToBook(availableRooms);
 }
 
 function displayManagerInfo() {
@@ -133,7 +130,9 @@ function getSearchResultsForManager() {
 
 function getAllAvailableRooms() {
 	availableRooms = checkAvailability();
-	domUpdates.displayAvailableRoomsToBook(availableRooms);
+	if (availableRooms) {
+		domUpdates.displayAvailableRoomsToBook(availableRooms);
+	}
 }
 
 function getFilteredRooms() {
@@ -146,7 +145,16 @@ function getFilteredRooms() {
 function checkAvailability() {
 	const dateSelected = getDateSelected();
 	const bookedRooms = bookingRepo.getBookedRooms(dateSelected);
-	return user.listRoomsAvailable(bookedRooms, roomsData, dateSelected);
+	if (bookedRooms.length < 25) {
+		return user.listRoomsAvailable(bookedRooms, roomsData, dateSelected);
+	} else {
+		apologizeForAvailability();
+	}
+}
+
+function apologizeForAvailability() {
+	const apologyMessage = user.apologizeForNoRooms();
+	domUpdates.displayApology(apologyMessage);
 }
 
 function getDateSelected() {

@@ -51,6 +51,11 @@
 	width: 100%;
 }
 
+.try-again {
+	@include button();
+	width: 20%;
+}
+
 .reserve {
 	@include button();
 	margin-top: 20px;
