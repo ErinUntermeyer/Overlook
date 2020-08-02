@@ -15,6 +15,9 @@ const domUpdates = {
 			case '.search-form':
 				hide;
 				break;
+			case '.customer-bookings':
+				hide;
+				break;
 		}
 	},
 
@@ -26,6 +29,9 @@ const domUpdates = {
 				show;
 				break;
 			case '.manager-wrapper':
+				show;
+				break;
+			case '.available-rooms-wrapper':
 				show;
 				break;
 		}
@@ -74,6 +80,26 @@ const domUpdates = {
 				<p>bed size: ${match.bedSize}</p>
 				<p>number of beds: ${match.numBeds}</p>
 				<p>cost per night: $${match.costPerNight}</p>
+			</section>
+			`
+		})
+	},
+
+	displayAvailableRoomsToBook(availableRooms) {
+		const availableRoomsSection = document.querySelector('.available-rooms-wrapper');
+		this.hideDisplay('.customer-wrapper');
+		this.showDisplay('.available-rooms-wrapper');
+		availableRooms.forEach(room => {
+			availableRoomsSection.innerHTML += `
+			<section class="available-rooms-to-book">
+			 <h3 class="card-header">room details</h3>
+				<p>room number: ${room.number}</p>
+				<p>room type: ${room.roomType}</p>
+				<p>bidet: ${room.bidet}</p>
+				<p>bed size: ${room.bedSize}</p>
+				<p>number of beds: ${room.numBeds}</p>
+				<p>cost per night: $${room.costPerNight}</p>
+				<button class="reserve">reserve</button>
 			</section>
 			`
 		})
