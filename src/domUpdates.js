@@ -57,7 +57,7 @@ const domUpdates = {
 			 <h3 class="card-header">booked for</h3>
 			  <p>${new Date(booking.date).toLocaleString().split(',')[0]}</p>
 			 <h3 class="card-header">${variableName.roomType}</h3>
-				<p>room number: ${variableName.number}</p>
+				<p class="room-num">room number: ${variableName.number}</p>
 				<p>bidet: ${variableName.bidet}</p>
 				<p>beds: ${variableName.numBeds} ${variableName.bedSize} size</p>
 				<p>$${variableName.costPerNight} per night</p>
@@ -69,7 +69,7 @@ const domUpdates = {
 		return section.innerHTML += `
 			<section class="${sectionClass}">
 			 <h3 class="card-header">${variableName.roomType}</h3>
-				<p>room number: ${variableName.number}</p>
+				<p class="room-num">room number: ${variableName.number}</p>
 				<p>bidet: ${variableName.bidet}</p>
 				<p>beds: ${variableName.numBeds} ${variableName.bedSize} size</p>
 				<p>$${variableName.costPerNight} per night</p>
@@ -136,25 +136,6 @@ const domUpdates = {
 		availableRooms.forEach(room => {
 			this.createBookRoomCard(filteredRoomsSection, 'available-rooms-to-book', room);
 		});
-	},
-
-	displayFilteredList(availableRooms) {
-		this.hideDisplay('.available-rooms-list');
-		const filteredRoomsSection = document.querySelector('.filtered-list');
-		availableRooms.forEach(room => {
-			filteredRoomsSection.innerHTML += `
-			<section class="available-rooms-to-book">
-			 <h3 class="card-header">room details</h3>
-				<p>room number: ${room.number}</p>
-				<p>room type: ${room.roomType}</p>
-				<p>bidet: ${room.bidet}</p>
-				<p>bed size: ${room.bedSize}</p>
-				<p>number of beds: ${room.numBeds}</p>
-				<p>cost per night: $${room.costPerNight}</p>
-				<button class="reserve">reserve</button>
-			</section>
-			`
-		})
 	},
 
 	// manager section 

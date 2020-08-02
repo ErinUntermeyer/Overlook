@@ -29,6 +29,8 @@ function handleClick(event) {
 		getFilteredRooms();
 	} else if (event.target.classList.contains('try-again')) {
 		resetCheckAvailability();
+	} else if (event.target.classList.contains('reserve')) {
+		formatBookingData();
 	}
 }
 
@@ -54,6 +56,19 @@ function getData() {
 		return dataSets;
 	})
 	.catch(error => console.log(error));
+}
+
+// POST data
+function formatBookingData() {
+	const button = event.target;
+	const parent = button.closest('.available-rooms-to-book').children[1].innerText;
+	const roomNumber = parent.match(/\d+/g).map(Number)[0];
+	const bookingData = {
+		userId: customerId,
+		date: today,
+		roomNumber: roomNumber
+	}
+	return bookingData;
 }
 
 function verifyLoginCredentials() {
@@ -172,3 +187,24 @@ function getRoomTypeClicked() {
 	const roomType = event.target.id;
 	return roomType;
 }
+
+
+
+/*
+
+
+
+when i click the reserve button
+
+needs to call a function to post data to the server
+first should call a function that formats the object to send
+then needs to call another function that actually posts to the server
+
+
+all views hide (customer wrapper)
+add a section just like apology
+to say success!
+add button to go back to main page
+call resetCheckAvailability
+
+*/
