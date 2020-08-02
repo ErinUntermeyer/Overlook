@@ -45,6 +45,37 @@ const domUpdates = {
 		loginErrorMessage.innerHTML = `<p>Invalid username and/or password</p>`;
 	},
 
+	createRoomCard(section, sectionClass, booking, variableName) {
+		return section.innerHTML += `
+			<section class="${sectionClass}">
+			 <h3 class="card-header">booked for</h3>
+			  <p>${new Date(booking.date).toLocaleString().split(',')[0]}</p>
+			 <h3 class="card-header">room details</h3>
+				<p>room number: ${variableName.number}</p>
+				<p>room type: ${variableName.roomType}</p>
+				<p>bidet: ${variableName.bidet}</p>
+				<p>bed size: ${variableName.bedSize}</p>
+				<p>number of beds: ${variableName.numBeds}</p>
+				<p>cost per night: $${variableName.costPerNight}</p>
+			</section>
+			`
+	},
+
+	createBookRoomCard(section, sectionClass, variableName) {
+		return section.innerHTML += `
+			<section class="${sectionClass}">
+			 <h3 class="card-header">room details</h3>
+				<p>room number: ${variableName.number}</p>
+				<p>room type: ${variableName.roomType}</p>
+				<p>bidet: ${variableName.bidet}</p>
+				<p>bed size: ${variableName.bedSize}</p>
+				<p>number of beds: ${variableName.numBeds}</p>
+				<p>cost per night: $${variableName.costPerNight}</p>
+				<button class="reserve">reserve</button>
+			</section>
+			`
+	},
+
 	// customer section
 	displayCustomerLandingPage() {
 		this.hideDisplay('.login-wrapper');
@@ -71,20 +102,8 @@ const domUpdates = {
 	displayCustomerBookings(customerBookings, roomsData) {
 		const customerBookingSection = document.querySelector('.customer-wrapper');
 		customerBookings.forEach(booking => {
-			const match = roomsData.find(room => booking.roomNumber === room.number)
-			customerBookingSection.innerHTML += `
-			<section class="customer-bookings">
-			 <h3 class="card-header">booked for</h3>
-			  <p>${new Date(booking.date).toLocaleString().split(',')[0]}</p>
-			 <h3 class="card-header">room details</h3>
-				<p>room number: ${match.number}</p>
-				<p>room type: ${match.roomType}</p>
-				<p>bidet: ${match.bidet}</p>
-				<p>bed size: ${match.bedSize}</p>
-				<p>number of beds: ${match.numBeds}</p>
-				<p>cost per night: $${match.costPerNight}</p>
-			</section>
-			`
+			const match = roomsData.find(room => booking.roomNumber === room.number);
+			this.createRoomCard(customerBookingSection, 'customer-bookings', booking, match)
 		})
 	},
 
@@ -93,38 +112,16 @@ const domUpdates = {
 		this.hideDisplay('.customer-wrapper');
 		this.showDisplay('.available-rooms-header');
 		availableRooms.forEach(room => {
-			availableRoomsSection.innerHTML += `
-			<section class="available-rooms-to-book">
-			 <h3 class="card-header">room details</h3>
-				<p>room number: ${room.number}</p>
-				<p>room type: ${room.roomType}</p>
-				<p>bidet: ${room.bidet}</p>
-				<p>bed size: ${room.bedSize}</p>
-				<p>number of beds: ${room.numBeds}</p>
-				<p>cost per night: $${room.costPerNight}</p>
-				<button class="reserve">reserve</button>
-			</section>
-			`
-		})
+			this.createBookRoomCard(availableRoomsSection, 'available-rooms-to-book', room);
+		});
 	},
 
 	displayFilteredList(availableRooms) {
 		this.hideDisplay('.available-rooms-list');
 		const filteredRoomsSection = document.querySelector('.filtered-list');
 		availableRooms.forEach(room => {
-			filteredRoomsSection.innerHTML += `
-			<section class="available-rooms-to-book">
-			 <h3 class="card-header">room details</h3>
-				<p>room number: ${room.number}</p>
-				<p>room type: ${room.roomType}</p>
-				<p>bidet: ${room.bidet}</p>
-				<p>bed size: ${room.bedSize}</p>
-				<p>number of beds: ${room.numBeds}</p>
-				<p>cost per night: $${room.costPerNight}</p>
-				<button class="reserve">reserve</button>
-			</section>
-			`
-		})
+			this.createBookRoomCard(filteredRoomsSection, 'available-rooms-to-book', room);
+		});
 	},
 
 	// manager section 
@@ -176,20 +173,8 @@ const domUpdates = {
 		const searchResultsSection = document.querySelector('.search-results');
 		searchResultsSection.classList.remove('hidden');
 		customerBookings.forEach(booking => {
-			const match = roomsData.find(room => booking.roomNumber === room.number)
-			searchResultsSection.innerHTML += `
-				<section class="customer-bookings">
-					<h3 class="card-header">booked for</h3>
-						<p>${new Date(booking.date).toLocaleString().split(',')[0]}</p>
-					<h3 class="card-header">room details</h3>
-						<p>room number: ${match.number}</p>
-						<p>room type: ${match.roomType}</p>
-						<p>bidet: ${match.bidet}</p>
-						<p>bed size: ${match.bedSize}</p>
-						<p>number of beds: ${match.numBeds}</p>
-						<p>cost per night: $${match.costPerNight}</p>
-				</section>
-			`
+			const match = roomsData.find(room => booking.roomNumber === room.number);
+			this.createRoomCard(searchResultsSection, 'customer-bookings', booking, match);
 		})
 	}
 }
