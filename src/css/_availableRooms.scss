@@ -1,8 +1,18 @@
-.available-rooms-wrapper {
+.available-rooms-header {
 	padding: 30px;
 	display: grid;
+	grid-gap: 10px;
 	grid-template-columns: 1fr 1fr 1fr;
-	grid-template-rows: .5fr .5fr .5fr 1fr;
+	grid-template-rows: .25fr .5fr .25fr;
+	justify-items: center;
+	width: 100%;
+}
+
+.available-rooms-list, .filtered-list {
+	padding: 30px;
+	display: grid;
+	grid-gap: 10px;
+	grid-template-columns: 1fr 1fr 1fr;
 	justify-items: center;
 	width: 100%;
 }
