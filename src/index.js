@@ -25,10 +25,9 @@ function handleClick(event) {
 		event.preventDefault();
 		getSearchResultsForManager();
 	} else if (event.target.classList.contains('availability-button')) {
-		checkAvailability();
+		getAllAvailableRooms();
 	} else if (event.target.classList.contains('filter-button')) {
-		event.preventDefault();
-		filterRoomOnClick();
+		getFilteredRooms();
 	}
 }
 
@@ -97,6 +96,8 @@ function callGetData() {
 function displayCustomerInfo(customerName, customerBookings) {
 	domUpdates.displayCustomerLandingPage();
 	domUpdates.displayCustomerDetails(customerName, customerBookings, roomsData);
+	// availableRooms = checkAvailability();
+	// domUpdates.displayAvailableRoomsToBook(availableRooms);
 }
 
 function displayManagerInfo() {
@@ -130,30 +131,30 @@ function getSearchResultsForManager() {
 	}
 }
 
-function getDateSelected() {
-	const calendarInput = document.querySelector('#customer-calendar').value;
-	return calendarInput.split('-').join('/');
+function getAllAvailableRooms() {
+	availableRooms = checkAvailability();
+	domUpdates.displayAvailableRoomsToBook(availableRooms);
+}
+
+function getFilteredRooms() {
+	const roomTypeSelected = getRoomTypeClicked();
+	availableRooms = checkAvailability();
+	const filteredAvailable = user.filterByRoomType(roomTypeSelected, availableRooms);
+	domUpdates.displayFilteredList(filteredAvailable);
 }
 
 function checkAvailability() {
 	const dateSelected = getDateSelected();
 	const bookedRooms = bookingRepo.getBookedRooms(dateSelected);
-	availableRooms = user.listRoomsAvailable(bookedRooms, roomsData, dateSelected);
-	domUpdates.displayAvailableRoomsToBook(availableRooms);
+	return user.listRoomsAvailable(bookedRooms, roomsData, dateSelected);
 }
 
-function filterRoomOnClick() {
-	if (event.target.id === 'res') {
-		availableRooms = user.filterByRoomType('residential suite', availableRooms);
-		domUpdates.displayFilteredList(availableRooms);
-	} else if (event.target.id === 'suite') {
-		availableRooms = user.filterByRoomType('suite', availableRooms);
-		domUpdates.displayFilteredList(availableRooms);
-	} else if (event.target.id === 'single') {
-		availableRooms = user.filterByRoomType('single room', availableRooms);
-		domUpdates.displayFilteredList(availableRooms);
-	} else if (event.target.id === 'junior') {
-		availableRooms = user.filterByRoomType('junior suite', availableRooms);
-		domUpdates.displayFilteredList(availableRooms);
-	}
+function getDateSelected() {
+	const calendarInput = document.querySelector('#customer-calendar').value;
+	return calendarInput.split('-').join('/');
+}
+
+function getRoomTypeClicked() {
+	const roomType = event.target.id;
+	return roomType;
 }

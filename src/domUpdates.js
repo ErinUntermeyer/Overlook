@@ -115,6 +115,7 @@ const domUpdates = {
 	displayFilteredList(availableRooms) {
 		this.hideDisplay('.available-rooms-list');
 		const filteredRoomsSection = document.querySelector('.filtered-list');
+		filteredRoomsSection.innerHTML = ``;
 		availableRooms.forEach(room => {
 			this.createBookRoomCard(filteredRoomsSection, 'available-rooms-to-book', room);
 		});
