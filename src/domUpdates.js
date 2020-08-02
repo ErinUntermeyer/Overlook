@@ -120,7 +120,7 @@ const domUpdates = {
 		this.hideDisplay('.customer-wrapper');
 		this.showDisplay('.apology');
 		apologySection.innerHTML = `
-			<h3 class="card-header">${message}</h3>
+			<h3 class="card-header message">${message}</h3>
 			<button class="try-again">Try again!</button>
 		`
 	},

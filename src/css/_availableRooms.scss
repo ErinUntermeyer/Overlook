@@ -53,7 +53,18 @@
 
 .try-again {
 	@include button();
-	width: 20%;
+	width: 15%;
+	margin-top: 20px;
+}
+
+.apology {
+	display: grid;
+	justify-items: center;
+}
+
+.message {
+	width: 50%;
+	text-align: center;
 }
 
 .reserve {
