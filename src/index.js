@@ -53,6 +53,7 @@ function getData() {
 	.then(dataSets => {
 		return dataSets;
 	})
+	.catch(error = console.log(error));
 }
 
 function verifyLoginCredentials() {
@@ -123,7 +124,7 @@ function getSearchResultsForManager() {
 		customerId = customerMatch.id;
 		customerBookings = bookingRepo.listBookingsById(customerId);
 		const customerSpent = (user.retrieveTotalSpent(customerBookings, roomsData)).toFixed(2);
-		domUpdates.hideManagerLandingDisplay();
+		domUpdates.hideManagerLandingPage();
 		domUpdates.displayMatchedCustomerName(customerMatch, customerSpent);
 		domUpdates.displayMatchedCustomerBookings(customerBookings, roomsData);
 	}
