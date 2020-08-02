@@ -130,11 +130,15 @@ function getSearchResultsForManager() {
 	}
 }
 
-function checkAvailability() {
+function getDateSelected() {
 	const calendarInput = document.querySelector('#customer-calendar').value;
-	const modifiedInput = calendarInput.split('-').join('/');
-	const bookedRooms = bookingRepo.getBookedRooms(modifiedInput);
-	availableRooms = user.listRoomsAvailable(bookedRooms, roomsData, modifiedInput);
+	return calendarInput.split('-').join('/');
+}
+
+function checkAvailability() {
+	const dateSelected = getDateSelected();
+	const bookedRooms = bookingRepo.getBookedRooms(dateSelected);
+	availableRooms = user.listRoomsAvailable(bookedRooms, roomsData, dateSelected);
 	domUpdates.displayAvailableRoomsToBook(availableRooms);
 }
 
