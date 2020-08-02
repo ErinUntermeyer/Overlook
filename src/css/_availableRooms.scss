@@ -1,4 +1,4 @@
-.available-rooms-header {
+.available-rooms-nav {
 	padding: 30px;
 	display: grid;
 	grid-gap: 10px;
@@ -41,7 +41,7 @@
 	}
 }
 
-.available-header {
+.available-rooms-header {
 	@include header-font(40px);
 	grid-area: 3 / 1 / 4 / 4;
 }

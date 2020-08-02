@@ -34,7 +34,7 @@ const domUpdates = {
 			case '.manager-wrapper':
 				show;
 				break;
-			case '.available-rooms-header':
+			case '.available-rooms-nav':
 				show;
 				break;
 		}
@@ -50,13 +50,11 @@ const domUpdates = {
 			<section class="${sectionClass}">
 			 <h3 class="card-header">booked for</h3>
 			  <p>${new Date(booking.date).toLocaleString().split(',')[0]}</p>
-			 <h3 class="card-header">room details</h3>
+			 <h3 class="card-header">${variableName.roomType}</h3>
 				<p>room number: ${variableName.number}</p>
-				<p>room type: ${variableName.roomType}</p>
 				<p>bidet: ${variableName.bidet}</p>
-				<p>bed size: ${variableName.bedSize}</p>
-				<p>number of beds: ${variableName.numBeds}</p>
-				<p>cost per night: $${variableName.costPerNight}</p>
+				<p>beds: ${variableName.numBeds} ${variableName.bedSize} size</p>
+				<p>$${variableName.costPerNight} per night</p>
 			</section>
 			`
 	},
@@ -64,13 +62,11 @@ const domUpdates = {
 	createBookRoomCard(section, sectionClass, variableName) {
 		return section.innerHTML += `
 			<section class="${sectionClass}">
-			 <h3 class="card-header">room details</h3>
+			 <h3 class="card-header">${variableName.roomType}</h3>
 				<p>room number: ${variableName.number}</p>
-				<p>room type: ${variableName.roomType}</p>
 				<p>bidet: ${variableName.bidet}</p>
-				<p>bed size: ${variableName.bedSize}</p>
-				<p>number of beds: ${variableName.numBeds}</p>
-				<p>cost per night: $${variableName.costPerNight}</p>
+				<p>beds: ${variableName.numBeds} ${variableName.bedSize} size</p>
+				<p>$${variableName.costPerNight} per night</p>
 				<button class="reserve">reserve</button>
 			</section>
 			`
@@ -86,11 +82,6 @@ const domUpdates = {
 		this.displayCustomerName(customerName);
 		this.displayCustomerSpent(customerBookings, roomsData);
 		this.displayCustomerBookings(customerBookings, roomsData);
-	},
-
-	displayCustomerName(customerName) {
-		const nameDisplay = document.querySelector('.name-display');
-		nameDisplay.innerHTML = `${customerName}`
 	},
 
 	displayCustomerSpent(customerBookings, roomsData) {
@@ -110,7 +101,7 @@ const domUpdates = {
 	displayAvailableRoomsToBook(availableRooms) {
 		const availableRoomsSection = document.querySelector('.available-rooms-list');
 		this.hideDisplay('.customer-wrapper');
-		this.showDisplay('.available-rooms-header');
+		this.showDisplay('.available-rooms-nav');
 		availableRooms.forEach(room => {
 			this.createBookRoomCard(availableRoomsSection, 'available-rooms-to-book', room);
 		});
@@ -128,6 +119,11 @@ const domUpdates = {
 	displayManagerLandingPage() {
 		this.hideDisplay('.login-wrapper');
 		this.showDisplay('.manager-wrapper');
+	},
+
+	hideManagerLandingPage() {
+		this.hideDisplay('.daily-stats');
+		this.hideDisplay('.search-form');
 	},
 
 	displayManagerWelcome() {
@@ -151,11 +147,6 @@ const domUpdates = {
 	displaySearchErrorMessage() {
 		const searchErrorMessage = document.querySelector('.search-error-message');
 		searchErrorMessage.innerHTML = `<p>Invalid customer name</p>`;
-	},
-
-	hideManagerLandingDisplay() {
-		this.hideDisplay('.daily-stats');
-		this.hideDisplay('.search-form');
 	},
 
 	displayMatchedCustomerName(customerMatch, customerSpent) {
