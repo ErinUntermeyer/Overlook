@@ -2,21 +2,30 @@ header {
 	display: flex;
 	justify-content: space-between;
 	background-color: $black;
-	height: 90px;
+	height: 145px;
 	opacity: 80%;
 	color: $sand;
 }
 
 h1 {
-	@include header-font(60px);
-	margin-top: 5px;
+	@include header-font(74px);
+	margin-top: 15px;
 	margin-left: 30px;
 }
 
 div {
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-end;
+	justify-content: space-between;
 	align-items: flex-end;
 	padding: 15px;
+}
+
+.log-out {
+	height: 25px;
+	background-color: $sand;
+	color: $black;
+	border: none;
+	border-radius: 3px;
+	opacity: 80%;
 }

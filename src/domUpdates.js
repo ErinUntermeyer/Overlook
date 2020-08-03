@@ -61,6 +61,9 @@ const domUpdates = {
 			case '.filtered-list':
 				show;
 				break;
+			case '.log-out':
+				show;
+				break;
 		}
 	},
 
@@ -101,6 +104,7 @@ const domUpdates = {
 		this.hideDisplay('.login-wrapper');
 		this.hideDisplay('.success');
 		this.showDisplay('.customer-wrapper');
+		this.showDisplay('.log-out');
 	},
 
 	displayCustomerDetails(customerName, customerBookings, roomsData) {
@@ -180,6 +184,7 @@ const domUpdates = {
 	displayManagerLandingPage() {
 		this.hideDisplay('.login-wrapper');
 		this.showDisplay('.manager-wrapper');
+		this.showDisplay('.log-out');
 	},
 
 	hideManagerLandingPage() {
