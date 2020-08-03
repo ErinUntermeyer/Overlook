@@ -23,6 +23,8 @@ function handleClick(event) {
 	} else if (event.target.classList.contains('search-button')) {
 		event.preventDefault();
 		getSearchResultsForManager();
+	} else if (event.target.classList.contains('calendar')) {
+		document.querySelector('.availability-button').disabled = false;
 	} else if (event.target.classList.contains('availability-button')) {
 		getAllAvailableRooms();
 	} else if (event.target.classList.contains('filter-button')) {
