@@ -222,6 +222,9 @@ const domUpdates = {
 				<h2 class="customer-match-name">${customerMatch.name}</h2>
 				<h3 class="card-header">total spent on rooms</h3>
 				<p>$${customerSpent}</p>
+				<label class="book-new-label" for="calendar">Book a Room</label>
+				<input class="calendar" id="manager-calendar" type="date">
+				<input type="submit" value="Check Availability" class="availability-button" disabled=true>
 			</section>
 			`
 	},
