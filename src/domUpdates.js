@@ -79,7 +79,7 @@ const domUpdates = {
 		return section.innerHTML += `
 			<section class="${sectionClass}">
 			 <h3 class="card-header">booked for</h3>
-			  <p>${new Date(booking.date).toLocaleString().split(',')[0]}</p>
+			  <p>${this.formatDate(booking.date)}</p>
 			 <h3 class="card-header">${variableName.roomType}</h3>
 				<p class="room-num">room number: ${variableName.number}</p>
 				<p>bidet: ${variableName.bidet}</p>
@@ -100,6 +100,11 @@ const domUpdates = {
 				<button class="reserve">reserve</button>
 			</section>
 			`
+	},
+
+	formatDate(date) {
+		const dateString = new Date(date).toLocaleString().split(',')[0];
+		return (0 + dateString.split('/')[0]).slice(-2) + '/' + (0 + dateString.split('/')[1]).slice(-2) + '/' + dateString.split('/')[2];
 	},
 
 	// customer section
@@ -250,7 +255,7 @@ const domUpdates = {
 			return searchResultsSection.innerHTML += `
 			<section class="future-customer-bookings">
 			 <h3 class="card-header">booked for</h3>
-			  <p>${new Date(booking.date).toLocaleString().split(',')[0]}</p>
+			  <p>${this.formatDate(booking.date)}</p>
 			 <h3 class="card-header">${match.roomType}</h3>
 				<p class="room-num">room number: ${match.number}</p>
 				<p>bidet: ${match.bidet}</p>
