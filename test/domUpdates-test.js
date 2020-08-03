@@ -5,9 +5,9 @@ chai.use(spies);
 
 import domUpdates from '../src/domUpdates';
 
-describe('domUpdates', function () {
+describe('domUpdates', function() {
 
-	beforeEach(function () {
+	beforeEach(function() {
 		global.document = {};
 		chai.spy.on(document, ['querySelector'], function () {
 			return {};
@@ -18,7 +18,10 @@ describe('domUpdates', function () {
 		chai.spy.restore();
 	})
 
-	it('should', function () {
+	it('should display error if login credentials invalid', function () {
+		domUpdates.displayLoginErrorMessage();
 
+		expect(document.querySelector).to.have.been.called(1);
+		expect(document.querySelector).to.have.been.called.with('.login-error-message');
 	})
 })
