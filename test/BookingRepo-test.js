@@ -28,11 +28,11 @@ describe('BookingRepo', function () {
 	})
 	
 	it('should list all past bookings', function () {
-		expect(bookingRepo.getPastBookings('2020/06/09')).to.deep.equal([bookingsData[1]]);
+		expect(bookingRepo.getPastBookings('2020/06/09', bookingsData)).to.deep.equal([bookingsData[1]]);
 	})
 	
 	it('should list all future bookings', function () {
-		expect(bookingRepo.getFutureBookings('2020/06/09')).to.deep.equal([bookingsData[2]]);
+		expect(bookingRepo.getFutureBookings('2020/06/09', bookingsData)).to.deep.equal([bookingsData[2]]);
 	})
 	
 	it('should list all bookings by ID', function () {

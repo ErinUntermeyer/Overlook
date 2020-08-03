@@ -65,7 +65,8 @@
 	
 }
 
-.book-new-label {
+.manager-book-new-label {
+	@include header-font(40px);
 	margin-top: 50px;
 }
 
@@ -73,6 +74,17 @@
 	@include header-font(40px)
 }
 
-.customer-bookings {
+.past-customer-bookings {
 	@include book-room-box;
+	width: 100%;
+}
+
+.future-customer-bookings {
+	@include book-room-box;
+	width: 100%;
+}
+
+.delete {
+	@include button();
+	margin-top: 10px;
 }

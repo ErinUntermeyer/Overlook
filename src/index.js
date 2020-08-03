@@ -135,8 +135,15 @@ function getSearchResultsForManager() {
 		const customerSpent = (user.retrieveTotalSpent(customerBookings, roomsData)).toFixed(2);
 		domUpdates.hideManagerLandingPage();
 		domUpdates.displayMatchedCustomerName(customerMatch, customerSpent);
-		domUpdates.displayMatchedCustomerBookings(customerBookings, roomsData);
+		getMatchedCustomerBookings(customerBookings, roomsData);
 	}
+}
+
+function getMatchedCustomerBookings(customerBookings, roomsData) {
+	const pastBookings = bookingRepo.getPastBookings(today, customerBookings);
+	const futureBookings = bookingRepo.getFutureBookings(today, customerBookings);
+	domUpdates.displayFutureBookings(futureBookings, roomsData);
+	domUpdates.displayPastBookings(pastBookings, roomsData);
 }
 
 function getAllAvailableRooms() {
@@ -202,3 +209,11 @@ function addABooking() {
 	postBooking();
 	domUpdates.displaySuccessMessage();
 }
+
+
+/* determine which bookings are in the future
+assign to futureBookings array
+all others assign to pastBookings array
+
+
+*/

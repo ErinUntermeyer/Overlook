@@ -226,19 +226,39 @@ const domUpdates = {
 				<h2 class="customer-match-name">${customerMatch.name}</h2>
 				<h3 class="card-header">total spent on rooms</h3>
 				<p>$${customerSpent}</p>
-				<label class="book-new-label" for="calendar">Book a Room</label>
+				<label class="manager-book-new-label" for="calendar">Book a Room</label>
 				<input class="calendar" id="manager-calendar" type="date">
 				<input type="submit" value="Check Availability" class="availability-button" id="manager">
 			</section>
 			`
 	},
 
-	displayMatchedCustomerBookings(customerBookings, roomsData) {
+	displayPastBookings(pastBookings, roomsData) {
 		const searchResultsSection = document.querySelector('.search-results');
 		searchResultsSection.classList.remove('hidden');
-		customerBookings.forEach(booking => {
+		pastBookings.forEach(booking => {
 			const match = roomsData.find(room => booking.roomNumber === room.number);
-			this.createRoomCard(searchResultsSection, 'customer-bookings', booking, match);
+			this.createRoomCard(searchResultsSection, 'past-customer-bookings', booking, match)
+		})
+	},
+
+	displayFutureBookings(futureBookings, roomsData) {
+		const searchResultsSection = document.querySelector('.search-results');
+		searchResultsSection.classList.remove('hidden');
+		futureBookings.forEach(booking => {
+			const match = roomsData.find(room => booking.roomNumber === room.number);
+			return searchResultsSection.innerHTML += `
+			<section class="future-customer-bookings">
+			 <h3 class="card-header">booked for</h3>
+			  <p>${new Date(booking.date).toLocaleString().split(',')[0]}</p>
+			 <h3 class="card-header">${match.roomType}</h3>
+				<p class="room-num">room number: ${match.number}</p>
+				<p>bidet: ${match.bidet}</p>
+				<p>beds: ${match.numBeds} ${match.bedSize} size</p>
+				<p>$${match.costPerNight} per night</p>
+				<button class="delete">delete reservation</button>
+			</section>
+			`
 		})
 	}
 }
