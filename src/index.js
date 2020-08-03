@@ -1,9 +1,10 @@
 import './css/base.scss';
 import './images/black-tables-on-beach.jpg'
-import Manager from './Manager';
-import domUpdates from './domUpdates'
 import User from './User';
+import Manager from './Manager';
 import BookingRepo from './BookingRepo';
+import domUpdates from './domUpdates'
+import fetchData from './fetchData'
 const Moment = require('moment');
 
 let customerId, customerName, customerBookings, manager, usersData, roomsData, bookingRepo, availableRooms, dateSelected;
@@ -36,30 +37,6 @@ function handleClick(event) {
 	} else if (event.target.classList.contains('log-out')) {
 		logOut();
 	}
-}
-
-// fetch data
-function getUsersData() {
-	return fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
-		.then(response => response.json())
-}
-
-function getRoomsData() {
-	return fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms')
-		.then(response => response.json())
-}
-
-function getBookingsData() {
-	return fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings')
-		.then(response => response.json())
-}
-
-function getData() {
-	return Promise.all([getUsersData(), getRoomsData(), getBookingsData()])
-	.then(dataSets => {
-		return dataSets;
-	})
-	.catch(error => console.log(error));
 }
 
 // POST data
@@ -106,7 +83,7 @@ function verifyCustomerId(input) {
 }
 
 function callGetData() {
-	return getData()
+	return fetchData.getData()
 		.then(parsedData => {
 			usersData = parsedData[0].users;
 			roomsData = parsedData[1].rooms;

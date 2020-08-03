@@ -12,12 +12,14 @@ class Manager extends User {
 	}
 
 	searchForCustomer(name) {
-		let input = name.toLowerCase();
-		const searchResults = this.allCustomers.find(customer => input == customer.name.toLowerCase())
-		if (searchResults === undefined || typeof name !== 'string') {
-			return 'Invalid search'
-		} else {
+		let searchResults;
+		if (typeof name === 'string') {
+			let input = name.toLowerCase();
+			searchResults = this.allCustomers.find(customer => input === customer.name.toLowerCase());
 			return searchResults;
+		}
+		if (searchResults === undefined) {
+			return 'Invalid search'
 		}
 	}
 
