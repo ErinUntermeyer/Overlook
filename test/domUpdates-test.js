@@ -55,4 +55,12 @@ describe('domUpdates', function() {
 		expect(domUpdates.displayCustomerDetails).to.have.been.called(1);
 		expect(domUpdates.displayCustomerDetails).to.have.been.called.with(customerName, bookings, rooms);
 	})
+
+	it('should display the available rooms to book', function () {
+		chai.spy.on(domUpdates, ['displayAvailableRoomsToBook'], function () { return {} })
+		domUpdates.displayAvailableRoomsToBook(rooms);
+
+		expect(domUpdates.displayAvailableRoomsToBook).to.have.been.called(1);
+		expect(domUpdates.displayAvailableRoomsToBook).to.have.been.called.with(rooms);
+	})
 })
