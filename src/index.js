@@ -23,6 +23,8 @@ function handleClick(event) {
 	} else if (event.target.classList.contains('search-button')) {
 		event.preventDefault();
 		getSearchResultsForManager();
+	} else if (event.target.classList.contains('calendar')) {
+		document.querySelector('.availability-button').disabled = false;
 	} else if (event.target.classList.contains('availability-button')) {
 		getAllAvailableRooms();
 	} else if (event.target.classList.contains('filter-button')) {
@@ -31,6 +33,8 @@ function handleClick(event) {
 		resetCheckAvailability();
 	} else if (event.target.classList.contains('reserve')) {
 		addABooking();
+	} else if (event.target.classList.contains('log-out')) {
+		logOut();
 	}
 }
 
@@ -109,12 +113,16 @@ function callGetData() {
 			bookingRepo = new BookingRepo(parsedData[2].bookings);
 			if (customerId) {
 				customerName = usersData.find(user => user.id === customerId).name;
-				customerBookings = bookingRepo.listBookingsById(customerId);
+				customerBookings = bookingRepo.sortBookingsByDate(bookingRepo.listBookingsById(customerId));
 				displayCustomerInfo(customerName, customerBookings);
 			} else {
 				displayManagerInfo();
 			}
 		})
+}
+
+function logOut() {
+	window.location.reload();
 }
 
 // display functions
@@ -146,7 +154,7 @@ function getSearchResultsForManager() {
 		domUpdates.displaySearchErrorMessage();
 	} else {
 		customerId = customerMatch.id;
-		customerBookings = bookingRepo.listBookingsById(customerId);
+		customerBookings = bookingRepo.sortBookingsByDate(bookingRepo.listBookingsById(customerId));
 		const customerSpent = (user.retrieveTotalSpent(customerBookings, roomsData)).toFixed(2);
 		domUpdates.hideManagerLandingPage();
 		domUpdates.displayMatchedCustomerName(customerMatch, customerSpent);
@@ -163,9 +171,13 @@ function getAllAvailableRooms() {
 
 function getFilteredRooms() {
 	const roomTypeSelected = getRoomTypeClicked();
-	availableRooms = checkAvailability();
-	const filteredAvailable = user.filterByRoomType(roomTypeSelected, availableRooms);
-	domUpdates.displayFilteredList(filteredAvailable);
+	if (roomTypeSelected === 'all-rooms') {
+		domUpdates.resetAvailableRoomsDisplay();
+	} else {
+		availableRooms = checkAvailability();
+		const filteredAvailable = user.filterByRoomType(roomTypeSelected, availableRooms);
+		domUpdates.displayFilteredList(filteredAvailable);
+	}
 }
 
 function checkAvailability() {

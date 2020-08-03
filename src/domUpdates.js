@@ -30,6 +30,9 @@ const domUpdates = {
 			case '.filtered-list':
 				hide;
 				break;
+			case '.success':
+				hide;
+				break;
 		}
 	},
 
@@ -50,6 +53,15 @@ const domUpdates = {
 				show;
 				break;
 			case '.success':
+				show;
+				break;
+			case '.available-rooms-list':
+				show;
+				break;
+			case '.filtered-list':
+				show;
+				break;
+			case '.log-out':
 				show;
 				break;
 		}
@@ -90,7 +102,9 @@ const domUpdates = {
 	// customer section
 	displayCustomerLandingPage() {
 		this.hideDisplay('.login-wrapper');
+		this.hideDisplay('.success');
 		this.showDisplay('.customer-wrapper');
+		this.showDisplay('.log-out');
 	},
 
 	displayCustomerDetails(customerName, customerBookings, roomsData) {
@@ -123,9 +137,15 @@ const domUpdates = {
 		const availableRoomsSection = document.querySelector('.available-rooms-list');
 		this.hideDisplay('.customer-wrapper');
 		this.showDisplay('.available-rooms-nav');
+		this.showDisplay('.available-rooms-list');
 		availableRooms.forEach(room => {
 			this.createBookRoomCard(availableRoomsSection, 'available-rooms-to-book', room);
 		});
+	},
+
+	resetAvailableRoomsDisplay() {
+		this.showDisplay('.available-rooms-list');
+		this.hideDisplay('.filtered-list');
 	},
 
 	displayApology(message) {
@@ -140,6 +160,7 @@ const domUpdates = {
 
 	displayFilteredList(availableRooms) {
 		this.hideDisplay('.available-rooms-list');
+		this.showDisplay('.filtered-list');
 		const filteredRoomsSection = document.querySelector('.filtered-list');
 		filteredRoomsSection.innerHTML = ``;
 		availableRooms.forEach(room => {
@@ -163,6 +184,7 @@ const domUpdates = {
 	displayManagerLandingPage() {
 		this.hideDisplay('.login-wrapper');
 		this.showDisplay('.manager-wrapper');
+		this.showDisplay('.log-out');
 	},
 
 	hideManagerLandingPage() {
