@@ -33,6 +33,8 @@ function handleClick(event) {
 		resetCheckAvailability();
 	} else if (event.target.classList.contains('reserve')) {
 		addABooking();
+	} else if (event.target.classList.contains('log-out')) {
+		logOut();
 	}
 }
 
@@ -117,6 +119,10 @@ function callGetData() {
 				displayManagerInfo();
 			}
 		})
+}
+
+function logOut() {
+	window.location.reload();
 }
 
 // display functions
