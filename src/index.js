@@ -177,7 +177,13 @@ function resetCheckAvailability() {
 }
 
 function getDateSelected() {
-	const calendarInput = document.querySelector('#customer-calendar').value;
+	let thisUser = event.target.id;
+	let calendarInput;
+	if (thisUser === 'customer') {
+		calendarInput = document.querySelector('#customer-calendar').value;
+	} else {
+		calendarInput = document.querySelector('#manager-calendar').value;
+	}
 	return calendarInput.split('-').join('/');
 }
 

@@ -33,6 +33,9 @@ const domUpdates = {
 			case '.success':
 				hide;
 				break;
+			case '.search-results':
+				hide;
+				break;
 		}
 	},
 
@@ -135,6 +138,7 @@ const domUpdates = {
 
 	displayAvailableRoomsToBook(availableRooms) {
 		const availableRoomsSection = document.querySelector('.available-rooms-list');
+		this.hideDisplay('.search-results');
 		this.hideDisplay('.customer-wrapper');
 		this.showDisplay('.available-rooms-nav');
 		this.showDisplay('.available-rooms-list');
@@ -224,7 +228,7 @@ const domUpdates = {
 				<p>$${customerSpent}</p>
 				<label class="book-new-label" for="calendar">Book a Room</label>
 				<input class="calendar" id="manager-calendar" type="date">
-				<input type="submit" value="Check Availability" class="availability-button" disabled=true>
+				<input type="submit" value="Check Availability" class="availability-button" id="manager">
 			</section>
 			`
 	},
