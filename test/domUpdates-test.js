@@ -6,15 +6,16 @@ chai.use(spies);
 import domUpdates from '../src/domUpdates';
 
 describe('domUpdates', function() { 
-	let section, sectionClass, bookings, variableName, customerName, rooms;
+	let section, sectionClass, bookings, variableName, customerName, rooms, message;
 
 	beforeEach(function() {
 		section = 'this section';
 		sectionClass = 'this section class';
 		bookings = 'these bookings';
-		variableName = 'this variable name'
-		customerName = 'erin'
-		rooms = 'these rooms'
+		variableName = 'this variable name';
+		customerName = 'erin';
+		rooms = 'these rooms';
+		message = 'this is a message';
 		global.document = {};
 		chai.spy.on(document, ['querySelector'], function () { return {} })
 	})
@@ -62,5 +63,12 @@ describe('domUpdates', function() {
 
 		expect(domUpdates.displayAvailableRoomsToBook).to.have.been.called(1);
 		expect(domUpdates.displayAvailableRoomsToBook).to.have.been.called.with(rooms);
+	})
+
+	it('should display manager welcome', function () {
+		domUpdates.displayManagerWelcome();
+
+		expect(document.querySelector).to.have.been.called(1);
+		expect(document.querySelector).to.have.been.called.with('.name-display');
 	})
 })
