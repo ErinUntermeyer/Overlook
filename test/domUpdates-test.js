@@ -73,6 +73,14 @@ describe('domUpdates', function() {
 		expect(domUpdates.displayApology).to.have.been.called.with(message);
 	})
 
+	it('should display a filtered list of rooms', function () {
+		chai.spy.on(domUpdates, ['displayFilteredList'], function () { return {} })
+		domUpdates.displayFilteredList(rooms);
+
+		expect(domUpdates.displayFilteredList).to.have.been.called(1);
+		expect(domUpdates.displayFilteredList).to.have.been.called.with(rooms);
+	})
+
 	it('should display manager welcome', function () {
 		domUpdates.displayManagerWelcome();
 
