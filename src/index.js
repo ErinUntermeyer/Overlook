@@ -65,15 +65,21 @@ function postBooking() {
 
 // DELETE data
 function deleteBooking(id) {
-	fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', {
-		method: 'DELETE',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({
-				"id": id
+	fetchData.getData()
+		.then(parsedData => {
+			usersData = parsedData[0].users;
+			roomsData = parsedData[1].rooms;
+			bookingRepo = new BookingRepo(parsedData[2].bookings);
+			fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+						"id": id
+					})
 			})
-	})
+		})
 }
 
 // login page
@@ -172,10 +178,16 @@ function getMatchedCustomerBookings(customerBookings, roomsData) {
 }
 
 function getAllAvailableRooms() {
-	availableRooms = checkAvailability();
-	if (availableRooms) {
-		domUpdates.displayAvailableRoomsToBook(availableRooms);
-	}
+	fetchData.getData()
+		.then(parsedData => {
+			usersData = parsedData[0].users;
+			roomsData = parsedData[1].rooms;
+			bookingRepo = new BookingRepo(parsedData[2].bookings);
+			availableRooms = checkAvailability();
+			if (availableRooms) {
+				domUpdates.displayAvailableRoomsToBook(availableRooms);
+			}
+		})
 }
 
 function getFilteredRooms() {
@@ -244,10 +256,16 @@ function retrieveBookingId() {
 }
 
 function determineHomePage() {
-	console.log(currentUser)
-	if (currentUser === 'customer') {
-		resetCheckAvailability();
-	} else {
-		displayManagerInfo();
-	}
+	fetchData.getData()
+		.then(parsedData => {
+			usersData = parsedData[0].users;
+			roomsData = parsedData[1].rooms;
+			bookingRepo = new BookingRepo(parsedData[2].bookings);
+			customerBookings = bookingRepo.sortBookingsByDate(bookingRepo.listBookingsById(customerId))
+			if (currentUser === 'customer') {
+				resetCheckAvailability();
+			} else {
+				displayManagerInfo();
+			}
+		})
 }
