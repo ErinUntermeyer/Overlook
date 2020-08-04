@@ -7,13 +7,13 @@ import domUpdates from './domUpdates'
 import fetchData from './fetchData'
 const Moment = require('moment');
 
-let customerId, customerName, customerBookings, manager, usersData, roomsData, bookingRepo, availableRooms, dateSelected, currentUser;
+let availableRooms, bookingRepo, currentUser, customerBookings, customerId, customerName, dateSelected, manager, roomsData, usersData;
 
 const user = new User();
 const today = new Moment().format('YYYY/MM/DD');
-const body = document.querySelector('body');
 
 // event listeners
+const body = document.querySelector('body');
 body.addEventListener('click', handleClick);
 
 // event handlers
