@@ -1,19 +1,10 @@
-.name-display {
+// customer navigation
+.availability-button {
+	@include button();
+}
+
+.available-rooms-header {
 	@include header-font(40px);
-	color: $sand;
-}
-
-h3 {
-	@include header-font(20px);
-}
-
-.customer-nav-wrapper {
-	@include section-wrapper;
-}
-
-.customer-book-new {
-	@include book-room-box;
-	grid-area: 1 / 1 / 2 / 4;
 }
 
 .available-rooms-nav {
@@ -22,8 +13,13 @@ h3 {
 	justify-items: center;
 }
 
-.filter-header {
-	@include header-font(40px);
+.customer-book-new {
+	@include book-room-box;
+	grid-area: 1 / 1 / 2 / 4;
+}
+
+.customer-nav-wrapper {
+	@include section-wrapper;
 }
 
 .filter-buttons {
@@ -44,7 +40,7 @@ h3 {
 	}
 }
 
-.available-rooms-header {
+.filter-header {
 	@include header-font(40px);
 }
 
@@ -54,6 +50,7 @@ h3 {
 	justify-self: center;
 }
 
+// customer views
 .customer-bookings-list {
 	padding: 30px;
 	display: grid;
@@ -66,10 +63,6 @@ h3 {
 .customer-bookings {
 	@include info-card-box(10px);
 	width: 100%;
-}
-
-.availability-button {
-	@include button();
 }
 
 .apology, .success {

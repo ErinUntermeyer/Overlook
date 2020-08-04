@@ -18,14 +18,14 @@ html {
 	height: 100%;
 }
 
+.card-header {
+	@include header-font(32px);
+}
+
 .hidden {
 	display: none;
 }
 
 .input-field {
 	@include input-field;
-}
-
-.card-header {
-	@include header-font(32px);
 }
