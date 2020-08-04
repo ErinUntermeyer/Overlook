@@ -32,7 +32,8 @@ function handleClick(event) {
 	} else if (event.target.classList.contains('filter-button')) {
 		getFilteredRooms();
 	} else if (event.target.classList.contains('try-again')) {
-		resetCheckAvailability();
+		determineHomePage();
+		// resetCheckAvailability();
 	} else if (event.target.classList.contains('reserve')) {
 		addABooking();
 	} else if (event.target.classList.contains('log-out')) {
@@ -242,4 +243,13 @@ function retrieveBookingId() {
 	const futureBookings = bookingRepo.getFutureBookings(today, customerBookings);
 	const matchedBooking = futureBookings.find(booking => booking.roomNumber === roomNumber && booking.date.includes(dateBooked.slice(0, 5)))
 	return parseInt(matchedBooking.id)
+}
+
+function determineHomePage() {
+	console.log(currentUser)
+	if (currentUser === 'customer') {
+		resetCheckAvailability();
+	} else {
+		displayManagerInfo();
+	}
 }
