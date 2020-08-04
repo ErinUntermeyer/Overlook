@@ -70,6 +70,9 @@ const domUpdates = {
 			case '.delete-confirmation':
 				show;
 				break;
+			case '.search-results':
+				show;
+				break;
 		}
 	},
 
@@ -185,6 +188,7 @@ const domUpdates = {
 		this.hideDisplay('.available-rooms-nav')
 		this.hideDisplay('.available-rooms-list')
 		this.hideDisplay('.filtered-list')
+		this.hideDisplay('.delete-confirmation')
 		this.showDisplay('.success')
 		successSection.innerHTML = `
 			<h3 class="card-header message">Success! Enjoy your stay!</h3>
@@ -195,8 +199,10 @@ const domUpdates = {
 	// manager section 
 	displayManagerLandingPage() {
 		this.hideDisplay('.login-wrapper');
+		this.hideDisplay('.success');
 		this.showDisplay('.manager-wrapper');
 		this.showDisplay('.log-out');
+		this.showDisplay('.search-results');
 	},
 
 	hideManagerLandingPage() {
@@ -272,7 +278,8 @@ const domUpdates = {
 
 	displayDeleteConfirmation() {
 		const deleteConfirmationSection = document.querySelector('.delete-confirmation');
-		this.hideDisplay('.search-results')
+		this.hideDisplay('.search-results');
+		this.hideDisplay('.success')
 		this.showDisplay('.delete-confirmation');
 		deleteConfirmationSection.innerHTML = `
 			<h3 class="card-header message">We miss you already!</h3>

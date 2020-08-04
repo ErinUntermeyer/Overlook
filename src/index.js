@@ -7,7 +7,7 @@ import domUpdates from './domUpdates'
 import fetchData from './fetchData'
 const Moment = require('moment');
 
-let customerId, customerName, customerBookings, manager, usersData, roomsData, bookingRepo, availableRooms, dateSelected;
+let customerId, customerName, customerBookings, manager, usersData, roomsData, bookingRepo, availableRooms, dateSelected, currentUser;
 
 const user = new User();
 const today = new Moment().format('YYYY/MM/DD');
@@ -21,6 +21,7 @@ function handleClick(event) {
 	if (event.target.classList.contains('login-button')) {
 		event.preventDefault();
 		verifyLoginCredentials();
+		assignCurrentUser();
 	} else if (event.target.classList.contains('search-button')) {
 		event.preventDefault();
 		getSearchResultsForManager();
@@ -31,7 +32,7 @@ function handleClick(event) {
 	} else if (event.target.classList.contains('filter-button')) {
 		getFilteredRooms();
 	} else if (event.target.classList.contains('try-again')) {
-		resetCheckAvailability();
+		determineHomePage();
 	} else if (event.target.classList.contains('reserve')) {
 		addABooking();
 	} else if (event.target.classList.contains('log-out')) {
@@ -112,6 +113,14 @@ function callGetData() {
 				displayManagerInfo();
 			}
 		})
+}
+
+function assignCurrentUser() {
+	if (customerId) {
+		currentUser = 'customer'
+	} else {
+		currentUser = 'manager'
+	}
 }
 
 function logOut() {
@@ -200,9 +209,8 @@ function resetCheckAvailability() {
 }
 
 function getDateSelected() {
-	let thisUser = event.target.id;
 	let calendarInput;
-	if (thisUser === 'customer') {
+	if (currentUser === 'customer') {
 		calendarInput = document.querySelector('#customer-calendar').value;
 	} else {
 		calendarInput = document.querySelector('#manager-calendar').value;
@@ -211,6 +219,7 @@ function getDateSelected() {
 }
 
 function getRoomTypeClicked() {
+	console.log(event.target)
 	const roomType = event.target.id;
 	return roomType;
 }
@@ -233,4 +242,13 @@ function retrieveBookingId() {
 	const futureBookings = bookingRepo.getFutureBookings(today, customerBookings);
 	const matchedBooking = futureBookings.find(booking => booking.roomNumber === roomNumber && booking.date.includes(dateBooked.slice(0, 5)))
 	return parseInt(matchedBooking.id)
+}
+
+function determineHomePage() {
+	console.log(currentUser)
+	if (currentUser === 'customer') {
+		resetCheckAvailability();
+	} else {
+		displayManagerInfo();
+	}
 }
