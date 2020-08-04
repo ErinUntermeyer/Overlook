@@ -67,6 +67,9 @@ const domUpdates = {
 			case '.log-out':
 				show;
 				break;
+			case '.delete-confirmation':
+				show;
+				break;
 		}
 	},
 
@@ -265,7 +268,18 @@ const domUpdates = {
 			</section>
 			`
 		})
-	}
+	},
+
+	displayDeleteConfirmation() {
+		console.log('i made it ')
+		const deleteConfirmationSection = document.querySelector('.delete-confirmation');
+		this.hideDisplay('.search-results')
+		this.showDisplay('.delete-confirmation');
+		deleteConfirmationSection.innerHTML = `
+			<h3 class="card-header message">We miss you already!</h3>
+			<button class="try-again">Home</button>
+		`
+	},
 }
 
 export default domUpdates;

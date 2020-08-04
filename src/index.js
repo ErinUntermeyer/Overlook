@@ -38,6 +38,7 @@ function handleClick(event) {
 		logOut();
 	} else if (event.target.classList.contains('delete')) {
 		deleteBooking(retrieveBookingId());
+		domUpdates.displayDeleteConfirmation();
 	}
 }
 
@@ -63,15 +64,16 @@ function postBooking() {
 
 // DELETE data
 function deleteBooking(id) {
-	fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', {
-		method: 'DELETE',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({
-				"id": id
-			})
-	})
+	console.log('hi')
+	// fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', {
+	// 	method: 'DELETE',
+	// 	headers: {
+	// 		'Content-Type': 'application/json',
+	// 	},
+	// 	body: JSON.stringify({
+	// 			"id": id
+	// 		})
+	// })
 }
 
 // login page

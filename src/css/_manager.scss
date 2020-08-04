@@ -88,3 +88,7 @@
 	@include button();
 	margin-top: 10px;
 }
+
+.delete-confirmation {
+	@include confirmation-display();
+}
