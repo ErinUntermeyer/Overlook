@@ -223,6 +223,7 @@ const domUpdates = {
 	hideManagerLandingPage() {
 		this.hideDisplay('.daily-stats');
 		this.hideDisplay('.search-form');
+		this.hideDisplay('.success');
 	},
 
 	displayManagerWelcome() {
