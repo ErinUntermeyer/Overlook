@@ -243,7 +243,8 @@ const domUpdates = {
 				<label class="manager-book-new-label" for="calendar">Book a Room</label>
 				<input class="calendar" id="manager-calendar" type="date">
 				<input type="submit" value="Check Availability" class="availability-button" id="manager">
-			</section>
+				</section>
+				<h2 class="section-header booked-header">booked rooms:</h2>
 			`
 	},
 

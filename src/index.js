@@ -219,7 +219,6 @@ function getDateSelected() {
 }
 
 function getRoomTypeClicked() {
-	console.log(event.target)
 	const roomType = event.target.id;
 	return roomType;
 }
