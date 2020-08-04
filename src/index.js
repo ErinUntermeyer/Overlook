@@ -37,7 +37,7 @@ function handleClick(event) {
 	} else if (event.target.classList.contains('log-out')) {
 		logOut();
 	} else if (event.target.classList.contains('delete')) {
-		retrieveBookingToDelete();
+		deleteBooking(retrieveBookingId());
 	}
 }
 
@@ -63,10 +63,15 @@ function postBooking() {
 
 // DELETE data
 function deleteBooking(id) {
-	console.log('hi')
-	// fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', {
-	// 	method: 'DELETE'
-	// })
+	fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+				"id": id
+			})
+	})
 }
 
 // login page
@@ -220,11 +225,11 @@ function addABooking() {
 	domUpdates.displaySuccessMessage();
 }
 
-function retrieveBookingToDelete() {
+function retrieveBookingId() {
 	const roomNumberElement = event.target.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling;
 	const roomNumber = roomNumberElement.innerText.match(/\d+/g).map(Number)[0];
 	const dateBooked = roomNumberElement.previousElementSibling.previousElementSibling.innerText
 	const futureBookings = bookingRepo.getFutureBookings(today, customerBookings);
 	const matchedBooking = futureBookings.find(booking => booking.roomNumber === roomNumber && booking.date.includes(dateBooked.slice(0, 5)))
-	return matchedBooking.id
+	return parseInt(matchedBooking.id)
 }
