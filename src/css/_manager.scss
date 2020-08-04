@@ -1,11 +1,4 @@
-.manager-wrapper {
-	padding: 30px;
-	display: grid;
-	grid-gap: 10px;
-	grid-template-rows: 1fr 1fr;
-	justify-items: center;
-}
-
+// manager navigation
 .daily-stats {
 	@include book-room-box;
 	grid-row-start: 1;
@@ -17,6 +10,12 @@
 	@include header-font(40px);
 	color: $black;
 	margin-bottom: 30px;
+}
+
+.section-header {
+	@include header-font(40px);
+	grid-area: 2 / 1 / 3 / 4;
+	justify-self: center;
 }
 
 .search-form {
@@ -43,10 +42,50 @@
 	@include error;
 }
 
-.section-header {
+.manager-wrapper {
+	padding: 30px;
+	display: grid;
+	grid-gap: 10px;
+	grid-template-rows: 1fr 1fr;
+	justify-items: center;
+}
+
+// manager search view
+.booked-header {
+	grid-area: 2 / 1 / 3 / 4
+}
+
+.customer-match-details {
+	@include book-room-box;
+	grid-area: 1 / 1 / 2 / 4;
+}
+
+.customer-match-name {
+	@include header-font(40px)
+}
+
+.delete {
+	@include button();
+	margin-top: 10px;
+}
+
+.delete-confirmation {
+	@include confirmation-display();
+}
+
+.future-customer-bookings {
+	@include book-room-box;
+	width: 100%;
+}
+
+.manager-book-new-label {
 	@include header-font(40px);
-	grid-area: 2 / 1 / 3 / 4;
-	justify-self: center;
+	margin-top: 50px;
+}
+
+.past-customer-bookings {
+	@include book-room-box;
+	width: 100%;
 }
 
 .search-results {
@@ -58,42 +97,4 @@
 	grid-template-rows: .5fr .2fr .5fr;
 	justify-items: center;
 	width: 100%;
-}
-
-.customer-match-details {
-	@include book-room-box;
-	grid-area: 1 / 1 / 2 / 4;
-	
-}
-
-.booked-header {
-	grid-area: 2 / 1 / 3 / 4
-}
-
-.manager-book-new-label {
-	@include header-font(40px);
-	margin-top: 50px;
-}
-
-.customer-match-name {
-	@include header-font(40px)
-}
-
-.past-customer-bookings {
-	@include book-room-box;
-	width: 100%;
-}
-
-.future-customer-bookings {
-	@include book-room-box;
-	width: 100%;
-}
-
-.delete {
-	@include button();
-	margin-top: 10px;
-}
-
-.delete-confirmation {
-	@include confirmation-display();
 }

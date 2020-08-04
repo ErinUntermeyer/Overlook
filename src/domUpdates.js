@@ -4,85 +4,12 @@ const user = new User();
 const domUpdates = {
 	hideDisplay(element) {
 		const pageElement = document.querySelector(element);
-		const hide = pageElement.classList.add('hidden');
-		switch(element) {
-			case '.login-wrapper':
-				hide;
-				break;
-			case '.daily-stats':
-				hide;
-				break;
-			case '.search-form':
-				hide;
-				break;
-			case '.customer-bookings':
-				hide;
-				break;
-			case '.available-rooms-list':
-				hide;
-				break;
-			case '.apology':
-				hide;
-				break;
-			case '.available-rooms-nav':
-				hide;
-				break;
-			case '.filtered-list':
-				hide;
-				break;
-			case '.success':
-				hide;
-				break;
-			case '.search-results':
-				hide;
-				break;
-			case '.customer-book-new':
-				hide;
-				break;
-			case '.section-header':
-				hide;
-				break;
-		}
+		pageElement.classList.add('hidden');
 	},
 
 	showDisplay(element) {
 		const pageElement = document.querySelector(element);
-		const show = pageElement.classList.remove('hidden');
-		switch (element) {
-			case '.manager-wrapper':
-				show;
-				break;
-			case '.available-rooms-nav':
-				show;
-				break;
-			case '.apology':
-				show;
-				break;
-			case '.success':
-				show;
-				break;
-			case '.available-rooms-list':
-				show;
-				break;
-			case '.filtered-list':
-				show;
-				break;
-			case '.log-out':
-				show;
-				break;
-			case '.delete-confirmation':
-				show;
-				break;
-			case '.search-results':
-				show;
-				break;
-			case '.section-header':
-				show;
-				break;
-			case '.customer-bookings-list':
-				show;
-				break;
-		}
+		pageElement.classList.remove('hidden');
 	},
 
 	displayLoginErrorMessage() {
@@ -126,10 +53,10 @@ const domUpdates = {
 	displayCustomerLandingPage() {
 		this.hideDisplay('.login-wrapper');
 		this.hideDisplay('.success');
+		this.showDisplay('.customer-bookings-list');
 		this.showDisplay('.customer-book-new');
 		this.showDisplay('.log-out');
 		this.showDisplay('.section-header');
-		this.showDisplay('.customer-bookings-list');
 	},
 
 	displayCustomerDetails(customerName, customerBookings, roomsData) {
@@ -162,20 +89,20 @@ const domUpdates = {
 	displayAvailableRoomsToBook(availableRooms) {
 		const availableRoomsSection = document.querySelector('.available-rooms-list');
 		availableRoomsSection.innerHTML = ``;
-		this.hideDisplay('.search-results');
-		this.hideDisplay('.customer-book-new');
-		this.hideDisplay('.section-header');
 		this.hideDisplay('.customer-bookings-list');
-		this.showDisplay('.available-rooms-nav');
+		this.hideDisplay('.customer-book-new');
+		this.hideDisplay('.search-results');
+		this.hideDisplay('.section-header');
 		this.showDisplay('.available-rooms-list');
+		this.showDisplay('.available-rooms-nav');
 		availableRooms.forEach(room => {
 			this.createBookRoomCard(availableRoomsSection, 'available-rooms-to-book', room);
 		});
 	},
 
 	resetAvailableRoomsDisplay() {
-		this.showDisplay('.available-rooms-list');
 		this.hideDisplay('.filtered-list');
+		this.showDisplay('.available-rooms-list');
 	},
 
 	displayApology(message) {
@@ -202,8 +129,8 @@ const domUpdates = {
 		const successSection = document.querySelector('.success');
 		this.hideDisplay('.available-rooms-nav')
 		this.hideDisplay('.available-rooms-list')
-		this.hideDisplay('.filtered-list')
 		this.hideDisplay('.delete-confirmation')
+		this.hideDisplay('.filtered-list')
 		this.showDisplay('.success')
 		successSection.innerHTML = `
 			<h3 class="card-header message">Success! Enjoy your stay!</h3>
@@ -215,8 +142,8 @@ const domUpdates = {
 	displayManagerLandingPage() {
 		this.hideDisplay('.login-wrapper');
 		this.hideDisplay('.success');
-		this.showDisplay('.manager-wrapper');
 		this.showDisplay('.log-out');
+		this.showDisplay('.manager-wrapper');
 		this.showDisplay('.search-results');
 	},
 

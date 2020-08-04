@@ -1,9 +1,10 @@
 @import 'variables';
-@import 'login';
+
+@import 'availableRooms';
 @import 'banner';
 @import 'customer';
+@import 'login';
 @import 'manager';
-@import 'availableRooms';
 
 * {
 	box-sizing: border-box;
@@ -17,14 +18,14 @@ html {
 	height: 100%;
 }
 
+.card-header {
+	@include header-font(32px);
+}
+
 .hidden {
 	display: none;
 }
 
 .input-field {
 	@include input-field;
-}
-
-.card-header {
-	@include header-font(32px);
 }

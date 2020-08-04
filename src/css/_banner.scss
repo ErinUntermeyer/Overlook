@@ -1,3 +1,4 @@
+// all users
 header {
 	display: flex;
 	justify-content: space-between;
@@ -13,6 +14,16 @@ h1 {
 	margin-left: 30px;
 }
 
+.log-out {
+	height: 25px;
+	background-color: $sand;
+	color: $black;
+	border: none;
+	border-radius: 3px;
+	opacity: 80%;
+}
+
+// welcome message container
 div {
 	display: flex;
 	flex-direction: column;
@@ -21,11 +32,12 @@ div {
 	padding: 15px;
 }
 
-.log-out {
-	height: 25px;
-	background-color: $sand;
-	color: $black;
-	border: none;
-	border-radius: 3px;
-	opacity: 80%;
+.name-display {
+	@include header-font(40px);
+	color: $sand;
+}
+
+// customer views only
+.total-spent {
+	@include header-font(20px);
 }
