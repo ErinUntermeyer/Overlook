@@ -10,7 +10,7 @@ $main-font: Verdana, sans-serif;
 @mixin book-room-box() {
 	@include info-card-box(10px);
 	.book-new-label {
-		@include header-font(40px);
+	@include header-font(40px);
 	}
 	.calendar {
 		background-color: $sand;
