@@ -54,20 +54,41 @@
 	display: grid;
 	grid-gap: 10px;
 	grid-template-columns: 1fr 1fr 1fr;
-	grid-template-rows: .5fr .5fr 1fr;
+	grid-template-rows: .5fr .2fr .5fr;
 	justify-items: center;
 	width: 100%;
 }
 
 .customer-match-details {
 	@include book-room-box;
-	grid-area: 1 / 1 / 1 / 4;
+	grid-area: 1 / 1 / 2 / 4;
+	
+}
+
+.manager-book-new-label {
+	@include header-font(40px);
+	margin-top: 50px;
 }
 
 .customer-match-name {
 	@include header-font(40px)
 }
 
-.customer-bookings {
+.past-customer-bookings {
 	@include book-room-box;
+	width: 100%;
+}
+
+.future-customer-bookings {
+	@include book-room-box;
+	width: 100%;
+}
+
+.delete {
+	@include button();
+	margin-top: 10px;
+}
+
+.delete-confirmation {
+	@include confirmation-display();
 }

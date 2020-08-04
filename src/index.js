@@ -36,6 +36,9 @@ function handleClick(event) {
 		addABooking();
 	} else if (event.target.classList.contains('log-out')) {
 		logOut();
+	} else if (event.target.classList.contains('delete')) {
+		deleteBooking(retrieveBookingId());
+		domUpdates.displayDeleteConfirmation();
 	}
 }
 
@@ -56,6 +59,19 @@ function postBooking() {
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(formatBookingData())
+	})
+}
+
+// DELETE data
+function deleteBooking(id) {
+	fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+				"id": id
+			})
 	})
 }
 
@@ -135,8 +151,15 @@ function getSearchResultsForManager() {
 		const customerSpent = (user.retrieveTotalSpent(customerBookings, roomsData)).toFixed(2);
 		domUpdates.hideManagerLandingPage();
 		domUpdates.displayMatchedCustomerName(customerMatch, customerSpent);
-		domUpdates.displayMatchedCustomerBookings(customerBookings, roomsData);
+		getMatchedCustomerBookings(customerBookings, roomsData);
 	}
+}
+
+function getMatchedCustomerBookings(customerBookings, roomsData) {
+	const pastBookings = bookingRepo.getPastBookings(today, customerBookings);
+	const futureBookings = bookingRepo.getFutureBookings(today, customerBookings);
+	domUpdates.displayFutureBookings(futureBookings, roomsData);
+	domUpdates.displayPastBookings(pastBookings, roomsData);
 }
 
 function getAllAvailableRooms() {
@@ -177,7 +200,13 @@ function resetCheckAvailability() {
 }
 
 function getDateSelected() {
-	const calendarInput = document.querySelector('#customer-calendar').value;
+	let thisUser = event.target.id;
+	let calendarInput;
+	if (thisUser === 'customer') {
+		calendarInput = document.querySelector('#customer-calendar').value;
+	} else {
+		calendarInput = document.querySelector('#manager-calendar').value;
+	}
 	return calendarInput.split('-').join('/');
 }
 
@@ -195,4 +224,13 @@ function getRoomCardClicked() {
 function addABooking() {
 	postBooking();
 	domUpdates.displaySuccessMessage();
+}
+
+function retrieveBookingId() {
+	const roomNumberElement = event.target.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling;
+	const roomNumber = roomNumberElement.innerText.match(/\d+/g).map(Number)[0];
+	const dateBooked = roomNumberElement.previousElementSibling.previousElementSibling.innerText
+	const futureBookings = bookingRepo.getFutureBookings(today, customerBookings);
+	const matchedBooking = futureBookings.find(booking => booking.roomNumber === roomNumber && booking.date.includes(dateBooked.slice(0, 5)))
+	return parseInt(matchedBooking.id)
 }

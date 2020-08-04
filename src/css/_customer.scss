@@ -30,3 +30,7 @@ h3 {
 .availability-button {
 	@include button();
 }
+
+.apology, .success {
+	@include confirmation-display();
+}

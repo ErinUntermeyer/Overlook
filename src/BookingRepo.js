@@ -19,12 +19,12 @@ class BookingRepo {
 		return bookedRooms;
 	}
 
-	getPastBookings(today) {
-		return this.bookings.filter(booking => booking.date < today);
+	getPastBookings(today, bookings) {
+		return bookings.filter(booking => booking.date < today);
 	}
 
-	getFutureBookings(today) {
-		return this.bookings.filter(booking => booking.date > today);
+	getFutureBookings(today, bookings) {
+		return bookings.filter(booking => booking.date > today);
 	}
 
 	listBookingsById(id) {

@@ -77,3 +77,14 @@ $main-font: Verdana, sans-serif;
 	color: $black;
  	font-weight: bold;
 }
+
+@mixin confirmation-display() {
+	margin-top: 100px;
+	display: grid;
+	justify-items: center;
+
+		.message {
+			width: 50%;
+			text-align: center;
+		}
+}

@@ -33,6 +33,9 @@ const domUpdates = {
 			case '.success':
 				hide;
 				break;
+			case '.search-results':
+				hide;
+				break;
 		}
 	},
 
@@ -64,6 +67,9 @@ const domUpdates = {
 			case '.log-out':
 				show;
 				break;
+			case '.delete-confirmation':
+				show;
+				break;
 		}
 	},
 
@@ -76,7 +82,7 @@ const domUpdates = {
 		return section.innerHTML += `
 			<section class="${sectionClass}">
 			 <h3 class="card-header">booked for</h3>
-			  <p>${new Date(booking.date).toLocaleString().split(',')[0]}</p>
+			  <p>${this.formatDate(booking.date)}</p>
 			 <h3 class="card-header">${variableName.roomType}</h3>
 				<p class="room-num">room number: ${variableName.number}</p>
 				<p>bidet: ${variableName.bidet}</p>
@@ -97,6 +103,11 @@ const domUpdates = {
 				<button class="reserve">reserve</button>
 			</section>
 			`
+	},
+
+	formatDate(date) {
+		const dateString = new Date(date).toLocaleString().split(',')[0];
+		return (0 + dateString.split('/')[0]).slice(-2) + '/' + (0 + dateString.split('/')[1]).slice(-2) + '/' + dateString.split('/')[2];
 	},
 
 	// customer section
@@ -135,6 +146,7 @@ const domUpdates = {
 
 	displayAvailableRoomsToBook(availableRooms) {
 		const availableRoomsSection = document.querySelector('.available-rooms-list');
+		this.hideDisplay('.search-results');
 		this.hideDisplay('.customer-wrapper');
 		this.showDisplay('.available-rooms-nav');
 		this.showDisplay('.available-rooms-list');
@@ -222,18 +234,51 @@ const domUpdates = {
 				<h2 class="customer-match-name">${customerMatch.name}</h2>
 				<h3 class="card-header">total spent on rooms</h3>
 				<p>$${customerSpent}</p>
+				<label class="manager-book-new-label" for="calendar">Book a Room</label>
+				<input class="calendar" id="manager-calendar" type="date">
+				<input type="submit" value="Check Availability" class="availability-button" id="manager">
 			</section>
 			`
 	},
 
-	displayMatchedCustomerBookings(customerBookings, roomsData) {
+	displayPastBookings(pastBookings, roomsData) {
 		const searchResultsSection = document.querySelector('.search-results');
 		searchResultsSection.classList.remove('hidden');
-		customerBookings.forEach(booking => {
+		pastBookings.forEach(booking => {
 			const match = roomsData.find(room => booking.roomNumber === room.number);
-			this.createRoomCard(searchResultsSection, 'customer-bookings', booking, match);
+			this.createRoomCard(searchResultsSection, 'past-customer-bookings', booking, match)
 		})
-	}
+	},
+
+	displayFutureBookings(futureBookings, roomsData) {
+		const searchResultsSection = document.querySelector('.search-results');
+		searchResultsSection.classList.remove('hidden');
+		futureBookings.forEach(booking => {
+			const match = roomsData.find(room => booking.roomNumber === room.number);
+			return searchResultsSection.innerHTML += `
+			<section class="future-customer-bookings">
+			 <h3 class="card-header">booked for</h3>
+			  <p>${this.formatDate(booking.date)}</p>
+			 <h3 class="card-header">${match.roomType}</h3>
+				<p class="room-num">room number: ${match.number}</p>
+				<p>bidet: ${match.bidet}</p>
+				<p>beds: ${match.numBeds} ${match.bedSize} size</p>
+				<p>$${match.costPerNight} per night</p>
+				<button class="delete">delete reservation</button>
+			</section>
+			`
+		})
+	},
+
+	displayDeleteConfirmation() {
+		const deleteConfirmationSection = document.querySelector('.delete-confirmation');
+		this.hideDisplay('.search-results')
+		this.showDisplay('.delete-confirmation');
+		deleteConfirmationSection.innerHTML = `
+			<h3 class="card-header message">We miss you already!</h3>
+			<button class="try-again">Home</button>
+		`
+	},
 }
 
 export default domUpdates;
