@@ -29,29 +29,31 @@
 			</section>
 		</section>
 
-		<section class="customer-wrapper hidden">
-			<section class="customer-book-new">
+		<section class="customer-nav-wrapper">
+			<section class="customer-book-new hidden">
 				<label class="book-new-label" for="calendar">Book a Room</label>
 				<input class="calendar" id="customer-calendar" type="date">
 				<input type="submit" value="Check Availability" class="availability-button" id="customer" disabled=true>
 			</section>
-			<h2 class="section-header">your booked rooms:</h2>
+			<h2 class="section-header hidden">your booked rooms:</h2>
+			<section class="available-rooms-nav hidden">
+				<h2 class="filter-header">filter rooms by:</h2>
+				<div class="filter-buttons">
+					<button class="filter-button" id="residential suite">residential suite</button>
+					<button class="filter-button" id="suite">suite</button>
+					<button class="filter-button" id="single room">single room</button>
+					<button class="filter-button" id="junior suite">junior suite</button>
+					<button class="filter-button" id="all-rooms">all rooms</button>
+				</div>
+				<h2 class="available-rooms-header">available rooms to book:</h2>
+			</section>
 		</section>
-		<section class="available-rooms-nav hidden">
-			<h2 class="filter-header">filter rooms by:</h2>
-			<div class="filter-buttons">
-				<button class="filter-button" id="residential suite">residential suite</button>
-				<button class="filter-button" id="suite">suite</button>
-				<button class="filter-button" id="single room">single room</button>
-				<button class="filter-button" id="junior suite">junior suite</button>
-				<button class="filter-button" id="all-rooms">all rooms</button>
-			</div>
-			<h2 class="available-rooms-header">available rooms to book:</h2>
-		</section>
+
+		<section class="customer-bookings-list hidden"></section>
 		<section class="available-rooms-list hidden"></section>
+		<section class="filtered-list hidden"></section>
 		<section class="apology hidden"></section>
 		<section class="success hidden"></section>
-		<section class="filtered-list hidden"></section>
 
 		<section class="manager-wrapper hidden">
 			<section class="daily-stats"></section>
@@ -61,10 +63,9 @@
 				<input id="search" class="input-field" type="text">
 				<input type="submit" value="Search" class="search-button">
 			</form>
-			<section class="search-results hidden">
-				<h2 class="section-header">booked rooms:</h2>
-			</section>
 		</section>
+
+		<section class="search-results hidden"></section>
 		<section class="delete-confirmation hidden"></section>
 
   </body>
