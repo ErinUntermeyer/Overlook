@@ -271,7 +271,6 @@ const domUpdates = {
 	},
 
 	displayDeleteConfirmation() {
-		console.log('i made it ')
 		const deleteConfirmationSection = document.querySelector('.delete-confirmation');
 		this.hideDisplay('.search-results')
 		this.showDisplay('.delete-confirmation');
