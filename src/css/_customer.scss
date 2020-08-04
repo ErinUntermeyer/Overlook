@@ -68,3 +68,19 @@
 .apology, .success {
 	@include confirmation-display();
 }
+
+// media queries
+@media screen and (max-width: 830px) and (min-width: 650px) {
+	.customer-bookings-list {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.customer-bookings-list {
+		grid-template-columns: 1fr;
+	}
+	.customer-bookings {
+		width: 290px;
+	}
+}

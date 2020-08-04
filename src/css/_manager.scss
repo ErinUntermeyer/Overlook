@@ -98,3 +98,28 @@
 	justify-items: center;
 	width: 100%;
 }
+
+// media queries
+@media screen and (max-width: 830px) and (min-width: 650px) {
+	.daily-stats {
+		width: 70%;
+	}
+	.search-form {
+		width: 40%;
+	}
+	.search-results {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.daily-stats {
+		min-width: 350px;
+	}
+	.search-form {
+		width: 60%;
+	}
+	.search-results {
+		grid-template-columns: 1fr;
+	}
+}

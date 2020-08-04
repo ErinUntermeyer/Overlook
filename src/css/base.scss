@@ -13,9 +13,11 @@
 }
 
 html {
-	background: url('../images/black-tables-on-beach.jpg');
+	background: url('../images/black-tables-on-beach.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 	background-size: cover;
-	height: 100%;
 }
 
 .card-header {

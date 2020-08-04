@@ -41,3 +41,28 @@ div {
 .total-spent {
 	@include header-font(20px);
 }
+
+// media queries
+@media screen and (max-width: 800px) and (min-width: 400px) {
+	h1 {
+		display: none;
+	}
+	div {
+		align-items: center;
+	}
+	header {
+		justify-content: space-around;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	h1 {
+		display: none;
+	}
+	div {
+		align-items: center;
+	}
+	header {
+		justify-content: space-around;
+	}
+}
