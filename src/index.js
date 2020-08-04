@@ -33,7 +33,6 @@ function handleClick(event) {
 		getFilteredRooms();
 	} else if (event.target.classList.contains('try-again')) {
 		determineHomePage();
-		// resetCheckAvailability();
 	} else if (event.target.classList.contains('reserve')) {
 		addABooking();
 	} else if (event.target.classList.contains('log-out')) {
