@@ -4,7 +4,7 @@
 
 ## About
 
-Overlook is a hotel management tool for hotel customers and staff to manage room bookings and view current activity. Customers can view all bookings, see total amount spent on rooms and reserve new rooms. Managers can view daily bookings, revenue and rooms available. They can also add and delete reservations for customer after searching for them by name.
+Overlook is a hotel management tool for hotel customers and staff to manage room bookings and view current activity. Customers can view all bookings, see total amount spent on rooms and reserve new rooms. Managers can view daily bookings, revenue and rooms available. They can also add and delete reservations for a customer after searching for them by name.
 
 ## Technologies Used
 
