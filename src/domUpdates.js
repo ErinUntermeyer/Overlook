@@ -49,9 +49,6 @@ const domUpdates = {
 		const pageElement = document.querySelector(element);
 		const show = pageElement.classList.remove('hidden');
 		switch (element) {
-			case '.customer-nav':
-				show;
-				break;
 			case '.manager-wrapper':
 				show;
 				break;
@@ -129,7 +126,6 @@ const domUpdates = {
 	displayCustomerLandingPage() {
 		this.hideDisplay('.login-wrapper');
 		this.hideDisplay('.success');
-		this.showDisplay('.customer-nav');
 		this.showDisplay('.customer-book-new');
 		this.showDisplay('.log-out');
 		this.showDisplay('.section-header');
