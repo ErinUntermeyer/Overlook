@@ -160,6 +160,7 @@ const domUpdates = {
 
 	displayAvailableRoomsToBook(availableRooms) {
 		const availableRoomsSection = document.querySelector('.available-rooms-list');
+		availableRoomsSection.innerHTML = ``;
 		this.hideDisplay('.search-results');
 		this.hideDisplay('.customer-book-new');
 		this.hideDisplay('.section-header');
@@ -178,7 +179,7 @@ const domUpdates = {
 
 	displayApology(message) {
 		const apologySection = document.querySelector('.apology');
-		this.hideDisplay('.customer-nav');
+		this.hideDisplay('.customer-nav-wrapper');
 		this.showDisplay('.apology');
 		apologySection.innerHTML = `
 			<h3 class="card-header message">${message}</h3>
