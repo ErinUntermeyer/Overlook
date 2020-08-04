@@ -152,6 +152,7 @@ const domUpdates = {
 
 	displayCustomerBookings(customerBookings, roomsData) {
 		const customerBookingSection = document.querySelector('.customer-bookings-list');
+		customerBookingSection.innerHTML = ``;
 		customerBookings.forEach(booking => {
 			const match = roomsData.find(room => booking.roomNumber === room.number);
 			this.createRoomCard(customerBookingSection, 'customer-bookings', booking, match)
