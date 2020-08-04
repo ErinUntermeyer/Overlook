@@ -24,3 +24,19 @@
 	margin-top: 20px;
 	width: 50%;
 }
+
+// media queries
+@media screen and (max-width: 830px) and (min-width: 650px) {
+	.available-rooms-list, .filtered-list {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.available-rooms-list, .filtered-list {
+		grid-template-columns: 1fr;
+	}
+	.available-rooms-to-book {
+		width: 290px;
+	}
+}
