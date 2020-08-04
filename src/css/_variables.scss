@@ -4,10 +4,52 @@ $black: #1A1A1A;
 
 // fonts
 $main-font: Verdana, sans-serif;
-
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 
 // mixins
+@mixin book-room-box() {
+	@include info-card-box(10px);
+	.book-new-label {
+		@include header-font(40px);
+	}
+	.calendar {
+		background-color: $sand;
+		font-family: $main-font;
+		border: none;
+		padding: 20px;
+	}
+}
+
+@mixin button() {
+	height: 25px;
+	background-color: $black;
+	color: $sand;
+	border: none;
+	border-radius: 3px;
+	opacity: 80%;
+}
+
+@mixin confirmation-display() {
+	margin-top: 100px;
+	display: grid;
+	justify-items: center;
+		.message {
+			width: 50%;
+			text-align: center;
+		}
+}
+
+@mixin error() {
+	color: $black;
+ 	font-weight: bold;
+}
+
+@mixin form() {
+	margin: 10px;
+	color: $black;
+	display: flex;
+	flex-direction: column;
+}
 
 @mixin header-font($font-size) {
   font-family: 'Dancing Script', cursive;
@@ -24,28 +66,12 @@ $main-font: Verdana, sans-serif;
 	align-items: center;
 }
 
-@mixin button() {
+@mixin input-field() {
 	height: 25px;
-	background-color: $black;
-	color: $sand;
+	margin-bottom: 10px;
 	border: none;
-	border-radius: 3px;
-	opacity: 80%;
-}
-
-@mixin book-room-box() {
-	@include info-card-box(10px);
-
-	.book-new-label {
-		@include header-font(40px);
-	}
-
-	.calendar {
-		background-color: $sand;
-		font-family: $main-font;
-		border: none;
-		padding: 20px;
-	}
+	background: transparent;
+	border-bottom: $black solid 1px;
 }
 
 @mixin section-wrapper() {
@@ -56,35 +82,4 @@ $main-font: Verdana, sans-serif;
 	grid-template-rows: 1fr .25fr;
 	justify-items: center;
 	width: 100%;
-}
-
-@mixin input-field() {
-	height: 25px;
-	margin-bottom: 10px;
-	border: none;
-	background: transparent;
-	border-bottom: $black solid 1px;
-}
-
-@mixin form() {
-	margin: 10px;
-	color: $black;
-	display: flex;
-	flex-direction: column;
-}
-
-@mixin error() {
-	color: $black;
- 	font-weight: bold;
-}
-
-@mixin confirmation-display() {
-	margin-top: 100px;
-	display: grid;
-	justify-items: center;
-
-		.message {
-			width: 50%;
-			text-align: center;
-		}
 }

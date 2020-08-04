@@ -1,9 +1,10 @@
 @import 'variables';
-@import 'login';
+
+@import 'availableRooms';
 @import 'banner';
 @import 'customer';
+@import 'login';
 @import 'manager';
-@import 'availableRooms';
 
 * {
 	box-sizing: border-box;
