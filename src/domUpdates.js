@@ -249,6 +249,7 @@ const domUpdates = {
 
 	displayMatchedCustomerName(customerMatch, customerSpent) {
 		const searchResultsSection = document.querySelector('.search-results');
+		searchResultsSection.innerHTML = ``;
 		searchResultsSection.innerHTML += `
 			<section class="customer-match-details">
 				<h2 class="customer-match-name">${customerMatch.name}</h2>

@@ -265,7 +265,7 @@ function determineHomePage() {
 			if (currentUser === 'customer') {
 				resetCheckAvailability();
 			} else {
-				displayManagerInfo();
+				getSearchResultsForManager();
 			}
 		})
 }
