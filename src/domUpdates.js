@@ -36,6 +36,12 @@ const domUpdates = {
 			case '.search-results':
 				hide;
 				break;
+			case '.customer-book-new':
+				hide;
+				break;
+			case '.section-header':
+				hide;
+				break;
 		}
 	},
 
@@ -43,7 +49,7 @@ const domUpdates = {
 		const pageElement = document.querySelector(element);
 		const show = pageElement.classList.remove('hidden');
 		switch (element) {
-			case '.customer-wrapper':
+			case '.customer-nav':
 				show;
 				break;
 			case '.manager-wrapper':
@@ -71,6 +77,12 @@ const domUpdates = {
 				show;
 				break;
 			case '.search-results':
+				show;
+				break;
+			case '.section-header':
+				show;
+				break;
+			case '.customer-bookings-list':
 				show;
 				break;
 		}
@@ -117,8 +129,11 @@ const domUpdates = {
 	displayCustomerLandingPage() {
 		this.hideDisplay('.login-wrapper');
 		this.hideDisplay('.success');
-		this.showDisplay('.customer-wrapper');
+		this.showDisplay('.customer-nav');
+		this.showDisplay('.customer-book-new');
 		this.showDisplay('.log-out');
+		this.showDisplay('.section-header');
+		this.showDisplay('.customer-bookings-list');
 	},
 
 	displayCustomerDetails(customerName, customerBookings, roomsData) {
@@ -140,7 +155,7 @@ const domUpdates = {
 	},
 
 	displayCustomerBookings(customerBookings, roomsData) {
-		const customerBookingSection = document.querySelector('.customer-wrapper');
+		const customerBookingSection = document.querySelector('.customer-bookings-list');
 		customerBookings.forEach(booking => {
 			const match = roomsData.find(room => booking.roomNumber === room.number);
 			this.createRoomCard(customerBookingSection, 'customer-bookings', booking, match)
@@ -150,7 +165,9 @@ const domUpdates = {
 	displayAvailableRoomsToBook(availableRooms) {
 		const availableRoomsSection = document.querySelector('.available-rooms-list');
 		this.hideDisplay('.search-results');
-		this.hideDisplay('.customer-wrapper');
+		this.hideDisplay('.customer-book-new');
+		this.hideDisplay('.section-header');
+		this.hideDisplay('.customer-bookings-list');
 		this.showDisplay('.available-rooms-nav');
 		this.showDisplay('.available-rooms-list');
 		availableRooms.forEach(room => {
@@ -165,7 +182,7 @@ const domUpdates = {
 
 	displayApology(message) {
 		const apologySection = document.querySelector('.apology');
-		this.hideDisplay('.customer-wrapper');
+		this.hideDisplay('.customer-nav');
 		this.showDisplay('.apology');
 		apologySection.innerHTML = `
 			<h3 class="card-header message">${message}</h3>
