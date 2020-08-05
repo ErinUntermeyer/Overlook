@@ -55,12 +55,14 @@ const domUpdates = {
     this.hideDisplay('.success');
     this.showDisplay('.customer-bookings-list');
     this.showDisplay('.customer-book-new');
+    this.showDisplay('.customer-nav-wrapper');
     this.showDisplay('.log-out');
     this.showDisplay('.section-header');
   },
 
   displayCustomerDetails(customerName, customerBookings, roomsData) {
     this.hideDisplay('.apology');
+    // this.hideDisplay('');
     this.displayCustomerName(customerName);
     this.displayCustomerSpent(customerBookings, roomsData);
     this.displayCustomerBookings(customerBookings, roomsData);
@@ -107,6 +109,7 @@ const domUpdates = {
 
   displayApology(message) {
     const apologySection = document.querySelector('.apology');
+    this.hideDisplay('.customer-bookings-list');
     this.hideDisplay('.customer-nav-wrapper');
     this.showDisplay('.apology');
     apologySection.innerHTML = `
