@@ -147,7 +147,7 @@ function displayManagerInfo() {
   domUpdates.displayDailyStatsForManager(dailyStats);
 }
 
-function getManagerDailyStats(date) {
+function getManagerDailyStats(bookingRepo, roomsData, date) {
   const bookedRooms = bookingRepo.getBookedRooms(date);
   const totalRoomsAvailable = user.listRoomsAvailable(bookedRooms, roomsData, date).length;
   const totalRevenue = manager.getRevenueToday(bookedRooms, roomsData);
