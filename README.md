@@ -35,6 +35,12 @@ Manager deleting a reservation for a customer;
 - Run `npm start` in your terminal
 - Go to `http://localhost:8080/`
 - ADVENTURE AWAITS!
+- Customer Login:
+  - Username: customer1 (customer2 -> customer50 also work)
+  - Password: overlook2020
+- Manager Login:
+  - Username: manager
+  - Password: overlook2020
 #### Enter `control + c` in your terminal to stop the server at any time.
 
 ## Contributors
