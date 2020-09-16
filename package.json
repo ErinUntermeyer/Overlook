@@ -9,7 +9,8 @@
     "test": "mochapack 'test/**/*.js'",
     "lint": "./node_modules/.bin/eslint 'src/**.js' 'test/**.js'",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+		"deploy": "gh-pages -d dist",
+		"heroku-prebuild": "npm install --dev"
   },
   "repository": {
     "type": "git",
